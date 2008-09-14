@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7E21E813-78FF-4957-A213-D9D969317558}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RVSLite</RootNamespace>
+    <AssemblyName>RVSLite</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Operators\Join.cs" />
+    <Compile Include="Operators\Calculate.cs" />
+    <Compile Include="CalculationCommands\CalculationCommandBase.cs" />
+    <Compile Include="CalculationCommands\DivisionCalculationCommand.cs" />
+    <Compile Include="Lang.cs" />
+    <Compile Include="CalculationCommands\MultiplyCalculationCommand.cs" />
+    <Compile Include="ConditionCommands\ConditionCommandBase.cs" />
+    <Compile Include="Operators\DataHolder.cs" />
+    <Compile Include="Operators\Drive.cs" />
+    <Compile Include="ConditionCommands\EqualConditionCommand.cs" />
+    <Compile Include="ConditionCommands\GreaterThanConditionCommand.cs" />
+    <Compile Include="ConditionCommands\GreaterThanOrEqualConditionCommand.cs" />
+    <Compile Include="Operators\Sound.cs" />
+    <Compile Include="Operators\IntegerValueReceiver.cs" />
+    <Compile Include="ConditionCommands\LessThanConditionCommand.cs" />
+    <Compile Include="ConditionCommands\LessThanOrEqualConditionCommand.cs" />
+    <Compile Include="ConditionCommands\NotEqualConditionCommand.cs" />
+    <Compile Include="Operators\Pause.cs" />
+    <Compile Include="Operators\ValueHolderContainerBase.cs" />
+    <Compile Include="Operators\ValueNegator.cs" />
+    <Compile Include="Operators\Bumper.cs" />
+    <Compile Include="Operators\ClearDisplay.cs" />
+    <Compile Include="Operators\IValueHolder.cs" />
+    <Compile Include="Operators\LED.cs" />
+    <Compile Include="Operators\Messenger.cs" />
+    <Compile Include="Operators\NullOperator.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Operators\NullValueHolder.cs" />
+    <Compile Include="Operators\OperatorBase.cs" />
+    <Compile Include="ServiceCoordinator.cs" />
+    <Compile Include="Operators\TriggerValueBase.cs" />
+    <Compile Include="Operators\ValueReceiver.cs" />
+    <Compile Include="Operators\ValueHolder.cs" />
+    <Compile Include="Operators\IfClause.cs" />
+    <Compile Include="CalculationCommands\SubstractionCalculationCommand.cs" />
+    <Compile Include="CalculationCommands\SumCalculationCommand.cs" />
+    <Compile Include="Operators\ValueSetter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
