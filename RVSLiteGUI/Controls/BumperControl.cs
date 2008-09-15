@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public partial class BumperControl : UserControl, ITriggerControl{
+    public partial class BumperControl : UserControl, IBooleanControl{
         private bool _value;
 
         public BumperControl(){
@@ -12,9 +12,9 @@ namespace RVSLite.Controls{
             pictureBox.Click += pictureBox_Click;
         }
 
-        #region ITriggerControl Members
+        #region IBooleanControl Members
 
-        public event BooleanEventHandler OnStateChanged;
+        public event PostEventHandler OnStateChanged;
 
         public bool Value{
             get { return _value; }

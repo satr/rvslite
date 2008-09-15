@@ -1,5 +1,5 @@
 namespace RVSLite {
-    public abstract class BooleanValueBase : ValueHolder {
+    public abstract class BooleanValueBase : ValueHolder, IBooleanValue {
         protected string _valueIsFalseText;
         protected string _valueIsTrueText;
         protected string _name;
@@ -15,7 +15,19 @@ namespace RVSLite {
             return string.Format("{0} {1}", Name, GetBoolValue() ? _valueIsTrueText : _valueIsFalseText); 
         }
 
-        private bool GetBoolValue(){
+        public override object Value {
+            get { return base.Value; }
+            set{
+                bool changed = !(bool) (base.Value = (bool) value);
+                base.Value = value;
+                if (OnStateChanged != null)
+                    OnStateChanged(value);
+            }
+        }
+
+        string IBooleanValue.Name { get; set; }
+
+        private bool GetBoolValue() {
             if(Value is bool)
                 return ((bool) Value);
             if (Value is string)
@@ -26,6 +38,11 @@ namespace RVSLite {
 
         public override string Name {
             get { return _name; }
+        }
+
+        public event PostEventHandler OnStateChanged;
+        public void SetValue(object value){
+            throw new System.NotImplementedException();
         }
     }
 }

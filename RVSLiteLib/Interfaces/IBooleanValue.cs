@@ -1,8 +1,8 @@
 namespace RVSLite{
     public interface IBooleanValue{
-        bool Value { get; set; }
+        object Value { get; set; }
         string Name { get; set; }
-        event BooleanEventHandler OnStateChanged;
-        void SetValue(bool value);
+        event PostEventHandler OnStateChanged;
+        void SetValue(object value);
     }
 }
