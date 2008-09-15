@@ -45,7 +45,7 @@
     <Compile Include="Controls\BumperControl.Designer.cs">
       <DependentUpon>BumperControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ITriggerControl.cs" />
+    <Compile Include="Controls\IBooleanControl.cs" />
     <Compile Include="Controls\LEDControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -58,7 +58,7 @@
     <Compile Include="Controls\OperatorHolderControl.Designer.cs">
       <DependentUpon>OperatorHolderControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="HardwareDevices\HWTrigger.cs" />
+    <Compile Include="HardwareDevices\HWBooleanValue.cs" />
     <Compile Include="HardwareInterface.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="MainForm.cs">

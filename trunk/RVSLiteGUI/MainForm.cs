@@ -18,7 +18,7 @@ namespace RVSLite{
 
         private HardwareInterface GetHardware() {
             var hardware = new HardwareInterface();
-            hardware.Bumpers = new[]{new HWTrigger(bumperControl1),new HWTrigger(bumperControl2)};
+            hardware.Bumpers = new[]{new HWBooleanValue(bumperControl1),new HWBooleanValue(bumperControl2)};
             hardware.SetLEDs(ledControl1, ledControl2);
             return hardware;
         }

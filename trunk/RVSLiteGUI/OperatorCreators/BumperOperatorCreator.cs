@@ -8,7 +8,7 @@ namespace RVSLite{
 
         public override OperatorBase Create(){
             var bumper = new Bumper();
-//            _selectedBumper.OnStateChanged += bumper.Post;
+            _selectedBumper.OnStateChanged += bumper.Post;
             return bumper;
         }
 

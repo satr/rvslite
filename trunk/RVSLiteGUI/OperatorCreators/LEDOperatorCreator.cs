@@ -8,7 +8,7 @@ namespace RVSLite{
 
         public override OperatorBase Create(){
             var oper = new LED();
-//            oper.OnStateChanged += _selectedLED.SetValue;
+            oper.OnStateChanged += _selectedLED.SetValue;
             return oper;
         }
 

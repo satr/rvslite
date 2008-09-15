@@ -2,14 +2,14 @@
 using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public partial class LEDControl : UserControl, ITriggerControl {
+    public partial class LEDControl : UserControl, IBooleanControl {
         private bool _value;
 
         public LEDControl(){
             InitializeComponent();
         }
 
-        #region ITriggerControl Members
+        #region IBooleanControl Members
 
         public bool Value{
             get { return _value; }
@@ -24,7 +24,7 @@ namespace RVSLite.Controls{
             set { lblName.Text = value; }
         }
 
-        public event BooleanEventHandler OnStateChanged;
+        public event PostEventHandler OnStateChanged;
 
         #endregion
     }
