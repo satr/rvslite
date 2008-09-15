@@ -45,6 +45,7 @@
     <Compile Include="Controls\BumperControl.Designer.cs">
       <DependentUpon>BumperControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ITriggerControl.cs" />
     <Compile Include="Controls\LEDControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -57,6 +58,7 @@
     <Compile Include="Controls\OperatorHolderControl.Designer.cs">
       <DependentUpon>OperatorHolderControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="HardwareDevices\HWTrigger.cs" />
     <Compile Include="HardwareInterface.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="MainForm.cs">
@@ -71,7 +73,18 @@
     <Compile Include="OperationsListForm.Designer.cs">
       <DependentUpon>OperationsListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperatorCreators\BumperOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\CalculateOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\ConnectionOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\DataHolderOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\DriveOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\IfClauseOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\LEDOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\MessengerOperatorCreator.cs" />
     <Compile Include="OperatorCreators\OperatorCreatorBase.cs" />
+    <Compile Include="OperatorCreators\ValueHolderOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\ValueReceiverOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\ValueSetterOperatorCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\BumperControl.resx">

@@ -1,26 +1,26 @@
 using System;
 
 namespace RVSLite {
-    public delegate void PostEventHandler();
-    public delegate void TriggerEventHandler(bool value);
+    public delegate void PostEventHandler(object value);
+    public delegate void BooleanEventHandler(bool value);
 
     public abstract class OperatorBase {
         private OperatorBase _sourceOperator;
         public abstract string Name { get; }
         public event PostEventHandler OnPost;
 
-        public virtual void Post(){
+        public virtual void Post(object value){
             DisplayThis();
-            FireOnPost();
+            FireOnPost(value);
         }
 
         protected void DisplayThis(){
             Console.Out.WriteLine(this);
         }
 
-        protected void FireOnPost(){
+        protected void FireOnPost(object value){
             if (OnPost != null)
-                OnPost();
+                OnPost(value);
         }
 
         public OperatorBase SourceOperator{

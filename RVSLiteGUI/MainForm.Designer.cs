@@ -26,8 +26,10 @@
             this.pnlMainControl = new System.Windows.Forms.Panel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrlBumper = new RVSLite.Controls.BumperControl();
-            this.ctrlLED1 = new RVSLite.Controls.LEDControl();
+            this.bumperControl2 = new RVSLite.Controls.BumperControl();
+            this.bumperControl1 = new RVSLite.Controls.BumperControl();
+            this.ledControl2 = new RVSLite.Controls.LEDControl();
+            this.ledControl1 = new RVSLite.Controls.LEDControl();
             this.pnlMainControl.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -35,25 +37,27 @@
             // 
             // pnlMainControl
             // 
-            this.pnlMainControl.Controls.Add(this.ctrlBumper);
-            this.pnlMainControl.Controls.Add(this.ctrlLED1);
+            this.pnlMainControl.Controls.Add(this.bumperControl2);
+            this.pnlMainControl.Controls.Add(this.bumperControl1);
+            this.pnlMainControl.Controls.Add(this.ledControl2);
+            this.pnlMainControl.Controls.Add(this.ledControl1);
             this.pnlMainControl.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMainControl.Location = new System.Drawing.Point(0, 0);
             this.pnlMainControl.Name = "pnlMainControl";
-            this.pnlMainControl.Size = new System.Drawing.Size(108, 539);
+            this.pnlMainControl.Size = new System.Drawing.Size(155, 539);
             this.pnlMainControl.TabIndex = 0;
             // 
             // splitContainer
             // 
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(108, 0);
+            this.splitContainer.Location = new System.Drawing.Point(155, 0);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.tableLayoutPanel);
-            this.splitContainer.Size = new System.Drawing.Size(702, 539);
+            this.splitContainer.Size = new System.Drawing.Size(655, 539);
             this.splitContainer.SplitterDistance = 28;
             this.splitContainer.TabIndex = 1;
             // 
@@ -85,26 +89,44 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(702, 507);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(655, 507);
             this.tableLayoutPanel.TabIndex = 0;
             // 
-            // ctrlBumper
+            // bumperControl2
             // 
-            this.ctrlBumper.HWName = "Bumper1";
-            this.ctrlBumper.Location = new System.Drawing.Point(4, 13);
-            this.ctrlBumper.Name = "ctrlBumper";
-            this.ctrlBumper.Size = new System.Drawing.Size(98, 49);
-            this.ctrlBumper.TabIndex = 2;
-            this.ctrlBumper.Value = false;
+            this.bumperControl2.HWName = "Rear bumper";
+            this.bumperControl2.Location = new System.Drawing.Point(4, 134);
+            this.bumperControl2.Name = "bumperControl2";
+            this.bumperControl2.Size = new System.Drawing.Size(98, 49);
+            this.bumperControl2.TabIndex = 2;
+            this.bumperControl2.Value = false;
             // 
-            // ctrlLED1
+            // bumperControl1
             // 
-            this.ctrlLED1.HWName = "LED#1";
-            this.ctrlLED1.Location = new System.Drawing.Point(4, 68);
-            this.ctrlLED1.Name = "ctrlLED1";
-            this.ctrlLED1.Size = new System.Drawing.Size(89, 27);
-            this.ctrlLED1.TabIndex = 1;
-            this.ctrlLED1.Value = false;
+            this.bumperControl1.HWName = "Front bumper";
+            this.bumperControl1.Location = new System.Drawing.Point(4, 13);
+            this.bumperControl1.Name = "bumperControl1";
+            this.bumperControl1.Size = new System.Drawing.Size(98, 49);
+            this.bumperControl1.TabIndex = 2;
+            this.bumperControl1.Value = false;
+            // 
+            // ledControl2
+            // 
+            this.ledControl2.HWName = "LED#2";
+            this.ledControl2.Location = new System.Drawing.Point(4, 101);
+            this.ledControl2.Name = "ledControl2";
+            this.ledControl2.Size = new System.Drawing.Size(89, 27);
+            this.ledControl2.TabIndex = 1;
+            this.ledControl2.Value = false;
+            // 
+            // ledControl1
+            // 
+            this.ledControl1.HWName = "LED#1";
+            this.ledControl1.Location = new System.Drawing.Point(4, 68);
+            this.ledControl1.Name = "ledControl1";
+            this.ledControl1.Size = new System.Drawing.Size(89, 27);
+            this.ledControl1.TabIndex = 1;
+            this.ledControl1.Value = false;
             // 
             // MainForm
             // 
@@ -127,8 +149,10 @@
         private System.Windows.Forms.Panel pnlMainControl;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private RVSLite.Controls.LEDControl ctrlLED1;
-        private RVSLite.Controls.BumperControl ctrlBumper;
+        private RVSLite.Controls.LEDControl ledControl1;
+        private RVSLite.Controls.BumperControl bumperControl1;
+        private RVSLite.Controls.LEDControl ledControl2;
+        private RVSLite.Controls.BumperControl bumperControl2;
     }
 }
 

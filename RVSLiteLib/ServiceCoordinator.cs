@@ -14,24 +14,26 @@ namespace RVSLite{
         private const string RUN_DRIVE_SERVICE_ID = "5";
         private const string SET_VALUE_SERVICE_ID = "2";
         private const string SOUND_SERVICE_ID = "6";
-        private readonly IHardwareInterface _hw;
+        private readonly IHardwareInterface _hardware;
         private readonly Dictionary<string, OperatorBase> _services = new Dictionary<string, OperatorBase>();
+        private int _columnCount;
         private OperatorBase _ledNo2Operator;
+        private int _rowCount;
         private ValueReceiver _valueReceiver = new ValueReceiver();
+        private readonly DataHolder _bumperState = new DataHolder(false);
 
         public ServiceCoordinator(IHardwareInterface hwInterface){
             Operators = new OperatorBase[0,0];
             if (hwInterface == null)
                 return;
-            _hw = hwInterface;
-            _hw.Bumper1.OnStateChanged += Bumper1_OnStateChanged;
+            _hardware = hwInterface;
+        }
+
+        public IHardwareInterface Hardware{
+            get { return _hardware; }
         }
 
         public OperatorBase[,] Operators { get; set; }
-
-        private void Bumper1_OnStateChanged(bool value){
-            _hw.Led1.Value = value;
-        }
 
         public void Start(){
             for (;;){
@@ -44,7 +46,9 @@ namespace RVSLite{
                         _ledNo2Operator.Disconnect();
                         break;
                     default:
-                        GetServiceBy(choice).Post();
+                        GetServiceBy(choice).Post(null);
+                        if (choice == BUMPER_SERVICE_ID)
+                            _bumperState.Value = !(bool)_bumperState.Value;
                         break;
                 }
             }
@@ -74,6 +78,42 @@ namespace RVSLite{
             DemoIntConditionOperation();
             DemoBoolConditionOperation();
             StartCyclicSound();
+        }
+
+        public void PlaceOperatorAt(OperatorBase oper, int column, int row){
+            Operators[column, row] = oper;
+            ConnectToNeighbours(oper, column, row);
+        }
+
+        private void ConnectToNeighbours(OperatorBase oper, int column, int row){
+            foreach (Directions direction in new[]{Directions.Left, Directions.Top, Directions.Bottom, Directions.Right}){
+                if (ConnectToNeighboursBy(column, row, oper, direction))
+                    return;
+            }
+        }
+
+        private bool ConnectToNeighboursBy(int column, int row, OperatorBase oper, Directions direction){
+            OperatorBase neighbourOperator = GetNeighbourOperatorBy(column, row, direction);
+            if (neighbourOperator == null)
+                return false;
+            oper.ListenTo(neighbourOperator);
+            return true;
+        }
+
+        private OperatorBase GetNeighbourOperatorBy(int column, int row, Directions direction){
+            if (direction == Directions.Left)
+                return column == 0 ? null : Operators[column - 1, row];
+            if (direction == Directions.Right)
+                return column == _columnCount ? null : Operators[column + 1, row];
+            if (direction == Directions.Top)
+                return row == 0 ? null : Operators[column, row - 1];
+            return row == _rowCount ? null : Operators[column, row + 1];
+        }
+
+        public void InitOperatorsListBy(int columnCount, int rowCount){
+            Operators = new OperatorBase[columnCount,rowCount];
+            _columnCount = columnCount;
+            _rowCount = rowCount;
         }
 
         #region Services
@@ -107,7 +147,9 @@ namespace RVSLite{
 
         private void StartCyclicSound(){
             var soundTone = new ValueHolder(Lang.Res.SoundTone, 100);
-            RegisterInteractiveServiceTo(CYCLIC_SOUND_SERVICE_ID, soundTone);
+            var soundToneInitializer = new ValueSetter(soundTone, new DataHolder(100));
+            RegisterInteractiveServiceTo(CYCLIC_SOUND_SERVICE_ID, soundToneInitializer);
+            soundTone.ListenTo(soundToneInitializer);
             var ifClause = new IfClause(soundTone, ConditionOperations.LessThan, new DataHolder(200));
             ifClause.ListenTo(soundTone);
             var sound = new Sound(soundTone);
@@ -160,13 +202,26 @@ namespace RVSLite{
 
         private void InteractionWithBumper(){
             var bumper = new Bumper();
-            RegisterInteractiveServiceTo(BUMPER_SERVICE_ID, bumper);
+            var bumperSetter = new ValueSetter(bumper, _bumperState);
+            RegisterInteractiveServiceTo(BUMPER_SERVICE_ID, bumperSetter);
+            bumper.ListenTo(bumperSetter);
             new Messenger().ListenTo(bumper);
             new LED().ListenTo(bumper);
             var valueNegator = new ValueNegator();
             valueNegator.ListenTo(bumper);
             _ledNo2Operator = new LED();
             _ledNo2Operator.ListenTo(valueNegator);
+        }
+
+        #endregion
+
+        #region Nested type: Directions
+
+        private enum Directions{
+            Left,
+            Right,
+            Top,
+            Bottom,
         }
 
         #endregion

@@ -6,9 +6,9 @@ namespace RVSLite {
             get { return Lang.Res.Clear_display; }
         }
 
-        public override void Post() {
+        public override void Post(object value) {
             Console.Clear();
-            FireOnPost();
+            FireOnPost(value);
         }
     }
 }

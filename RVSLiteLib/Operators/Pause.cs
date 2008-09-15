@@ -15,10 +15,10 @@ namespace RVSLite{
             get { return OperatorName; }
         }
 
-        public override void Post(){
+        public override void Post(object value){
             DisplayThis();
             Thread.Sleep(DurationInMilliseconds);
-            FireOnPost();
+            FireOnPost(value);
         }
 
         public override string ToString(){

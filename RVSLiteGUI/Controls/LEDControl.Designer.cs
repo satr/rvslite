@@ -1,5 +1,5 @@
 ﻿namespace RVSLite.Controls {
-    partial class LEDControl : ITriggerValue{
+    partial class LEDControl : ITriggerControl{
         /// <summary> 
         /// Required designer variable.
         /// </summary>

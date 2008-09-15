@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace RVSLite {
-    public class LED : TriggerValueBase {
+    public class LED : BooleanValueBase {
         new public static readonly string OperatorName = Lang.Res.LED;
         private static int _instanceCounter;
         private IValueHolder _valueHolder;

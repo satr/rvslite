@@ -1,23 +1,21 @@
+using RVSLite.Controls;
+using RVSLite.HardwareDevices;
+
 namespace RVSLite{
     public class HardwareInterface : IHardwareInterface{
-        private readonly ITriggerValue _bumper1;
-        private readonly ITriggerValue _led1;
-
-        public HardwareInterface(ITriggerValue bumper1, ITriggerValue led1){
-            _bumper1 = bumper1;
-            _led1 = led1;
+        public HardwareInterface(){
+            Bumpers = new HWTrigger[0];
+            LEDs = new HWTrigger[0];
         }
 
-        #region IHardwareInterface Members
+        public IBooleanValue[] Bumpers { get; set; }
+        public IBooleanValue[] LEDs { get; set; }
 
-        public ITriggerValue Bumper1{
-            get { return _bumper1; }
+
+        public void SetLEDs(params LEDControl[] ledControls){
+            LEDs = new HWTrigger[ledControls.Length];
+            for (int i = 0; i < ledControls.Length; i++)
+                LEDs[i] = new HWTrigger(ledControls[i]);
         }
-
-        public ITriggerValue Led1{
-            get { return _led1; }
-        }
-
-        #endregion
     }
 }

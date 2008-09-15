@@ -24,6 +24,10 @@ namespace RVSLite{
             get { return _name; }
         }
 
+        public override void Post(object value){
+            base.Post(Value);
+        }
+
         #region IValueHolder Members
 
         public virtual object Value { set; get; }

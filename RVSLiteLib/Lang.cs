@@ -23,7 +23,8 @@ namespace RVSLite{
         public string Empty = "Empty";
         public string Value_receiver = "Value receiver";
         public string Wait_for = "Wait for";
-        public string Negate_value = "Negate value";
+        public string Negate_entry_value = "Negate entry value";
+        public string Negate_value = "Negate_entry_value value";
         public string Integer = "Integer";
         public string Max = "Max";
         public string Min = "Min";
@@ -45,7 +46,10 @@ namespace RVSLite{
         public string SoundTone = "Sound's tone";
         public string Check_condition = "Check condition";
         public string Data = "Data";
-
+        public string Connection = "Connection";
+        public string True = "True";
+        public string False= "False";
+        public string Entry_value = "Entry_value";
 
         public static Lang Res{
             get { return _instance ?? (_instance = new Lang()); }
@@ -99,6 +103,7 @@ namespace RVSLite{
             Value_receiver = "Приемник значений";
             Wait_for = "Ожидание";
             Negate_value = "Инвертировать значение";
+            Negate_entry_value = "Инвертировать входящие данные"; 
             Integer = "Целое";
             Max = "Макс.";
             Min = "Мин.";
@@ -122,6 +127,10 @@ namespace RVSLite{
             SoundTone = "Тон звука";
             Check_condition = "Проверить условие";
             Data = "Данные";
+            Connection = "Соединение";
+            True = "Да";
+            False= "Нет";
+            Entry_value = "Входящее значение";
         }
 
         public override string InteractionHelp{
