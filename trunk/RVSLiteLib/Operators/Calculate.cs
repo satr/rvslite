@@ -32,10 +32,10 @@ namespace RVSLite{
             _resultValueHolder = resultValueHolder;
         }
 
-        public override void Post(){
+        public override void Post(object value){
             DisplayThis();
             _resultValueHolder.Value = _calculationCommand.Calculate(_leftValueHolder, _rightValueHolder);
-            FireOnPost();
+            FireOnPost(_resultValueHolder.Value);
         }
 
         private static CalculationCommandBase GetCalculationCommandBy(CalculationOperations operation){

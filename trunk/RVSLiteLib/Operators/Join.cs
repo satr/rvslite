@@ -5,8 +5,8 @@ namespace RVSLite{
             get { return OperatorName; }
         }
 
-        public override void Post(){
-           FireOnPost();
+        public override void Post(object value){
+           FireOnPost(value);
         }
     }
 }

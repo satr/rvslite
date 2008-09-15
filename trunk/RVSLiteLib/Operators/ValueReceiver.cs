@@ -25,9 +25,10 @@ namespace RVSLite{
             get { return string.Empty; }
         }
 
-        public override void Post() {
+        public override void Post(object value) {
+            Value = value;
             ReceiveValue();
-            base.Post();
+            base.Post(Value);
         }
 
         protected virtual void ReceiveValue(){

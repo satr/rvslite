@@ -8,5 +8,9 @@
         public override string ToString() {
             return string.Format("{0}", Value == null ? Lang.Res.Empty : Value.ToString());
         }
+
+        public override void Post(object value){
+            base.Post(Value);
+        }
     }
 }

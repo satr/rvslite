@@ -10,8 +10,8 @@ namespace RVSLite{
         GreaterThan,
     }
 
-    public class IfClause : OperatorBase{
-        public static readonly string OperatorName = Lang.Res.Condition;
+    public class IfClause : BooleanValueBase{
+        new public static readonly string OperatorName = Lang.Res.Condition;
         private readonly ConditionCommandBase _conditionCommand;
         readonly ValueHolder _positiveValueHolder = new ValueHolder(Lang.Res.Result, true);
         readonly ValueHolder _negativeValueHolder = new ValueHolder(Lang.Res.Result, false);
@@ -24,7 +24,7 @@ namespace RVSLite{
         }
 
         public IfClause(ValueHolder leftValueHolder, ConditionOperations conditionOperation,
-                        ValueHolder rightValueHolder){
+                        ValueHolder rightValueHolder): base(OperatorName, Lang.Res.True, Lang.Res.False){
             LeftValueHolder = leftValueHolder;
             _conditionCommand = GetConditionCommandBy(conditionOperation);
             RightValueHolder = rightValueHolder;
@@ -46,13 +46,15 @@ namespace RVSLite{
             get{ return _negativeValueHolder;}
         }
 
-        public override void Post(){
+        public override void Post(object value){
             DisplayThis();
             bool conditionResult = _conditionCommand.GetConditionResult(LeftValueHolder, RightValueHolder);
+            Value = conditionResult;
             if (conditionResult)
-                Positive.Post();
+                Positive.Post(conditionResult);
             else
-                Negative.Post();
+                Negative.Post(conditionResult);
+            FireOnPost(Value);
         }
 
         private static ConditionCommandBase GetConditionCommandBy(ConditionOperations operation){

@@ -5,7 +5,7 @@ namespace RVSLite{
             get { return OperatorName; }
         }
 
-        public override void Post(){
+        public override void Post(object value){
             DisplayThis();
         }
 
