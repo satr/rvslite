@@ -26,8 +26,6 @@ namespace RVSLite {
             }
         }
 
-        string IBooleanValue.Name { get; set; }
-
         private bool GetBoolValue() {
             if(Value is bool)
                 return ((bool) Value);
@@ -37,8 +35,9 @@ namespace RVSLite {
             return decimal.TryParse(Value == null ? "0" : Value.ToString(), out dec) && dec != 0;
         }
 
-        public override string Name {
+        public override string Name{
             get { return _name; }
+            set { _name = value; }
         }
 
         public event PostEventHandler OnStateChanged;

@@ -52,10 +52,15 @@ namespace RVSLite{
 
         private void OperationsListForm_Activated(object sender, EventArgs e){
             RefreshSelection();
+            cbElementCreators.Focus();
         }
 
         private void RefreshSelection(){
             SelectedElementCreator = (ElementCreatorBase) cbElementCreators.SelectedValue;
+            txtAloneElementName.Text = SelectedElementCreator.Name;
+            var elementIsAlone = cbInstances.Items.Count == 1;
+            txtName.ReadOnly = txtAloneElementName.Visible = elementIsAlone;
+            cbInstances.Visible = !elementIsAlone;
         }
 
 
@@ -67,6 +72,7 @@ namespace RVSLite{
         private void OperationsListForm_Closing(object sender, CancelEventArgs e){
             if (DialogResult == DialogResult.Cancel)
                 return;
+            _selectedOperator.Name = txtName.Text;
         }
 
         private void InitControls(MainController mainController){

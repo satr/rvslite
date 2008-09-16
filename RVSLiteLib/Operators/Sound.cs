@@ -10,6 +10,7 @@
 
         public override string Name{
             get { return OperatorName; }
+            set {  }
         }
     }
 }

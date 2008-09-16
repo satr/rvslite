@@ -2,7 +2,7 @@
     public class Drive : ValueHolderContainerBase{
         private static int _instanceCounter;
         public static readonly string OperatorName = Lang.Res.Drive;
-        private readonly string _name;
+        private string _name;
 
         public Drive()
             : this(string.Format("{0}#{1}", OperatorName, _instanceCounter++)){
@@ -20,6 +20,7 @@
 
         public override string Name{
             get { return _name; }
+            set { _name = value; }
         }
 
         public override string ToString(){

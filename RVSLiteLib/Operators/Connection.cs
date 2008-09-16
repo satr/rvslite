@@ -2,8 +2,9 @@
     public class Connection : OperatorBase {
         public static readonly string OperatorName = Lang.Res.Connection;
 
-        public override string Name {
+        public override string Name{
             get { return OperatorName; }
+            set { }
         }
 
         public override void Post(object value) {

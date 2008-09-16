@@ -94,10 +94,10 @@ namespace RVSLite{
             On = "Вкл.";
             Off = "Вык.";
             Pressed = "Нажат";
-            Released = "Отпущен";
+            Released = "Свободен";
             Bumper = "Бампер";
             Undefined = "Не определен";
-            Undefined_operator_is_called = "Вызван не определенный оператор";
+            Undefined_operator_is_called = "Вызван неопределенный оператор";
             Value = "Значение";
             Empty = "Пусто";
             Value_receiver = "Приемник значений";
