@@ -6,19 +6,19 @@ using RVSLite.HardwareDevices;
 namespace RVSLite{
     public partial class MainForm : Form{
         private readonly MainController _mainController;
-        private readonly OperationsListForm _operationsListForm;
+        private readonly OperatorsListForm _operatorsListForm;
         public MainForm(){
             Lang.SwitchToRu();
             InitializeComponent();
             _mainController = new MainController(GetHardware());
-            _operationsListForm = new OperationsListForm(_mainController);
+            _operatorsListForm = new OperatorsListForm(_mainController);
             InitGroundControls();
             
         }
 
-        private HardwareInterface GetHardware() {
-            var hardware = new HardwareInterface();
-            hardware.Bumpers = new[]{new HWBooleanValue(bumperControl1),new HWBooleanValue(bumperControl2)};
+        private ServiceProvider GetHardware() {
+            var hardware = new ServiceProvider();
+            hardware.BumperPorts = new[]{new BooleanValueService(bumperControl1),new BooleanValueService(bumperControl2)};
             hardware.SetLEDs(ledControl1, ledControl2);
             return hardware;
         }
@@ -40,10 +40,10 @@ namespace RVSLite{
             var operatorHolderControl = (OperatorHolderControl)sender;
             if (operatorHolderControl.Operator != null)
                 return;
-            if (_operationsListForm.ShowDialog() == DialogResult.Cancel)
+            if (_operatorsListForm.ShowDialog() == DialogResult.Cancel)
                 return;
             var position = tableLayoutPanel.GetCellPosition(operatorHolderControl);
-            var selectedOperator = _operationsListForm.SelectedOperator;
+            var selectedOperator = _operatorsListForm.SelectedOperator;
             _mainController.PlaceOperatorAt(selectedOperator, position.Column, position.Row);
             operatorHolderControl.Operator = selectedOperator;
         }

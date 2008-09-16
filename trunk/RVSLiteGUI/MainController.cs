@@ -2,18 +2,18 @@ using System.Collections.Generic;
 
 namespace RVSLite {
     public class MainController {
-        private readonly HardwareInterface _hwInterface;
-        private readonly List<OperatorCreatorBase> _operatorsList;
+        private readonly ServiceProvider _serviceProvider;
+        private readonly List<ElementCreatorBase> _operatorsList;
         private readonly ServiceCoordinator _serviceCoordinator;
 
-        public MainController(HardwareInterface hwInterface) {
-            _hwInterface = hwInterface;
-            _serviceCoordinator = new ServiceCoordinator(_hwInterface);
+        public MainController(ServiceProvider serviceProvider) {
+            _serviceProvider = serviceProvider;
+            _serviceCoordinator = new ServiceCoordinator(_serviceProvider);
             _operatorsList = InitOperatorsList();
 //            _serviceCoordinator.Subscribe();
         }
 
-        public IEnumerable<OperatorCreatorBase> OperatorCreatorsList {
+        public IEnumerable<ElementCreatorBase> OperatorCreatorsList {
             get { return _operatorsList; }
         }
 
@@ -21,13 +21,13 @@ namespace RVSLite {
             get { return _serviceCoordinator; }
         }
 
-        private List<OperatorCreatorBase> InitOperatorsList() {
-            return new List<OperatorCreatorBase>
+        private List<ElementCreatorBase> InitOperatorsList() {
+            return new List<ElementCreatorBase>
                        {
-                           new ConnectionOperatorCreator(_serviceCoordinator.Hardware),
-                           new BumperOperatorCreator(_serviceCoordinator.Hardware),
-                           new DriveOperatorCreator(_serviceCoordinator.Hardware),
-                           new LEDOperatorCreator(_serviceCoordinator.Hardware)
+                           new ConnectionOperatorCreator(_serviceCoordinator.ServiceProvider),
+                           new BumperOperatorCreator(_serviceCoordinator.ServiceProvider),
+                           new DriveOperatorCreator(_serviceCoordinator.ServiceProvider),
+                           new LEDServiceCreator(_serviceCoordinator.ServiceProvider)
                        };
         }
 

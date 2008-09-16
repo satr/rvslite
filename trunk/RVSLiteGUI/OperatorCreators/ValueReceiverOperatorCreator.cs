@@ -1,10 +1,10 @@
 namespace RVSLite{
-    public class ValueReceiverOperatorCreator : OperatorCreatorBase{
-        public ValueReceiverOperatorCreator(IHardwareInterface hardware) : base(hardware) {}
+    public class ValueReceiverOperatorCreator : ElementCreatorBase{
+        public ValueReceiverOperatorCreator(IServiceProvider services) : base(services) {}
 
-        public override OperatorBase Create(){
-            return new ValueReceiver();
-        }
+//        public override OperatorBase Create(){
+//            return new ValueReceiver();
+//        }
 
         public override string Name {
             get { return ValueReceiver.OperatorName; }

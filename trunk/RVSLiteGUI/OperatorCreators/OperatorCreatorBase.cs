@@ -1,15 +1,28 @@
-﻿using System.Collections.Generic;
+using System.Collections;
 
 namespace RVSLite{
-    public abstract class OperatorCreatorBase{
-        protected readonly IHardwareInterface _hardware;
-
-        protected OperatorCreatorBase(IHardwareInterface hardware) {
-            _hardware = hardware;
+    public abstract class OperatorCreatorBase : ElementCreatorBase{
+        protected OperatorCreatorBase(IServiceProvider serviceProvider) : base(serviceProvider) {
         }
 
-        public abstract OperatorBase Create();
+        public override IList Instances{
+            get{
+                var instances = base.Instances;
+                if (instances.Count == 0
+                    || ElementIsNotNew(instances[0]))
+                    instances.Insert(0,Create());
+                return instances;
+            }
+        }
 
-        public abstract string Name { get; }
+        protected abstract OperatorBase Create();
+
+        private bool ElementIsNotNew(object obj){
+            foreach (var instance in _instances){
+                if (instance == obj)
+                    return true;
+            }
+            return false;
+        }
     }
 }

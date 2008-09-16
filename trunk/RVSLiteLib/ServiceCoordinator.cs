@@ -3,34 +3,34 @@ using System.Collections.Generic;
 
 namespace RVSLite{
     public class ServiceCoordinator{
-        private const string BOOL_CONDITION_OPERATION_SERVICE_ID = "8";
-        private const string BUMPER_SERVICE_ID = "1";
-        private const string CLEAR_DISPLAY_SERVICE_ID = "c";
-        private const string CYCLIC_SOUND_SERVICE_ID = "9";
+        private const string BOOL_CONDITION_OPERATION_DEMO_ACTION_ID = "8";
+        private const string PRESS_RELEASE_BUMPER_DEMO_ACTION_ID = "1";
+        private const string CLEAR_DISPLAY_DEMO_ACTION_ID = "c";
+        private const string CYCLIC_SOUND_DEMO_ACTION_ID = "9";
         private const string DISCONECT_LED2_SERVICE_EVENT_ID = "4";
-        private const string DISPLAY_VALUE_SERVICE_ID = "3";
+        private const string DISPLAY_VALUE_DEMO_ACTION_ID = "3";
         private const string EXIT_EVENT_ID = "q";
-        private const string INT_CONDITION_OPERATION_SERVICE_ID = "7";
-        private const string RUN_DRIVE_SERVICE_ID = "5";
-        private const string SET_VALUE_SERVICE_ID = "2";
-        private const string SOUND_SERVICE_ID = "6";
-        private readonly IHardwareInterface _hardware;
-        private readonly Dictionary<string, OperatorBase> _services = new Dictionary<string, OperatorBase>();
+        private const string INT_CONDITION_OPERATION_DEMO_ACTION_ID = "7";
+        private const string RUN_DRIVE_DEMO_ACTION_ID = "5";
+        private const string SET_VALUE_DEMO_ACTION_ID = "2";
+        private const string SOUND_DEMO_ACTION_ID = "6";
+        private readonly IServiceProvider _serviceProvider;
+        private readonly Dictionary<string, OperatorBase> _demoActions = new Dictionary<string, OperatorBase>();
         private int _columnCount;
         private OperatorBase _ledNo2Operator;
         private int _rowCount;
         private ValueReceiver _valueReceiver = new ValueReceiver();
         private readonly DataHolder _bumperState = new DataHolder(false);
 
-        public ServiceCoordinator(IHardwareInterface hwInterface){
+        public ServiceCoordinator(IServiceProvider serviceProvider){
             Operators = new OperatorBase[0,0];
-            if (hwInterface == null)
+            if (serviceProvider == null)
                 return;
-            _hardware = hwInterface;
+           _serviceProvider = serviceProvider;
         }
 
-        public IHardwareInterface Hardware{
-            get { return _hardware; }
+        public IServiceProvider ServiceProvider{
+            get { return _serviceProvider; }
         }
 
         public OperatorBase[,] Operators { get; set; }
@@ -47,7 +47,7 @@ namespace RVSLite{
                         break;
                     default:
                         GetServiceBy(choice).Post(null);
-                        if (choice == BUMPER_SERVICE_ID)
+                        if (choice == PRESS_RELEASE_BUMPER_DEMO_ACTION_ID)
                             _bumperState.Value = !(bool)_bumperState.Value;
                         break;
                 }
@@ -59,13 +59,13 @@ namespace RVSLite{
         }
 
         private OperatorBase GetServiceBy(string sensorId){
-            if (!_services.ContainsKey(sensorId))
+            if (!_demoActions.ContainsKey(sensorId))
                 return new NullOperator();
-            return _services[sensorId];
+            return _demoActions[sensorId];
         }
 
         private void RegisterInteractiveServiceTo(string serviceId, OperatorBase op){
-            _services[serviceId] = op;
+            _demoActions[serviceId] = op;
         }
 
         public void Subscribe(){
@@ -116,11 +116,11 @@ namespace RVSLite{
             _rowCount = rowCount;
         }
 
-        #region Services
+        #region ServiceProvider
 
         private void DemoIntConditionOperation(){
             var value1 = new IntegerValueReceiver();
-            RegisterInteractiveServiceTo(INT_CONDITION_OPERATION_SERVICE_ID, value1);
+            RegisterInteractiveServiceTo(INT_CONDITION_OPERATION_DEMO_ACTION_ID, value1);
             var value2 = new IntegerValueReceiver();
             value2.ListenTo(value1);
             var ifClause = new IfClause(value1, ConditionOperations.LessThan, value2);
@@ -131,7 +131,7 @@ namespace RVSLite{
 
         private void DemoBoolConditionOperation(){
             var bumper = new Bumper();
-            RegisterInteractiveServiceTo(BOOL_CONDITION_OPERATION_SERVICE_ID, bumper);
+            RegisterInteractiveServiceTo(BOOL_CONDITION_OPERATION_DEMO_ACTION_ID, bumper);
             var ifClause = new IfClause(bumper);
             ifClause.ListenTo(bumper);
             var value = new ValueHolder();
@@ -148,7 +148,7 @@ namespace RVSLite{
         private void StartCyclicSound(){
             var soundTone = new ValueHolder(Lang.Res.SoundTone, 100);
             var soundToneInitializer = new ValueSetter(soundTone, new DataHolder(100));
-            RegisterInteractiveServiceTo(CYCLIC_SOUND_SERVICE_ID, soundToneInitializer);
+            RegisterInteractiveServiceTo(CYCLIC_SOUND_DEMO_ACTION_ID, soundToneInitializer);
             soundTone.ListenTo(soundToneInitializer);
             var ifClause = new IfClause(soundTone, ConditionOperations.LessThan, new DataHolder(200));
             ifClause.ListenTo(soundTone);
@@ -164,7 +164,7 @@ namespace RVSLite{
 
         private void DemoStartSound3Times(){
             var sound1 = new Sound(100);
-            RegisterInteractiveServiceTo(SOUND_SERVICE_ID, sound1);
+            RegisterInteractiveServiceTo(SOUND_DEMO_ACTION_ID, sound1);
             var pause1 = new Pause(new ValueHolder(500));
             pause1.ListenTo(sound1);
             var tone = new ValueHolder(Lang.Res.SoundTone, 200);
@@ -180,30 +180,30 @@ namespace RVSLite{
 
         private void ControlOfDrive(){
             var integerReceiver = new IntegerValueReceiver(-1, 1);
-            RegisterInteractiveServiceTo(RUN_DRIVE_SERVICE_ID, integerReceiver);
+            RegisterInteractiveServiceTo(RUN_DRIVE_DEMO_ACTION_ID, integerReceiver);
             new Messenger().ListenTo(integerReceiver);
             new Drive().ListenTo(integerReceiver);
         }
 
         private void DisplayReceivedValue(){
             var valueReceiverMessenger = new Messenger(_valueReceiver);
-            RegisterInteractiveServiceTo(DISPLAY_VALUE_SERVICE_ID, valueReceiverMessenger);
+            RegisterInteractiveServiceTo(DISPLAY_VALUE_DEMO_ACTION_ID, valueReceiverMessenger);
         }
 
         private void ReceiveValue(){
             _valueReceiver = new ValueReceiver();
-            RegisterInteractiveServiceTo(SET_VALUE_SERVICE_ID, _valueReceiver);
+            RegisterInteractiveServiceTo(SET_VALUE_DEMO_ACTION_ID, _valueReceiver);
             new Messenger().ListenTo(_valueReceiver);
         }
 
         private void ClearDisplay(){
-            RegisterInteractiveServiceTo(CLEAR_DISPLAY_SERVICE_ID, new ClearDisplay());
+            RegisterInteractiveServiceTo(CLEAR_DISPLAY_DEMO_ACTION_ID, new ClearDisplay());
         }
 
         private void InteractionWithBumper(){
             var bumper = new Bumper();
             var bumperSetter = new ValueSetter(bumper, _bumperState);
-            RegisterInteractiveServiceTo(BUMPER_SERVICE_ID, bumperSetter);
+            RegisterInteractiveServiceTo(PRESS_RELEASE_BUMPER_DEMO_ACTION_ID, bumperSetter);
             bumper.ListenTo(bumperSetter);
             new Messenger().ListenTo(bumper);
             new LED().ListenTo(bumper);

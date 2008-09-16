@@ -48,7 +48,7 @@
     <Compile Include="ConditionCommands\LessThanConditionCommand.cs" />
     <Compile Include="ConditionCommands\LessThanOrEqualConditionCommand.cs" />
     <Compile Include="ConditionCommands\NotEqualConditionCommand.cs" />
-    <Compile Include="Interfaces\IHardwareInterface.cs" />
+    <Compile Include="Interfaces\IServiceProvider.cs" />
     <Compile Include="Interfaces\IBooleanValue.cs" />
     <Compile Include="Lang.cs" />
     <Compile Include="Operators\Bumper.cs" />
