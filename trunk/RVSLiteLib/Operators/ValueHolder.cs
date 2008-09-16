@@ -1,7 +1,7 @@
 namespace RVSLite{
     public class ValueHolder : OperatorBase, IValueHolder{
         public static readonly string OperatorName = Lang.Res.Value;
-        private readonly string _name;
+        private string _name;
         private static int _instanceCounter;
         public ValueHolder() {
             _name = GetNextDefaultName();
@@ -22,6 +22,7 @@ namespace RVSLite{
 
         public override string Name{
             get { return _name; }
+            set { _name = value; }
         }
 
         public override void Post(object value){

@@ -36,6 +36,7 @@
             this.cbInstances = new System.Windows.Forms.ComboBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblExistObjects = new System.Windows.Forms.Label();
+            this.txtAloneElementName = new System.Windows.Forms.TextBox();
             this.pnlControls.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -131,6 +132,7 @@
             // 
             // pnlExistObjects
             // 
+            this.pnlExistObjects.Controls.Add(this.txtAloneElementName);
             this.pnlExistObjects.Controls.Add(this.cbInstances);
             this.pnlExistObjects.Controls.Add(this.panel5);
             this.pnlExistObjects.Dock = System.Windows.Forms.DockStyle.Top;
@@ -171,6 +173,17 @@
             this.lblExistObjects.TabIndex = 0;
             this.lblExistObjects.Text = "Exist";
             // 
+            // txtAloneElementName
+            // 
+            this.txtAloneElementName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtAloneElementName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtAloneElementName.Location = new System.Drawing.Point(75, 0);
+            this.txtAloneElementName.Name = "txtAloneElementName";
+            this.txtAloneElementName.ReadOnly = true;
+            this.txtAloneElementName.Size = new System.Drawing.Size(289, 23);
+            this.txtAloneElementName.TabIndex = 1;
+            this.txtAloneElementName.Visible = false;
+            // 
             // OperatorsListForm
             // 
             this.AcceptButton = this.btnAdd;
@@ -193,6 +206,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.pnlExistObjects.ResumeLayout(false);
+            this.pnlExistObjects.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.ResumeLayout(false);
@@ -214,6 +228,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblExistObjects;
         private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtAloneElementName;
 
     }
 }

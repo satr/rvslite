@@ -20,8 +20,9 @@ namespace RVSLite {
             return string.Format("{0}: {1}", _title, _valueHolder);
         }
 
-        public override string Name {
+        public override string Name{
             get { return OperatorName; }
+            set { }
         }
 
         public object Value{

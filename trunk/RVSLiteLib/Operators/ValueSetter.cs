@@ -12,6 +12,7 @@
 
         public override string Name{
             get { return OperatorName; }
+            set { }
         }
 
         public override void Post(object value){

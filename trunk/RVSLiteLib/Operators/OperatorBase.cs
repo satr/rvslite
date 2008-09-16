@@ -6,7 +6,7 @@ namespace RVSLite {
 
     public abstract class OperatorBase {
         private OperatorBase _sourceOperator;
-        public abstract string Name { get; }
+        public abstract string Name { get; set; }
         public event PostEventHandler OnPost;
 
         public virtual void Post(object value){

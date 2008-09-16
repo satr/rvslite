@@ -8,11 +8,15 @@ namespace RVSLite{
         public override IList Instances{
             get{
                 var instances = base.Instances;
-                if (instances.Count == 0
-                    || ElementIsNotNew(instances[0]))
-                    instances.Insert(0,Create());
+                AddNewInstanceIfNotExist(instances);
                 return instances;
             }
+        }
+
+        private void AddNewInstanceIfNotExist(IList instances){
+            if (instances.Count == 0
+                || ElementIsNotNew(instances[0]))
+                instances.Insert(0,Create());
         }
 
         protected abstract OperatorBase Create();
