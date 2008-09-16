@@ -1,8 +1,8 @@
 namespace RVSLite{
     public class ConnectionOperatorCreator : OperatorCreatorBase {
-        public ConnectionOperatorCreator(IHardwareInterface hardware) : base(hardware) {}
+        public ConnectionOperatorCreator(IServiceProvider serviceProvider) : base(serviceProvider) {}
 
-        public override OperatorBase Create() {
+        protected override OperatorBase Create() {
             return new Connection();
         }
 

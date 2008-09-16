@@ -1,10 +1,10 @@
 namespace RVSLite{
-    public class ValueHolderOperatorCreator : OperatorCreatorBase{
-        public ValueHolderOperatorCreator(IHardwareInterface hardware) : base(hardware) {}
+    public class ValueHolderOperatorCreator : ElementCreatorBase{
+        public ValueHolderOperatorCreator(IServiceProvider services) : base(services) {}
 
-        public override OperatorBase Create(){
-            return new ValueHolder();
-        }
+//        public override OperatorBase Create(){
+//            return new ValueHolder();
+//        }
 
         public override string Name {
             get { return ValueHolder.OperatorName; }

@@ -1,23 +1,24 @@
+using System.Collections;
+
 namespace RVSLite{
-    public class BumperOperatorCreator : OperatorCreatorBase{
-        private IBooleanValue _selectedBumper;
-
-        public BumperOperatorCreator(IHardwareInterface hardware) : base(hardware){
-            _selectedBumper = Bumpers[0];
+    public class BumperOperatorCreator : ServiceCreatorBase{
+        public BumperOperatorCreator(IServiceProvider services) : base(services){
         }
 
-        public override OperatorBase Create(){
-            var bumper = new Bumper();
-            _selectedBumper.OnStateChanged += bumper.Post;
-            return bumper;
+        protected override IList GetServices(){
+            return _serviceProvider.BumperPorts;
         }
 
-        public override string Name {
+        public override string Name{
             get { return Bumper.OperatorName; }
         }
 
-        public IBooleanValue[] Bumpers {
-            get { return _hardware.Bumpers; }
+        protected override OperatorBase CreateOperator(){
+            return new Bumper();
+        }
+
+        protected override void Subscribe(IBooleanValue service, OperatorBase oper){
+            service.OnStateChanged += oper.Post;
         }
     }
 }

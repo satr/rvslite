@@ -58,8 +58,10 @@
     <Compile Include="Controls\OperatorHolderControl.Designer.cs">
       <DependentUpon>OperatorHolderControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="HardwareDevices\HWBooleanValue.cs" />
-    <Compile Include="HardwareInterface.cs" />
+    <Compile Include="OperatorCreators\OperatorCreatorBase.cs" />
+    <Compile Include="OperatorCreators\ServiceCreatorBase.cs" />
+    <Compile Include="Services\BooleanValueService.cs" />
+    <Compile Include="ServiceProvider.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -67,11 +69,11 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperationsListForm.cs">
+    <Compile Include="OperatorsListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OperationsListForm.Designer.cs">
-      <DependentUpon>OperationsListForm.cs</DependentUpon>
+    <Compile Include="OperatorsListForm.Designer.cs">
+      <DependentUpon>OperatorsListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorCreators\BumperOperatorCreator.cs" />
     <Compile Include="OperatorCreators\CalculateOperatorCreator.cs" />
@@ -79,9 +81,9 @@
     <Compile Include="OperatorCreators\DataHolderOperatorCreator.cs" />
     <Compile Include="OperatorCreators\DriveOperatorCreator.cs" />
     <Compile Include="OperatorCreators\IfClauseOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\LEDOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\LEDServiceCreator.cs" />
     <Compile Include="OperatorCreators\MessengerOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\OperatorCreatorBase.cs" />
+    <Compile Include="OperatorCreators\ElementCreatorBase.cs" />
     <Compile Include="OperatorCreators\ValueHolderOperatorCreator.cs" />
     <Compile Include="OperatorCreators\ValueReceiverOperatorCreator.cs" />
     <Compile Include="OperatorCreators\ValueSetterOperatorCreator.cs" />
@@ -103,8 +105,8 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="OperationsListForm.resx">
-      <DependentUpon>OperationsListForm.cs</DependentUpon>
+    <EmbeddedResource Include="OperatorsListForm.resx">
+      <DependentUpon>OperatorsListForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -18,7 +18,8 @@ namespace RVSLite {
         public override object Value {
             get { return base.Value; }
             set{
-                bool changed = !(bool) (base.Value = (bool) value);
+                if (base.Value != null && (bool)base.Value == (bool)value)
+                    return;
                 base.Value = value;
                 if (OnStateChanged != null)
                     OnStateChanged(value);

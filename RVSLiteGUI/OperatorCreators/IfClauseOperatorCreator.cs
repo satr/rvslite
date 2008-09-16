@@ -1,10 +1,12 @@
 namespace RVSLite{
-    public class IfClauseOperatorCreator : OperatorCreatorBase{
-        public IfClauseOperatorCreator(IHardwareInterface hardware) : base(hardware) {}
+    public class IfClauseOperatorCreator : ElementCreatorBase{
+        public IfClauseOperatorCreator(IServiceProvider services) : base(services) {}
 
+/*
         public override OperatorBase Create(){
             return new IfClause();
         }
+*/
 
         public override string Name {
             get { return IfClause.OperatorName; }
