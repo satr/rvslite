@@ -25,8 +25,17 @@ namespace RVSLite{
             set { _name = value; }
         }
 
-        public override void Post(object value){
+        public event ValueEventHandler OnStateChanged;
+
+        public void SetValue(object value){
             Value = value;
+        }
+
+        public override void Post(object value){
+            bool valueChanged = Value != value;
+            Value = value;
+            if (valueChanged && OnStateChanged != null)
+                OnStateChanged(value);
             base.Post(Value);
         }
 

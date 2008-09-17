@@ -1,13 +1,12 @@
 using System;
 
 namespace RVSLite {
-    public delegate void PostEventHandler(object value);
-    public delegate void BooleanEventHandler(bool value);
+    public delegate void ValueEventHandler(object value);
 
     public abstract class OperatorBase {
         private OperatorBase _sourceOperator;
         public abstract string Name { get; set; }
-        public event PostEventHandler OnPost;
+        public event ValueEventHandler OnPost;
 
         public virtual void Post(object value){
             DisplayThis();

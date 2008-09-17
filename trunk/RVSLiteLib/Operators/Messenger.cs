@@ -25,6 +25,15 @@ namespace RVSLite {
             set { }
         }
 
+        public event ValueEventHandler OnStateChanged;
+        
+        public void SetValue(object value){
+            bool valueChanged = _valueHolder.Value != value;
+            _valueHolder.Value = value;
+            if (valueChanged && OnStateChanged != null)
+                OnStateChanged(value);
+        }
+
         public object Value{
             get { return _valueHolder.Value; }
             set {  }

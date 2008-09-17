@@ -9,20 +9,20 @@ namespace RVSLite{
         }
 
         private void InitServices(){
-            foreach (IBooleanValue service in GetServices())
+            foreach (IValueHolder service in GetServices())
                 _instances.Add(Create(service));
             _selectedPort = _instances[0];
         }
 
         protected abstract IList GetServices();
 
-        protected OperatorBase Create(IBooleanValue service){
+        protected OperatorBase Create(IValueHolder service) {
             var oper = CreateOperator();
             Subscribe(service, oper);
             return oper;
         }
 
-        protected abstract void Subscribe(IBooleanValue service, OperatorBase oper);
+        protected abstract void Subscribe(IValueHolder service, OperatorBase oper);
 
         protected abstract OperatorBase CreateOperator();
     }

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls{
     public partial class OperatorHolderControl : UserControl{
+        readonly Dictionary<NeighbourDirections, OperatorHolderControl> _neihgbours = new Dictionary<NeighbourDirections, OperatorHolderControl>();
         public OperatorHolderControl(){
             InitializeComponent();
             RefireEvent(Controls);
@@ -17,6 +19,10 @@ namespace RVSLite.Controls{
             }
         }
 
+        public Dictionary<NeighbourDirections, OperatorHolderControl> Neihgbours{
+            get { return _neihgbours; }
+        }
+
         public event EventHandler OnHolderClick;
 
         private void RefireEvent(ControlCollection controls){
@@ -29,6 +35,22 @@ namespace RVSLite.Controls{
         private void control_Click(object sender, EventArgs e){
             if (OnHolderClick != null)
                 OnHolderClick(this, e);
+        }
+
+        public OperatorHolderControl NearestNeighbourOperator{
+            get{
+                foreach (var direction in GetNeighbourDirections()){
+                    var neihgbour = Neihgbours[direction];
+                    if (neihgbour != null
+                        && neihgbour.Operator != null)
+                        return neihgbour;
+                }
+                return null;
+            }
+        }
+
+        public static NeighbourDirections[] GetNeighbourDirections(){
+            return new[]{NeighbourDirections.Left, NeighbourDirections.Top, NeighbourDirections.Bottom, NeighbourDirections.Right};
         }
     }
 }

@@ -17,7 +17,7 @@ namespace RVSLite{
             return new LED();
         }
 
-        protected override void Subscribe(IBooleanValue service, OperatorBase oper){
+        protected override void Subscribe(IValueHolder service, OperatorBase oper) {
             oper.OnPost += service.SetValue;
         }
     }

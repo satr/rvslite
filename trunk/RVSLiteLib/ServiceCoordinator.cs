@@ -86,13 +86,13 @@ namespace RVSLite{
         }
 
         private void ConnectToNeighbours(OperatorBase oper, int column, int row){
-            foreach (Directions direction in new[]{Directions.Left, Directions.Top, Directions.Bottom, Directions.Right}){
+            foreach (NeighbourDirections direction in new[]{NeighbourDirections.Left, NeighbourDirections.Top, NeighbourDirections.Bottom, NeighbourDirections.Right}){
                 if (ConnectToNeighboursBy(column, row, oper, direction))
                     return;
             }
         }
 
-        private bool ConnectToNeighboursBy(int column, int row, OperatorBase oper, Directions direction){
+        private bool ConnectToNeighboursBy(int column, int row, OperatorBase oper, NeighbourDirections direction){
             OperatorBase neighbourOperator = GetNeighbourOperatorBy(column, row, direction);
             if (neighbourOperator == null)
                 return false;
@@ -100,12 +100,12 @@ namespace RVSLite{
             return true;
         }
 
-        private OperatorBase GetNeighbourOperatorBy(int column, int row, Directions direction){
-            if (direction == Directions.Left)
+        private OperatorBase GetNeighbourOperatorBy(int column, int row, NeighbourDirections direction){
+            if (direction == NeighbourDirections.Left)
                 return column == 0 ? null : Operators[column - 1, row];
-            if (direction == Directions.Right)
+            if (direction == NeighbourDirections.Right)
                 return column == _columnCount ? null : Operators[column + 1, row];
-            if (direction == Directions.Top)
+            if (direction == NeighbourDirections.Top)
                 return row == 0 ? null : Operators[column, row - 1];
             return row == _rowCount ? null : Operators[column, row + 1];
         }
@@ -211,17 +211,6 @@ namespace RVSLite{
             valueNegator.ListenTo(bumper);
             _ledNo2Operator = new LED();
             _ledNo2Operator.ListenTo(valueNegator);
-        }
-
-        #endregion
-
-        #region Nested type: Directions
-
-        private enum Directions{
-            Left,
-            Right,
-            Top,
-            Bottom,
         }
 
         #endregion
