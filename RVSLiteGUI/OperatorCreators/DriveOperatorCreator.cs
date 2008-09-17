@@ -1,13 +1,23 @@
-namespace RVSLite{
-    public class DriveOperatorCreator : ElementCreatorBase{
-        public DriveOperatorCreator(IServiceProvider services) : base(services) {}
+using System.Collections;
 
-//        public override OperatorBase Create(){
-//            return new Drive();
-//        }
+namespace RVSLite{
+    public class DriveOperatorCreator :ServiceCreatorBase {
+        public DriveOperatorCreator(IServiceProvider services) : base(services) {}
 
         public override string Name {
             get { return Drive.OperatorName; }
+        }
+
+        protected override IList GetServices(){
+            return _serviceProvider.DrivePorts;
+        }
+
+        protected override void Subscribe(IValueHolder service, OperatorBase oper) {
+            oper.OnPost += service.SetValue;
+        }
+
+        protected override OperatorBase CreateOperator(){
+            return new Drive();
         }
     }
 }

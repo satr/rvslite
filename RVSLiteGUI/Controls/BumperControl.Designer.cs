@@ -1,5 +1,5 @@
 ﻿namespace RVSLite.Controls {
-    partial class BumperControl : IBooleanControl{
+    partial class BumperControl : IServiceControl{
         /// <summary> 
         /// Required designer variable.
         /// </summary>

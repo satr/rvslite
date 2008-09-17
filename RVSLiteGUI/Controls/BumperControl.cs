@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public partial class BumperControl : UserControl, IBooleanControl{
+    public partial class BumperControl : UserControl, IServiceControl{
         private bool _value;
 
         public BumperControl(){
@@ -12,23 +12,23 @@ namespace RVSLite.Controls{
             pictureBox.Click += pictureBox_Click;
         }
 
-        #region IBooleanControl Members
+        #region IServiceControl Members
 
-        public event PostEventHandler OnStateChanged;
+        public event ValueEventHandler OnStateChanged;
 
-        public bool Value{
+        public object Value{
             get { return _value; }
             set{
-                if (_value == value)
+                if (_value == (bool) value)
                     return;
-                _value = value;
+                _value = (bool) value;
                 pictureBox.BackColor = _value ? Color.DarkViolet : Color.Gray;
                 if (OnStateChanged != null)
                     OnStateChanged(_value);
             }
         }
 
-        public string HWName{
+        public string ServiceName{
             get { return lblName.Text; }
             set { lblName.Text = value; }
         }
@@ -36,7 +36,7 @@ namespace RVSLite.Controls{
         #endregion
 
         private void pictureBox_Click(object sender, EventArgs e){
-            Value = !Value;
+            Value = !(bool)Value;
         }
     }
 }

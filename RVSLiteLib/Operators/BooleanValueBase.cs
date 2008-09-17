@@ -1,5 +1,5 @@
 namespace RVSLite {
-    public abstract class BooleanValueBase : ValueHolder, IBooleanValue {
+    public abstract class BooleanValueBase : ValueHolder, IValueHolder {
         protected string _valueIsFalseText;
         protected string _valueIsTrueText;
         protected string _name;
@@ -40,7 +40,7 @@ namespace RVSLite {
             set { _name = value; }
         }
 
-        public event PostEventHandler OnStateChanged;
+        public event ValueEventHandler OnStateChanged;
         public void SetValue(object value){
             throw new System.NotImplementedException();
         }

@@ -12,12 +12,24 @@
 
         public object Value{
             get { return !((bool) _valueHolder.Value); }
-            set { _valueHolder.Value = !((bool) value); }
+            set{
+                var newValue = (bool) value;
+                var valueChanged = (bool)_valueHolder.Value != newValue;
+                _valueHolder.Value = !newValue;
+                if (valueChanged && OnStateChanged != null)
+                    OnStateChanged(Value);
+            }
         }
 
         public override string Name{
             get { return OperatorName; }
             set { }
+        }
+
+        public event ValueEventHandler OnStateChanged;
+        
+        public void SetValue(object value){
+            Value = value;
         }
 
         #endregion

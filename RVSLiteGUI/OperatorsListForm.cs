@@ -2,12 +2,14 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using RVSLite.Controls;
 
 namespace RVSLite{
     public partial class OperatorsListForm : Form{
         private readonly ServiceCoordinator _serviceCoordinator;
         private ElementCreatorBase _selectedElementCreator;
         private OperatorBase _selectedOperator = new NullOperator();
+        private OperatorHolderControl _sourceOperatorHolderControl;
 
         public OperatorsListForm(MainController mainController){
             InitializeComponent();
@@ -25,7 +27,7 @@ namespace RVSLite{
             get { return _selectedElementCreator; }
             set{
                 _selectedElementCreator = value;
-                cbInstances.DataSource = _selectedElementCreator.Instances;
+                cbInstances.DataSource = _selectedElementCreator.GetInstancesBy(_sourceOperatorHolderControl);
                 RefreshSelectedInstanceProperties();
             }
         }
@@ -42,17 +44,11 @@ namespace RVSLite{
         private void Bind(){
             btnAdd.Click += btnAdd_Click;
             Closing += OperationsListForm_Closing;
-            Activated += OperationsListForm_Activated;
             cbElementCreators.SelectedValueChanged += cbOperations_SelectedValueChanged;
         }
 
         private void cbOperations_SelectedValueChanged(object sender, EventArgs e){
             RefreshSelection();
-        }
-
-        private void OperationsListForm_Activated(object sender, EventArgs e){
-            RefreshSelection();
-            cbElementCreators.Focus();
         }
 
         private void RefreshSelection(){
@@ -78,6 +74,13 @@ namespace RVSLite{
         private void InitControls(MainController mainController){
             cbElementCreators.DisplayMember = "Name";
             cbElementCreators.DataSource = mainController.OperatorCreatorsList;
+        }
+
+        public DialogResult ActivateFor(OperatorHolderControl operatorHolderControl){
+            _sourceOperatorHolderControl = operatorHolderControl.NearestNeighbourOperator;
+            RefreshSelection();
+            cbElementCreators.Focus();
+            return ShowDialog();
         }
     }
 }

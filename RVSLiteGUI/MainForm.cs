@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using RVSLite.Controls;
-using RVSLite.HardwareDevices;
+using RVSLite.Services;
 
 namespace RVSLite{
     public partial class MainForm : Form{
@@ -17,10 +17,11 @@ namespace RVSLite{
         }
 
         private ServiceProvider GetHardware() {
-            var hardware = new ServiceProvider();
-            hardware.BumperPorts = new[]{new BooleanValueService(bumperControl1),new BooleanValueService(bumperControl2)};
-            hardware.SetLEDs(ledControl1, ledControl2);
-            return hardware;
+            var serviceProvider = new ServiceProvider();
+            serviceProvider.SetBumpers(bumperControl1, bumperControl2);
+            serviceProvider.SetLEDs(ledControl1, ledControl2);
+            serviceProvider.SetDrives(driveControl1, driveControl2);
+            return serviceProvider;
         }
 
         private void InitGroundControls(){
@@ -34,18 +35,41 @@ namespace RVSLite{
                     operatorHolderControl.OnHolderClick += operatorHolderControl_Click;
                 }
             }
+            for (int column = 0; column < columnCount; column++) {
+                for (int row = 0; row < rowCount; row++)
+                    InitNeighboursBy(column, row, (OperatorHolderControl) tableLayoutPanel.GetControlFromPosition(column, row));
+            }
+        }
+
+        private void InitNeighboursBy(int column, int row, OperatorHolderControl operatorHolderControl){
+            foreach (var direction in OperatorHolderControl.GetNeighbourDirections())
+                operatorHolderControl.Neihgbours[direction] = GetNeighboursBy(column, row, direction, tableLayoutPanel);
+        }
+
+        private static OperatorHolderControl GetNeighboursBy(int column, int row, NeighbourDirections direction, TableLayoutPanel tableLayoutPanel){
+            if (direction == NeighbourDirections.Left)
+                return (OperatorHolderControl) (column == 0 ? null : tableLayoutPanel.GetControlFromPosition(column - 1, row));
+            if (direction == NeighbourDirections.Right)
+                return (OperatorHolderControl) (column == tableLayoutPanel.ColumnCount ? null : tableLayoutPanel.GetControlFromPosition(column + 1, row));
+            if (direction == NeighbourDirections.Top)
+                return (OperatorHolderControl) (row == 0 ? null : tableLayoutPanel.GetControlFromPosition(column, row - 1));
+            return (OperatorHolderControl) (row == tableLayoutPanel.RowCount ? null : tableLayoutPanel.GetControlFromPosition(column, row + 1));
         }
 
         private void operatorHolderControl_Click(object sender, EventArgs e){
             var operatorHolderControl = (OperatorHolderControl)sender;
+            var position = tableLayoutPanel.GetCellPosition(operatorHolderControl);
             if (operatorHolderControl.Operator != null)
                 return;
-            if (_operatorsListForm.ShowDialog() == DialogResult.Cancel)
+            if (_operatorsListForm.ActivateFor(operatorHolderControl) == DialogResult.Cancel)
                 return;
-            var position = tableLayoutPanel.GetCellPosition(operatorHolderControl);
             var selectedOperator = _operatorsListForm.SelectedOperator;
             _mainController.PlaceOperatorAt(selectedOperator, position.Column, position.Row);
             operatorHolderControl.Operator = selectedOperator;
         }
+
+    }
+
+    internal class OperatorHolderControlNeighbours{
     }
 }

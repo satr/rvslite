@@ -17,7 +17,7 @@ namespace RVSLite{
             return new Bumper();
         }
 
-        protected override void Subscribe(IBooleanValue service, OperatorBase oper){
+        protected override void Subscribe(IValueHolder service, OperatorBase oper){
             service.OnStateChanged += oper.Post;
         }
     }
