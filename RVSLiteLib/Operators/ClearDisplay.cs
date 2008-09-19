@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace RVSLite {
-    public class ClearDisplay : OperatorBase {
+    public class ClearDisplay : BaseOperator {
         public override string Name{
             get { return Lang.Res.Clear_display; }
             set { }

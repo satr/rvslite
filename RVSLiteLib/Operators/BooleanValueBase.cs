@@ -1,5 +1,5 @@
 namespace RVSLite {
-    public abstract class BooleanValueBase : ValueHolder, IValueHolder {
+    public abstract class BooleanValueBase : ValueHolder {
         protected string _valueIsFalseText;
         protected string _valueIsTrueText;
         protected string _name;

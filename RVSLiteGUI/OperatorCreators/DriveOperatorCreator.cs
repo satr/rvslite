@@ -12,11 +12,11 @@ namespace RVSLite{
             return _serviceProvider.DrivePorts;
         }
 
-        protected override void Subscribe(IValueHolder service, OperatorBase oper) {
+        protected override void Subscribe(IService service, BaseOperator oper) {
             oper.OnPost += service.SetValue;
         }
 
-        protected override OperatorBase CreateOperator(){
+        protected override BaseOperator CreateOperator(){
             return new Drive();
         }
     }

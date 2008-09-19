@@ -6,20 +6,20 @@ using RVSLite.Controls;
 
 namespace RVSLite{
     public partial class OperatorsListForm : Form{
-        private readonly ServiceCoordinator _serviceCoordinator;
+        private readonly OperatorsController _operatorsController;
         private ElementCreatorBase _selectedElementCreator;
-        private OperatorBase _selectedOperator = new NullOperator();
+        private BaseOperator _selectedOperator = new BaseOperator();
         private OperatorHolderControl _sourceOperatorHolderControl;
 
         public OperatorsListForm(MainController mainController){
             InitializeComponent();
             InitControls(mainController);
-            _serviceCoordinator = mainController.ServiceCoordinator;
+            _operatorsController = mainController.OperatorsController;
             cbInstances.SelectedIndexChanged += cbInstances_SelectedIndexChanged;
             Bind();
         }
 
-        public OperatorBase SelectedOperator{
+        public BaseOperator SelectedOperator{
             get { return _selectedOperator; }
         }
 
@@ -37,7 +37,7 @@ namespace RVSLite{
         }
 
         private void RefreshSelectedInstanceProperties(){
-            _selectedOperator = (OperatorBase) cbInstances.SelectedValue;
+            _selectedOperator = (BaseOperator) cbInstances.SelectedValue;
             txtName.Text = _selectedOperator == null? "Null": _selectedOperator.Name;
         }
 

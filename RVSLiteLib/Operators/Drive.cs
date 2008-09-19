@@ -1,5 +1,5 @@
 ﻿namespace RVSLite{
-    public class Drive : ValueHolderContainerBase{
+    public class Drive : BaseOperator{
         private static int _instanceCounter;
         public static readonly string OperatorName = Lang.Res.Drive;
         private string _name;
@@ -12,19 +12,13 @@
             _name = name;
         }
 
-        private string StoppedText { get; set; }
-
-        private string RunForwardText { set; get; }
-
-        private string RunBackwardText { get; set; }
-
         public override string Name{
             get { return _name; }
             set { _name = value; }
         }
 
-        public override string ToString(){
-            var directionValue = ((int) _valueHolder.Value);
+        public override string ToString(object value){
+            var directionValue = ((int) value);
             string direction = directionValue < 0
                                    ? Lang.Res.RunBackward
                                    : (directionValue > 0

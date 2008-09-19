@@ -48,9 +48,11 @@
     <Compile Include="ConditionCommands\LessThanConditionCommand.cs" />
     <Compile Include="ConditionCommands\LessThanOrEqualConditionCommand.cs" />
     <Compile Include="ConditionCommands\NotEqualConditionCommand.cs" />
+    <Compile Include="OperatorsController.cs" />
     <Compile Include="Interfaces\IServiceProvider.cs" />
     <Compile Include="Lang.cs" />
     <Compile Include="NeighbourDirections.cs" />
+    <Compile Include="Operators\BooleanValueBase.cs" />
     <Compile Include="Operators\Bumper.cs" />
     <Compile Include="Operators\Calculate.cs" />
     <Compile Include="Operators\ClearDisplay.cs" />
@@ -59,22 +61,16 @@
     <Compile Include="Operators\Drive.cs" />
     <Compile Include="Operators\IfClause.cs" />
     <Compile Include="Operators\IntegerValueReceiver.cs" />
-    <Compile Include="Interfaces\IValueHolder.cs" />
+    <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Operators\Join.cs" />
     <Compile Include="Operators\LED.cs" />
     <Compile Include="Operators\Messenger.cs" />
     <Compile Include="Operators\Negator.cs" />
-    <Compile Include="Operators\NullOperator.cs" />
-    <Compile Include="Operators\NullValueHolder.cs" />
-    <Compile Include="Operators\OperatorBase.cs" />
+    <Compile Include="Operators\BaseOperator.cs" />
     <Compile Include="Operators\Pause.cs" />
     <Compile Include="Operators\Sound.cs" />
-    <Compile Include="Operators\BooleanValueBase.cs" />
     <Compile Include="Operators\ValueHolder.cs" />
-    <Compile Include="Operators\ValueHolderContainerBase.cs" />
-    <Compile Include="Operators\ValueNegator.cs" />
     <Compile Include="Operators\ValueReceiver.cs" />
-    <Compile Include="Operators\ValueSetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCoordinator.cs" />
   </ItemGroup>

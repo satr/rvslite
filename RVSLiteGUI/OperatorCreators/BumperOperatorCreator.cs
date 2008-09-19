@@ -13,11 +13,11 @@ namespace RVSLite{
             get { return Bumper.OperatorName; }
         }
 
-        protected override OperatorBase CreateOperator(){
+        protected override BaseOperator CreateOperator(){
             return new Bumper();
         }
 
-        protected override void Subscribe(IValueHolder service, OperatorBase oper){
+        protected override void Subscribe(IService service, BaseOperator oper){
             service.OnStateChanged += oper.Post;
         }
     }

@@ -1,23 +1,19 @@
 namespace RVSLite{
-    public class ValueHolder : OperatorBase, IValueHolder{
-        public static readonly string OperatorName = Lang.Res.Value;
+    public class ValueHolder : BaseOperator{
         private string _name;
         private static int _instanceCounter;
-        public ValueHolder() {
-            _name = GetNextDefaultName();
+        public ValueHolder(): this(Lang.Res.Value){
         }
 
-        public ValueHolder(object value)
-            : this(GetNextDefaultName(), value) {
-        }
-
-        private static string GetNextDefaultName(){
-            return string.Format("{0}_{1}", OperatorName, _instanceCounter++);
-        }
-
-        public ValueHolder(string name, object value){
+        public ValueHolder(string name){
             _name = name;
-            Value = value;
+            InstanceName = _instanceCounter++.ToString();
+        }
+
+        public string InstanceName { get; set; }
+
+        public override string ToString(object value){
+            return string.Format("{0} {1}", Name, InstanceName);
         }
 
         public override string Name{
@@ -25,28 +21,11 @@ namespace RVSLite{
             set { _name = value; }
         }
 
-        public event ValueEventHandler OnStateChanged;
-
-        public void SetValue(object value){
-            Value = value;
-        }
-
         public override void Post(object value){
-            bool valueChanged = Value != value;
             Value = value;
-            if (valueChanged && OnStateChanged != null)
-                OnStateChanged(value);
             base.Post(Value);
         }
 
-        #region IValueHolder Members
-
         public virtual object Value { set; get; }
-
-        #endregion
-
-        public override string ToString(){
-            return string.Format("{0} {1}", Name, Value == null ? Lang.Res.Empty : Value.ToString());
-        }
     }
 }

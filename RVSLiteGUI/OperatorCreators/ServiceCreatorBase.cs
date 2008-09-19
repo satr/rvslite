@@ -9,21 +9,21 @@ namespace RVSLite{
         }
 
         private void InitServices(){
-            foreach (IValueHolder service in GetServices())
+            foreach (IService service in GetServices())
                 _instances.Add(Create(service));
             _selectedPort = _instances[0];
         }
 
         protected abstract IList GetServices();
 
-        protected OperatorBase Create(IValueHolder service) {
+        protected BaseOperator Create(IService service) {
             var oper = CreateOperator();
             Subscribe(service, oper);
             return oper;
         }
 
-        protected abstract void Subscribe(IValueHolder service, OperatorBase oper);
+        protected abstract void Subscribe(IService service, BaseOperator oper);
 
-        protected abstract OperatorBase CreateOperator();
+        protected abstract BaseOperator CreateOperator();
     }
 }

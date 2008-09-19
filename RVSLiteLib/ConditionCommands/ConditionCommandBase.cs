@@ -2,25 +2,25 @@ using System;
 
 namespace RVSLite{
     public abstract class ConditionCommandBase{
-        public abstract bool GetConditionResult(IValueHolder valueHolder1, IValueHolder valueHolder2);
+        public abstract bool GetConditionResult(object value1, object value2);
 
-        protected static bool CheckValuesAreInvalid(IValueHolder valueHolder1, IValueHolder valueHolder2){
-            if (valueHolder1.Value == null || valueHolder2.Value == null)
+        protected static bool CheckValuesAreInvalid(object value1, object value2){
+            if (value1 == null || value2 == null)
                 return false;
-            if (valueHolder1.Value.GetType() != valueHolder2.Value.GetType())
+            if (value1.GetType() != value2.GetType())
                 return false;
             return true;
         }
 
-        protected static int GetInnerConditionResult(IValueHolder valueHolder1, IValueHolder valueHolder2){
-            if (!CheckValuesAreInvalid(valueHolder1, valueHolder2))
+        protected static int GetInnerConditionResult(object value1, object value2){
+            if (!CheckValuesAreInvalid(value1, value2))
                 return -1;
-            if (valueHolder1.Value is int)
-                return ((int) valueHolder1.Value).CompareTo((int) valueHolder2.Value);
-            if (valueHolder1.Value is bool)
-                return ((bool) valueHolder1.Value).CompareTo((bool) valueHolder2.Value);
-            if (valueHolder1.Value is string)
-                return ((string) valueHolder1.Value).CompareTo((string) valueHolder2.Value);
+            if (value1 is int)
+                return ((int) value1).CompareTo((int) value2);
+            if (value1 is bool)
+                return ((bool) value1).CompareTo((bool) value2);
+            if (value1 is string)
+                return ((string) value1).CompareTo((string) value2);
             throw new Exception(Lang.Res.Undefined_condition_operation);
         }
     }
