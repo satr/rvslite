@@ -1,14 +1,18 @@
 ﻿using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public partial class DriveControl : UserControl, IServiceControl{
+    public partial class DriveControl : UserControl, IService{
         private int _value;
 
         public DriveControl(){
             InitializeComponent();
         }
 
-        #region IServiceControl Members
+        #region IService Members
+
+        public void SetValue(object value){
+            Value = value;
+        }
 
         public event ValueEventHandler OnStateChanged;
 

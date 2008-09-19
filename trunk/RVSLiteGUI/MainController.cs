@@ -4,39 +4,43 @@ namespace RVSLite {
     public class MainController {
         private readonly ServiceProvider _serviceProvider;
         private readonly List<ElementCreatorBase> _operatorsList;
-        private readonly ServiceCoordinator _serviceCoordinator;
+        private readonly OperatorsController _operatorsController;
 
         public MainController(ServiceProvider serviceProvider) {
             _serviceProvider = serviceProvider;
-            _serviceCoordinator = new ServiceCoordinator(_serviceProvider);
+            _operatorsController = new OperatorsController(_serviceProvider);
             _operatorsList = InitOperatorsList();
-//            _serviceCoordinator.Subscribe();
         }
 
         public IEnumerable<ElementCreatorBase> OperatorCreatorsList {
             get { return _operatorsList; }
         }
 
-        public ServiceCoordinator ServiceCoordinator {
-            get { return _serviceCoordinator; }
+        public OperatorsController OperatorsController {
+            get { return _operatorsController; }
         }
 
         private List<ElementCreatorBase> InitOperatorsList() {
             return new List<ElementCreatorBase>
                        {
-                           new ConnectionOperatorCreator(_serviceCoordinator.ServiceProvider),
-                           new BumperOperatorCreator(_serviceCoordinator.ServiceProvider),
-                           new DriveOperatorCreator(_serviceCoordinator.ServiceProvider),
-                           new LEDServiceCreator(_serviceCoordinator.ServiceProvider)
+                           new DataHolderOperatorCreator(_operatorsController.ServiceProvider),
+                           new ValueHolderOperatorCreator(_operatorsController.ServiceProvider),
+                           new ConnectionOperatorCreator(_operatorsController.ServiceProvider),
+                           new IfClauseOperatorCreator(_operatorsController.ServiceProvider),
+                           new CalculateOperatorCreator(_operatorsController.ServiceProvider),
+                           new PauseOperatorCreator(_operatorsController.ServiceProvider),
+                           new BumperOperatorCreator(_operatorsController.ServiceProvider),
+                           new DriveOperatorCreator(_operatorsController.ServiceProvider),
+                           new LEDServiceCreator(_operatorsController.ServiceProvider)
                        };
         }
 
         public void InitOperatorsListBy(int columnCount, int rowCount) {
-            ServiceCoordinator.InitOperatorsListBy(columnCount, rowCount);
+            OperatorsController.InitOperatorsListBy(columnCount, rowCount);
         }
 
-        public void PlaceOperatorAt(OperatorBase oper, int column, int row) {
-            ServiceCoordinator.PlaceOperatorAt(oper, column, row);
+        public void PlaceOperatorAt(BaseOperator oper, int column, int row) {
+            OperatorsController.PlaceOperatorAt(oper, column, row);
         }
     }
 }

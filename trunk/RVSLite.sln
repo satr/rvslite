@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVSLiteConsole", "RVSLite\RVSLiteConsole.csproj", "{7E21E813-78FF-4957-A213-D9D969317558}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVSLiteLib", "RVSLiteLib\RVSLiteLib.csproj", "{8155BFB2-3B24-49EC-BB6F-1B72678B3B8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVSLiteGUI", "RVSLiteGUI\RVSLiteGUI.csproj", "{C22D01D8-E232-45C4-9CED-785489D84958}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7E21E813-78FF-4957-A213-D9D969317558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E21E813-78FF-4957-A213-D9D969317558}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E21E813-78FF-4957-A213-D9D969317558}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E21E813-78FF-4957-A213-D9D969317558}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8155BFB2-3B24-49EC-BB6F-1B72678B3B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8155BFB2-3B24-49EC-BB6F-1B72678B3B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8155BFB2-3B24-49EC-BB6F-1B72678B3B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU

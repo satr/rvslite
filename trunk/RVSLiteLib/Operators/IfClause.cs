@@ -10,51 +10,34 @@ namespace RVSLite{
         GreaterThan,
     }
 
-    public class IfClause : BooleanValueBase{
-        new public static readonly string OperatorName = Lang.Res.Condition;
-        private readonly ConditionCommandBase _conditionCommand;
-        readonly ValueHolder _positiveValueHolder = new ValueHolder(Lang.Res.Result, true);
-        readonly ValueHolder _negativeValueHolder = new ValueHolder(Lang.Res.Result, false);
+    public class IfClause : BaseOperator{
+        private ConditionCommandBase _conditionCommand;
+        readonly BaseOperator _positiveResult = new BaseOperator();
+        readonly BaseOperator _negativeResult = new BaseOperator();
+        private ValueHolder _valueHolder;
 
-        public IfClause() : this(new NullValueHolder(), ConditionOperations.NotEqual, new NullValueHolder()){
+        public IfClause(string name): base(name){
         }
 
-        public IfClause(ValueHolder boolValueHolder)
-            : this(boolValueHolder, ConditionOperations.Equal, new DataHolder(true)){
+        public BaseOperator Positive{
+            get { return _positiveResult; }
         }
 
-        public IfClause(ValueHolder leftValueHolder, ConditionOperations conditionOperation,
-                        ValueHolder rightValueHolder): base(OperatorName, Lang.Res.True, Lang.Res.False){
-            LeftValueHolder = leftValueHolder;
+        public BaseOperator Negative{
+            get{ return _negativeResult;}
+        }
+
+        public void InitBy(ConditionOperations conditionOperation, ValueHolder valueHolder){
             _conditionCommand = GetConditionCommandBy(conditionOperation);
-            RightValueHolder = rightValueHolder;
-        }
-
-        public ValueHolder LeftValueHolder { get; set; }
-
-        public ValueHolder RightValueHolder { get; set; }
-
-        public override string Name{
-            get { return OperatorName; }
-        }
-
-        public OperatorBase Positive{
-            get { return _positiveValueHolder; }
-        }
-
-        public OperatorBase Negative{
-            get{ return _negativeValueHolder;}
+            _valueHolder = valueHolder;
         }
 
         public override void Post(object value){
-            DisplayThis();
-            bool conditionResult = _conditionCommand.GetConditionResult(LeftValueHolder, RightValueHolder);
-            Value = conditionResult;
-            if (conditionResult)
-                Positive.Post(conditionResult);
+            DisplayThis(value);
+            if (_conditionCommand.GetConditionResult(value, _valueHolder))
+                Positive.Post(value);
             else
-                Negative.Post(conditionResult);
-            FireOnPost(Value);
+                Negative.Post(value);
         }
 
         private static ConditionCommandBase GetConditionCommandBy(ConditionOperations operation){
@@ -73,8 +56,8 @@ namespace RVSLite{
             throw new Exception(Lang.Res.Undefined);
         }
 
-        public override string ToString(){
-            return string.Format("{0}: [{1}] {2} [{3}]", Lang.Res.Check_condition, LeftValueHolder, _conditionCommand, RightValueHolder);
+        public override string ToString(object value){
+            return string.Format("{0}: [{1}] {2} [{3}]", Lang.Res.Check_condition, value, _conditionCommand, _valueHolder);
         }
     }
 }

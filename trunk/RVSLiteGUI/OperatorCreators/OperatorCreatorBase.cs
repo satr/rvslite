@@ -19,7 +19,7 @@ namespace RVSLite{
                 instances.Insert(0,Create());
         }
 
-        protected abstract OperatorBase Create();
+        protected abstract BaseOperator Create();
 
         private bool ElementIsNotNew(object obj){
             foreach (var instance in _instances){

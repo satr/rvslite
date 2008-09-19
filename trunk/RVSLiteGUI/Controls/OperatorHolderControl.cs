@@ -10,8 +10,8 @@ namespace RVSLite.Controls{
             RefireEvent(Controls);
         }
 
-        private OperatorBase _operator;
-        public OperatorBase Operator{
+        private BaseOperator _operator;
+        public BaseOperator Operator{
             get { return _operator; }
             set{
                 _operator = value;

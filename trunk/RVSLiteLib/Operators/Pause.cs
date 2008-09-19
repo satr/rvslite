@@ -2,39 +2,30 @@
 using System.Threading;
 
 namespace RVSLite{
-    public class Pause : ValueHolderContainerBase{
+    public class Pause : BaseOperator{
         public static readonly string OperatorName = Lang.Res.Pause;
-        public Pause(int milliseconds)
-            : this(new ValueHolder(milliseconds)) {
-        }
-
-        public Pause(IValueHolder valueHolder) : base(valueHolder){
-        }
-
         public override string Name{
             get { return OperatorName; }
             set {  }
         }
 
         public override void Post(object value){
-            DisplayThis();
-            Thread.Sleep(DurationInMilliseconds);
+            DisplayThis(value);
+            Thread.Sleep(GetDurationInMillisecondsBy(value));
             FireOnPost(value);
         }
 
-        public override string ToString(){
+        public override string ToString(object value){
             var durationText = new DateTime()
-                .AddMilliseconds(DurationInMilliseconds)
+                .AddMilliseconds(GetDurationInMillisecondsBy(value))
                 .ToString("HH:mm ss.fff");
             return string.Format("{0}: {1}", Name, durationText);
         }
 
-        private int DurationInMilliseconds{
-            get{
-                int duration;
-                int.TryParse(_valueHolder.Value == null ? "0" : _valueHolder.Value.ToString(), out duration);
-                return duration;
-            }
+        private static int GetDurationInMillisecondsBy(object value){
+            int duration;
+            int.TryParse(value == null ? "0" : value.ToString(), out duration);
+            return duration;
         }
     }
 }

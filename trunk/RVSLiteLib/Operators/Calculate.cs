@@ -9,33 +9,19 @@ namespace RVSLite{
     }
 
     public class Calculate : ValueHolder{
-        new public static readonly string OperatorName = Lang.Res.Calculate;
-        private IValueHolder _leftValueHolder;
-        private readonly IValueHolder _resultValueHolder;
-        private IValueHolder _rightValueHolder;
+        private IService _valueHolder;
         private CalculationCommandBase _calculationCommand;
 
-        public Calculate(IValueHolder leftValueHolder, CalculationOperations operation, IValueHolder rightValueHolder){
-            SetOperandsTo(leftValueHolder, operation, rightValueHolder);
-            _resultValueHolder = this;
+        public Calculate(string name): base(name){
         }
 
-        public void SetOperandsTo(IValueHolder leftValueHolder, CalculationOperations operation, IValueHolder rightValueHolder){
-            _leftValueHolder = leftValueHolder;
+        public void SetOperandsTo(CalculationOperations operation, IService valueHolder){
             _calculationCommand = GetCalculationCommandBy(operation);
-            _rightValueHolder = rightValueHolder;
-        }
-
-        public Calculate(IValueHolder leftValueHolder, CalculationOperations operation, IValueHolder rightValueHolder,
-                         IValueHolder resultValueHolder)
-            : this(leftValueHolder, operation, rightValueHolder){
-            _resultValueHolder = resultValueHolder;
+            _valueHolder = valueHolder;
         }
 
         public override void Post(object value){
-            DisplayThis();
-            _resultValueHolder.Value = _calculationCommand.Calculate(_leftValueHolder, _rightValueHolder);
-            FireOnPost(_resultValueHolder.Value);
+            base.Post(_calculationCommand.Calculate(Value, _valueHolder.Value));
         }
 
         private static CalculationCommandBase GetCalculationCommandBy(CalculationOperations operation){
@@ -50,17 +36,12 @@ namespace RVSLite{
             throw new Exception(Lang.Res.Undefined);
         }
 
-        public override string Name{
-            get { return OperatorName; }
-        }
-
-        public override string ToString(){
-            return string.Format("{0}: {4} = [{1}] {2} [{3}]",
+        public override string ToString(object value){
+            return string.Format("{0}: [{1}] {2} [{3}]",
                                  Name,
-                                 _leftValueHolder,
+                                 value,
                                  _calculationCommand,
-                                 _rightValueHolder,
-                                 _resultValueHolder.Name);
+                                 _valueHolder);
         }
     }
 }

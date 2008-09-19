@@ -2,7 +2,7 @@ namespace RVSLite{
     public class MessengerOperatorCreator : ElementCreatorBase{
         public MessengerOperatorCreator(IServiceProvider services) : base(services) {}
 
-//        public override OperatorBase Create(){
+//        public override BaseOperator Create(){
 //            return new Messenger();
 //        }
 

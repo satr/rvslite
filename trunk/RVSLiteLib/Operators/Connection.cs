@@ -1,5 +1,5 @@
 ﻿namespace RVSLite {
-    public class Connection : OperatorBase {
+    public class Connection : BaseOperator {
         public static readonly string OperatorName = Lang.Res.Connection;
 
         public override string Name{

@@ -1,23 +1,13 @@
-using System.Collections;
-
 namespace RVSLite{
-    public class ConnectionOperatorCreator : OperatorCreatorBase {
+    public class ConnectionOperatorCreator : SingleOperatorCreatorBase {
         public ConnectionOperatorCreator(IServiceProvider serviceProvider) : base(serviceProvider) {}
 
-        protected override OperatorBase Create() {
-            return new Connection();
+        protected override BaseOperator Create() {
+            return new BaseOperator(Name);
         }
 
         public override string Name {
             get { return Connection.OperatorName; }
-        }
-
-        public override IList Instances{
-            get{
-                _instances.Clear();
-                _instances.Add(Create());
-                return _instances;
-            }
         }
     }
 }

@@ -51,7 +51,6 @@
     <Compile Include="Controls\DriveControl.Designer.cs">
       <DependentUpon>DriveControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IServiceControl.cs" />
     <Compile Include="Controls\LEDControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,8 +64,9 @@
       <DependentUpon>OperatorHolderControl.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorCreators\OperatorCreatorBase.cs" />
+    <Compile Include="OperatorCreators\PauseOperatorCreator.cs" />
     <Compile Include="OperatorCreators\ServiceCreatorBase.cs" />
-    <Compile Include="Services\BooleanValueService.cs" />
+    <Compile Include="OperatorCreators\SingleOperatorCreatorBase.cs" />
     <Compile Include="ServiceProvider.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="MainForm.cs">
@@ -91,8 +91,6 @@
     <Compile Include="OperatorCreators\MessengerOperatorCreator.cs" />
     <Compile Include="OperatorCreators\ElementCreatorBase.cs" />
     <Compile Include="OperatorCreators\ValueHolderOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\ValueReceiverOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\ValueSetterOperatorCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\BumperControl.resx">

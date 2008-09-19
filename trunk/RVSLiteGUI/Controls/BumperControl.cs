@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public partial class BumperControl : UserControl, IServiceControl{
+    public partial class BumperControl : UserControl, IService{
         private bool _value;
 
         public BumperControl(){
@@ -12,7 +12,11 @@ namespace RVSLite.Controls{
             pictureBox.Click += pictureBox_Click;
         }
 
-        #region IServiceControl Members
+        #region IService Members
+
+        public void SetValue(object value){
+            Value = value;
+        }
 
         public event ValueEventHandler OnStateChanged;
 

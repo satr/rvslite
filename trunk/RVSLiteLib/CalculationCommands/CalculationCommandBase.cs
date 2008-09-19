@@ -1,5 +1,5 @@
 namespace RVSLite{
     public abstract class CalculationCommandBase{
-        public abstract object Calculate(IValueHolder leftValueHolder, IValueHolder rightValueHolder);
+        public abstract object Calculate(object value1, object value2);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using RVSLite.Controls;
-using RVSLite.Services;
 
 namespace RVSLite{
     public partial class MainForm : Form{
@@ -10,17 +10,17 @@ namespace RVSLite{
         public MainForm(){
             Lang.SwitchToRu();
             InitializeComponent();
-            _mainController = new MainController(GetHardware());
+            _mainController = new MainController(GetServices());
             _operatorsListForm = new OperatorsListForm(_mainController);
             InitGroundControls();
             
         }
 
-        private ServiceProvider GetHardware() {
+        private ServiceProvider GetServices() {
             var serviceProvider = new ServiceProvider();
-            serviceProvider.SetBumpers(bumperControl1, bumperControl2);
-            serviceProvider.SetLEDs(ledControl1, ledControl2);
-            serviceProvider.SetDrives(driveControl1, driveControl2);
+            serviceProvider.BumperPorts = new List<IService>{bumperControl1, bumperControl2};
+            serviceProvider.LEDPorts = new List<IService>{ledControl1, ledControl2};
+            serviceProvider.DrivePorts = new List<IService>{driveControl1, driveControl2};
             return serviceProvider;
         }
 

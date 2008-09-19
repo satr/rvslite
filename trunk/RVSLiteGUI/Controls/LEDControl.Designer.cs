@@ -1,5 +1,5 @@
 ﻿namespace RVSLite.Controls {
-    partial class LEDControl : IServiceControl{
+    partial class LEDControl{
         /// <summary> 
         /// Required designer variable.
         /// </summary>

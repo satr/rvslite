@@ -1,9 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 
 namespace RVSLite{
     public interface IServiceProvider{
-        IList BumperPorts { get; set; }
-        IList LEDPorts { get; set; }
-        IList DrivePorts { get; set; }
+        List<IService> BumperPorts { get; set; }
+        List<IService> LEDPorts { get; set; }
+        List<IService> DrivePorts { get; set; }
     }
 }

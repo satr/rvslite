@@ -3,18 +3,31 @@ using System;
 namespace RVSLite {
     public delegate void ValueEventHandler(object value);
 
-    public abstract class OperatorBase {
-        private OperatorBase _sourceOperator;
-        public abstract string Name { get; set; }
+    public class BaseOperator {
+        private BaseOperator _sourceOperator;
+        private string _name;
+        
+        public virtual string Name{
+            get { return _name; }
+            set { _name = value; }
+        }
+
         public event ValueEventHandler OnPost;
 
+        public BaseOperator(){
+        }
+
+        public BaseOperator(string name){
+            _name = name;
+        }
+
         public virtual void Post(object value){
-            DisplayThis();
+            DisplayThis(value);
             FireOnPost(value);
         }
 
-        protected void DisplayThis(){
-            Console.Out.WriteLine(this);
+        protected void DisplayThis(object value){
+            Console.Out.WriteLine(ToString(value));
         }
 
         protected void FireOnPost(object value){
@@ -22,7 +35,7 @@ namespace RVSLite {
                 OnPost(value);
         }
 
-        public OperatorBase SourceOperator{
+        public BaseOperator SourceOperator{
             set{
                 _sourceOperator = value;
                 _sourceOperator.OnPost += Post;
@@ -38,8 +51,12 @@ namespace RVSLite {
             Console.Out.WriteLine("{0} {1}", this, Lang.Res.Is_disconnected);
         }
 
-        public virtual void ListenTo(OperatorBase sourceOperator) {
+        public virtual void ListenTo(BaseOperator sourceOperator) {
             SourceOperator = sourceOperator;
+        }
+
+        public virtual string ToString(object value){
+            return string.Format("{0} {1}", Name ?? string.Empty, value ?? string.Empty);
         }
     }
 }

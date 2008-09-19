@@ -1,15 +1,13 @@
 namespace RVSLite{
-    public class IfClauseOperatorCreator : ElementCreatorBase{
+    public class IfClauseOperatorCreator : SingleOperatorCreatorBase{
         public IfClauseOperatorCreator(IServiceProvider services) : base(services) {}
 
-/*
-        public override OperatorBase Create(){
-            return new IfClause();
-        }
-*/
-
         public override string Name {
-            get { return IfClause.OperatorName; }
+            get { return Lang.Res.Condition; }
+        }
+
+        protected override BaseOperator Create(){
+            return new IfClause(Name);
         }
     }
 }
