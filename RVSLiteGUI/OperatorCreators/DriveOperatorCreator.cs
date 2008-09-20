@@ -16,7 +16,7 @@ namespace RVSLite{
             oper.OnPost += service.SetValue;
         }
 
-        protected override BaseOperator CreateOperator(){
+        public override BaseOperator Create(){
             return new Drive();
         }
     }

@@ -27,5 +27,9 @@ namespace RVSLite{
         }
 
         public virtual object Value { set; get; }
+
+        public override bool IsValueHolder {
+            get { return true; }
+        }
     }
 }

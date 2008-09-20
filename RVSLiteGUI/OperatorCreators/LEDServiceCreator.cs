@@ -13,7 +13,7 @@ namespace RVSLite{
             return _serviceProvider.LEDPorts;
         }
 
-        protected override BaseOperator CreateOperator(){
+        public override BaseOperator Create(){
             return new LED();
         }
 

@@ -6,8 +6,16 @@ namespace RVSLite{
             get { return Lang.Res.Data; }
         }
 
-        protected override BaseOperator Create(){
+        public override BaseOperator Create(){
             return new DataHolder();
+        }
+
+        public override bool RequireInitValue {
+            get { return true; }
+        }
+
+        public override bool RequireSourceElement {
+            get { return false; }
         }
     }
 }

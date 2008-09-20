@@ -58,5 +58,9 @@ namespace RVSLite {
         public virtual string ToString(object value){
             return string.Format("{0} {1}", Name ?? string.Empty, value ?? string.Empty);
         }
+
+        public virtual bool IsValueHolder {
+            get { return false; }
+        }
     }
 }

@@ -50,6 +50,9 @@ namespace RVSLite{
         public string True = "True";
         public string False= "False";
         public string Entry_value = "Entry_value";
+        public string Require_init_value = "Require init value";
+        public string Require_correct_name = "Require correct name";
+        public string Name_is_already_in_use = "Name is already in use";
 
         public static Lang Res{
             get { return _instance ?? (_instance = new Lang()); }
@@ -131,6 +134,9 @@ namespace RVSLite{
             True = "Да";
             False= "Нет";
             Entry_value = "Входящее значение";
+            Require_init_value = "Требуется начальное значение";
+            Require_correct_name = "Требуется корректное имя";
+            Name_is_already_in_use = "Имя уже используется";
         }
 
         public override string InteractionHelp{

@@ -1,11 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using RVSLite.Controls;
 
 namespace RVSLite{
     public abstract class ElementCreatorBase{
-        protected IList _instances = new ArrayList();
+        protected List<BaseOperator> _instances = new List<BaseOperator>();
         protected readonly IServiceProvider _serviceProvider;
-        private OperatorHolderControl _sourceOperatorHolderControl;
 
         protected ElementCreatorBase(IServiceProvider serviceProvider){
             _serviceProvider = serviceProvider;
@@ -13,13 +13,42 @@ namespace RVSLite{
 
         public abstract string Name { get; }
 
-        public virtual IList Instances{
+        public virtual List<BaseOperator> Instances{
             get { return _instances; }
         }
 
-        public IList GetInstancesBy(OperatorHolderControl sourceOperatorHolderControl){
-            _sourceOperatorHolderControl = sourceOperatorHolderControl;
-            return Instances;
+        public virtual bool RequireInitValue {
+            get{ return false;}
         }
+
+        public virtual bool RequireSourceElement {
+            get{ return true;}
+        }
+
+        public virtual bool IsCollectable {
+            get { return false; }
+        }
+
+        public IServiceProvider ServiceProvider {
+            get { return _serviceProvider; }
+        }
+
+        public virtual bool RequireValueHolder {
+            get { return false; }
+        }
+
+        public virtual bool IsAnonymous{
+            get { return false; }
+        }
+
+        public bool ExistAnotherInstanceWith(string name, BaseOperator sourceOperator){
+            foreach (BaseOperator instance in Instances){
+                if (instance != sourceOperator && instance.Name == name)
+                    return true;
+            }
+            return false;
+        }
+
+        public abstract BaseOperator Create();
     }
 }
