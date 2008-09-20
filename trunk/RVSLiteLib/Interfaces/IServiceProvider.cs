@@ -6,5 +6,6 @@ namespace RVSLite{
         List<IService> BumperPorts { get; set; }
         List<IService> LEDPorts { get; set; }
         List<IService> DrivePorts { get; set; }
+        List<BaseOperator> ValueHolders { get; }
     }
 }

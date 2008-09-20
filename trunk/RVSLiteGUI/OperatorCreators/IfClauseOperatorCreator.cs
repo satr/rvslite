@@ -6,7 +6,7 @@ namespace RVSLite{
             get { return Lang.Res.Condition; }
         }
 
-        protected override BaseOperator Create(){
+        public override BaseOperator Create(){
             return new IfClause(Name);
         }
     }

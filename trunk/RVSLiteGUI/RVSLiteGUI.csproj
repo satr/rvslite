@@ -51,6 +51,12 @@
     <Compile Include="Controls\DriveControl.Designer.cs">
       <DependentUpon>DriveControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ElementPropertiesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ElementPropertiesControl.Designer.cs">
+      <DependentUpon>ElementPropertiesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LEDControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -99,6 +105,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DriveControl.resx">
       <DependentUpon>DriveControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ElementPropertiesControl.resx">
+      <DependentUpon>ElementPropertiesControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LEDControl.resx">

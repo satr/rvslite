@@ -6,7 +6,7 @@ namespace RVSLite{
             get { return Lang.Res.Calculate; }
         }
 
-        protected override BaseOperator Create(){
+        public override BaseOperator Create(){
             return new Calculate(Name);
         }
     }

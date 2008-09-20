@@ -17,13 +17,15 @@ namespace RVSLite{
         protected abstract IList GetServices();
 
         protected BaseOperator Create(IService service) {
-            var oper = CreateOperator();
+            var oper = Create();
             Subscribe(service, oper);
             return oper;
         }
 
         protected abstract void Subscribe(IService service, BaseOperator oper);
 
-        protected abstract BaseOperator CreateOperator();
+        public override bool RequireValueHolder {
+            get { return true; }
+        }
     }
 }
