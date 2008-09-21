@@ -33,11 +33,15 @@ namespace RVSLite{
             get { return _serviceProvider; }
         }
 
-        public virtual bool RequireValueHolder {
+        public virtual bool IsOperatorWithOperation {
             get { return false; }
         }
 
         public virtual bool IsAnonymous{
+            get { return false; }
+        }
+
+        public virtual bool IsPredefinedList{
             get { return false; }
         }
 

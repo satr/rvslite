@@ -14,8 +14,13 @@ namespace RVSLite.Controls{
         public BaseOperator Operator{
             get { return _operator; }
             set{
-                _operator = value;
-                lblName.Text = _operator.Name;
+                elementPropertiesControl.Value = _operator = value;
+                if(_operator.IsOperatorWithOperation){
+                    var oper = ((OperatorWithOperation) _operator);
+                    lblOperation.Visible = elementPropertiesControl2.Visible = true;
+                    lblOperation.Text = oper.OperationCommand.ToString();
+                    elementPropertiesControl2.Value = oper.ValueHolder;
+                }
             }
         }
 

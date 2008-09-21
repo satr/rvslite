@@ -24,7 +24,7 @@ namespace RVSLite{
 
         protected abstract void Subscribe(IService service, BaseOperator oper);
 
-        public override bool RequireValueHolder {
+        public override bool IsPredefinedList{
             get { return true; }
         }
     }
