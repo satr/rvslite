@@ -36,18 +36,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationCommands\CalculationCommandBase.cs" />
-    <Compile Include="CalculationCommands\DivisionCalculationCommand.cs" />
-    <Compile Include="CalculationCommands\MultiplyCalculationCommand.cs" />
-    <Compile Include="CalculationCommands\SubstractionCalculationCommand.cs" />
-    <Compile Include="CalculationCommands\SumCalculationCommand.cs" />
-    <Compile Include="ConditionCommands\ConditionCommandBase.cs" />
-    <Compile Include="ConditionCommands\EqualConditionCommand.cs" />
-    <Compile Include="ConditionCommands\GreaterThanConditionCommand.cs" />
-    <Compile Include="ConditionCommands\GreaterThanOrEqualConditionCommand.cs" />
-    <Compile Include="ConditionCommands\LessThanConditionCommand.cs" />
-    <Compile Include="ConditionCommands\LessThanOrEqualConditionCommand.cs" />
-    <Compile Include="ConditionCommands\NotEqualConditionCommand.cs" />
+    <Compile Include="OperationsCommands\OperationsCommandBase.cs" />
+    <Compile Include="OperationsCommands\CalculationCommands\DivisionCalculationCommand.cs" />
+    <Compile Include="OperationsCommands\CalculationCommands\MultiplyCalculationCommand.cs" />
+    <Compile Include="OperationsCommands\CalculationCommands\SubstractionCalculationCommand.cs" />
+    <Compile Include="OperationsCommands\CalculationCommands\SumCalculationCommand.cs" />
+    <Compile Include="OperationsCommands\ConditionCommands\ConditionCommandBase.cs" />
+    <Compile Include="OperationsCommands\ConditionCommands\EqualConditionCommand.cs" />
+    <Compile Include="OperationsCommands\ConditionCommands\GreaterThanConditionCommand.cs" />
+    <Compile Include="OperationsCommands\ConditionCommands\GreaterThanOrEqualConditionCommand.cs" />
+    <Compile Include="OperationsCommands\ConditionCommands\LessThanConditionCommand.cs" />
+    <Compile Include="OperationsCommands\ConditionCommands\LessThanOrEqualConditionCommand.cs" />
+    <Compile Include="OperationsCommands\ConditionCommands\NotEqualConditionCommand.cs" />
     <Compile Include="OperatorsController.cs" />
     <Compile Include="Interfaces\IServiceProvider.cs" />
     <Compile Include="Lang.cs" />
@@ -67,6 +67,7 @@
     <Compile Include="Operators\Messenger.cs" />
     <Compile Include="Operators\Negator.cs" />
     <Compile Include="Operators\BaseOperator.cs" />
+    <Compile Include="Operators\OperatorWithOperation.cs" />
     <Compile Include="Operators\Pause.cs" />
     <Compile Include="Operators\Sound.cs" />
     <Compile Include="Operators\ValueHolder.cs" />

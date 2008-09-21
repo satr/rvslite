@@ -42,21 +42,56 @@ namespace RVSLite{
 
         private void RefreshSelection(){
             SelectedElementCreator = (ElementCreatorBase) cbElementCreators.SelectedValue;
-            pnlInstanceName.Visible = !SelectedElementCreator.IsAnonymous;
-            pnlValue.Visible = SelectedElementCreator.RequireInitValue;
+            RefreshSourceElementPanel(SelectedElementCreator);
+            RefreshOperationsList(SelectedElementCreator);
+            RefreshValuePanel();
+            RefreshNamePanel(SelectedElementCreator);
             RefreshInstancesList(SelectedElementCreator);
+            if(cbInstances.Items.Count == 0)
+                return;
             SelectFirstOperatorInList();
             RefreshSelectedInstanceProperties();
         }
 
+        private void RefreshSourceElementPanel(ElementCreatorBase elementCreator){
+            pnlSourceElement.Visible = elementCreator.RequireSourceElement;
+            if (!elementCreator.RequireSourceElement && _sourceOperatorHolderControl == null)
+                return;
+            txtSourceElementName.Text = _sourceOperatorHolderControl.Operator.Name;
+        }
+
+        private void RefreshOperationsList(ElementCreatorBase elementCreator){
+            pnlOperations.Visible = elementCreator.IsOperatorWithOperation;
+            if (!elementCreator.IsOperatorWithOperation)
+                return;
+            cbOperationsCommands.DataSource = new List<OperationsCommandBase>(((OperatorWithOperationCreatorBase) elementCreator).OperationCommands);
+        }
+
+        private void RefreshNamePanel(ElementCreatorBase elementCreator){
+            pnlInstanceName.Visible = elementCreator.IsCollectable && !SelectedElementCreator.IsAnonymous;
+        }
+
+        private void RefreshValuePanel(){
+            pnlValue.Visible = OperatorIsValueHolderRequiredInitValue(SelectedOperator);
+        }
+
         private void RefreshInstancesList(ElementCreatorBase elementCreator){
-            pnlInstances.Visible = elementCreator.RequireValueHolder || elementCreator.IsCollectable;
-            var instances = new List<BaseOperator>(elementCreator.Instances);
-            if (SelectedElementCreator.IsCollectable){
-                _newInstance = SelectedElementCreator.Create();
-                instances.Insert(0, _newInstance);
-            }
+            pnlInstances.Visible = elementCreator.IsOperatorWithOperation 
+                || elementCreator.IsCollectable
+                || elementCreator.IsPredefinedList;
+            var instances = new List<BaseOperator>(elementCreator.IsOperatorWithOperation
+                                                       ? elementCreator.ServiceProvider.ValueHolders
+                                                       : elementCreator.Instances);
+            if (elementCreator.IsCollectable)
+                AddNewInstance(instances, elementCreator.Create());
+            else if (elementCreator.IsOperatorWithOperation)
+                AddNewInstance(instances, new DataHolder());
             cbInstances.DataSource = instances;
+        }
+
+        private void AddNewInstance(IList<BaseOperator> instances, BaseOperator newInstance){
+            _newInstance = newInstance;
+            instances.Insert(0, _newInstance);
         }
 
 
@@ -76,7 +111,8 @@ namespace RVSLite{
         }
 
         private void SetValueField(){
-            if (SelectedOperator.IsValueHolder && ((ValueHolder) SelectedOperator).Value != null)
+            RefreshValuePanel();
+            if (SelectedOperator.IsValueHolder && ((ValueHolder)SelectedOperator).Value != null)
                 txtValue.Text = ((ValueHolder) SelectedOperator).Value.ToString();
         }
 
@@ -107,6 +143,14 @@ namespace RVSLite{
             if (!CheckSelectedOperatorIsValid())
                 return;
             ClearErrorMessage();
+            if (SelectedElementCreator.IsOperatorWithOperation){
+                var operatorWithOperation = (OperatorWithOperation) SelectedElementCreator.Create();
+                SelectedOperator = operatorWithOperation.InitBy((OperationsCommandBase)cbOperationsCommands.SelectedItem,
+                                             (ValueHolder) cbInstances.SelectedItem);
+            }
+            else{
+                SelectedOperator.Name = txtInstanceName.Text;
+            }
             if (SelectedElementCreator.IsCollectable)
                 SelectedElementCreator.Instances.Add(SelectedOperator);
             CloseFormWithResultOk();
@@ -128,9 +172,15 @@ namespace RVSLite{
             if (SelectedElementCreator.IsCollectable
                 && (!InstanceNameIsSetCorrectAndInstanceNameIsNotInUse()))
                 return false;
-            if (SelectedElementCreator.RequireInitValue && !InitValueIsSetCorrect())
+            if (OperatorIsValueHolderRequiredInitValue(SelectedOperator) 
+                && !InitValueIsSetCorrect())
                 return false;
             return true;
+        }
+
+        private static bool OperatorIsValueHolderRequiredInitValue(BaseOperator selectedOperator){
+            return selectedOperator.IsValueHolder 
+                   && ((ValueHolder)selectedOperator).RequireInitValue;
         }
 
         private bool InstanceNameIsSetCorrectAndInstanceNameIsNotInUse(){
@@ -160,7 +210,6 @@ namespace RVSLite{
         private void OperationsListForm_Closing(object sender, CancelEventArgs e){
             if (DialogResult == DialogResult.Cancel)
                 return;
-            SelectedOperator.Name = txtInstanceName.Text;
         }
 
         private void InitControls(MainController mainController){

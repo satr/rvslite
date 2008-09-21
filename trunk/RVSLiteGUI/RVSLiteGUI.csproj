@@ -70,6 +70,7 @@
       <DependentUpon>OperatorHolderControl.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorCreators\OperatorCreatorBase.cs" />
+    <Compile Include="OperatorCreators\OperatorWithOperationCreatorBase.cs" />
     <Compile Include="OperatorCreators\PauseOperatorCreator.cs" />
     <Compile Include="OperatorCreators\ServiceCreatorBase.cs" />
     <Compile Include="OperatorCreators\SingleOperatorCreatorBase.cs" />

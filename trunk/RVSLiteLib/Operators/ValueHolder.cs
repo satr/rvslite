@@ -2,7 +2,7 @@ namespace RVSLite{
     public class ValueHolder : BaseOperator{
         private string _name;
         private static int _instanceCounter;
-        public ValueHolder(): this(Lang.Res.Value){
+        public ValueHolder(): this(Lang.Res.Variable){
         }
 
         public ValueHolder(string name){
@@ -30,6 +30,14 @@ namespace RVSLite{
 
         public override bool IsValueHolder {
             get { return true; }
+        }
+
+        public virtual bool RequireInitValue {
+            get { return false; }
+        }
+
+        public override string ToString(){
+            return ToString("");
         }
     }
 }

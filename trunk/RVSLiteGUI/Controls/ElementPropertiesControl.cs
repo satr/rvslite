@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace RVSLite.Controls {
-    public partial class ElementPropertiesControl : UserControl {
-        public ElementPropertiesControl() {
+namespace RVSLite.Controls{
+    public partial class ElementPropertiesControl : UserControl{
+        public ElementPropertiesControl(){
             InitializeComponent();
+        }
+
+        public BaseOperator Value{
+            set{
+                lblName.Text = value.Name;
+                lblValue.Visible = value.IsValueHolder;
+                if (value.IsValueHolder){
+                    object val = ((ValueHolder) value).Value;
+                    lblValue.Text = val == null ? "" : val.ToString();
+                }
+            }
         }
     }
 }

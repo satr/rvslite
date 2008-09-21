@@ -62,5 +62,9 @@ namespace RVSLite {
         public virtual bool IsValueHolder {
             get { return false; }
         }
+
+        public virtual bool IsOperatorWithOperation {
+            get { return false; }
+        }
     }
 }
