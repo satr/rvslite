@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using RVSLite.Controls;
 
 namespace RVSLite{
-    public abstract class ElementCreatorBase{
-        protected List<BaseOperator> _instances = new List<BaseOperator>();
+    public abstract class ActivityCreatorBase{
+        protected List<BaseActivity> _instances = new List<BaseActivity>();
         protected readonly IServiceProvider _serviceProvider;
 
-        protected ElementCreatorBase(IServiceProvider serviceProvider){
+        protected ActivityCreatorBase(IServiceProvider serviceProvider){
             _serviceProvider = serviceProvider;
         }
 
         public abstract string Name { get; }
 
-        public virtual List<BaseOperator> Instances{
+        public virtual List<BaseActivity> Instances{
             get { return _instances; }
         }
 
@@ -45,14 +46,20 @@ namespace RVSLite{
             get { return false; }
         }
 
-        public bool ExistAnotherInstanceWith(string name, BaseOperator sourceOperator){
-            foreach (BaseOperator instance in Instances){
-                if (instance != sourceOperator && instance.Name == name)
+        public bool ExistAnotherInstanceWith(string name, BaseActivity sourceActivity){
+            foreach (BaseActivity instance in Instances){
+                if (instance != sourceActivity && instance.Name == name)
                     return true;
             }
             return false;
         }
 
-        public abstract BaseOperator Create();
+        public abstract BaseActivity Create();
+
+        public Control GetControl(BaseActivity activity){
+            var control = new DoControl();
+            control.Activity = activity;
+            return control;
+        }
     }
 }

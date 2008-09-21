@@ -1,22 +1,22 @@
 namespace RVSLite{
-    public class IfClause : OperatorWithOperation{
-        private readonly BaseOperator _negativeResult = new BaseOperator();
-        private readonly BaseOperator _positiveResult = new BaseOperator();
+    public class IfClause : ActivityWithOperation{
+        private readonly BaseActivity _negativeResult = new BaseActivity();
+        private readonly BaseActivity _positiveResult = new BaseActivity();
 
         public IfClause(string name) : base(name){
         }
 
-        public BaseOperator Positive{
+        public BaseActivity Positive{
             get { return _positiveResult; }
         }
 
-        public BaseOperator Negative{
+        public BaseActivity Negative{
             get { return _negativeResult; }
         }
 
         public override void Post(object value){
             DisplayThis(value);
-            if ((bool) _operationCommand.Perform(value, _valueHolder))
+            if ((bool) _operationCommand.Perform(value, _variable))
                 Positive.Post(value);
             else
                 Negative.Post(value);

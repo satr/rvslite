@@ -391,7 +391,7 @@
             this.MinimizeBox = false;
             this.Name = "OperatorsListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Operators";
+            this.Text = "Activities";
             this.pnlControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.initValueErrorProvider)).EndInit();
             this.panel4.ResumeLayout(false);

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
 namespace RVSLite{
-    public class ValueHolderOperatorCreator : OperatorCreatorBase{
-        public ValueHolderOperatorCreator(IServiceProvider serviceProvider) : base(serviceProvider){
+    public class VariableActivityCreator : BaseActivityCreatorBase{
+        public VariableActivityCreator(IServiceProvider serviceProvider) : base(serviceProvider){
         }
 
         public override string Name{
@@ -13,12 +13,12 @@ namespace RVSLite{
             get { return true; }
         }
 
-        public override List<BaseOperator> Instances{
+        public override List<BaseActivity> Instances{
             get { return ServiceProvider.ValueHolders; }
         }
 
-        public override BaseOperator Create(){
-            return new ValueHolder(Name);
+        public override BaseActivity Create(){
+            return new Variable(Name);
         }
     }
 }

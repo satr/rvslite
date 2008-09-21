@@ -13,11 +13,11 @@ namespace RVSLite{
             return _serviceProvider.LEDPorts;
         }
 
-        public override BaseOperator Create(){
+        public override BaseActivity Create(){
             return new LED();
         }
 
-        protected override void Subscribe(IService service, BaseOperator oper) {
+        protected override void Subscribe(IService service, BaseActivity oper) {
             oper.OnPost += service.SetValue;
         }
     }

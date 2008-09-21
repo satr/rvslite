@@ -45,6 +45,18 @@
     <Compile Include="Controls\BumperControl.Designer.cs">
       <DependentUpon>BumperControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DesignFieldControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DesignFieldControl.Designer.cs">
+      <DependentUpon>DesignFieldControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DoControl.Designer.cs">
+      <DependentUpon>DoControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DriveControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,11 +81,17 @@
     <Compile Include="Controls\OperatorHolderControl.Designer.cs">
       <DependentUpon>OperatorHolderControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorCreators\OperatorCreatorBase.cs" />
-    <Compile Include="OperatorCreators\OperatorWithOperationCreatorBase.cs" />
-    <Compile Include="OperatorCreators\PauseOperatorCreator.cs" />
+    <Compile Include="DesignerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesignerForm.Designer.cs">
+      <DependentUpon>DesignerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorCreators\BaseActivityCreatorBase.cs" />
+    <Compile Include="OperatorCreators\ActivityWithOperationCreatorBase.cs" />
+    <Compile Include="OperatorCreators\PauseActivityCreator.cs" />
     <Compile Include="OperatorCreators\ServiceCreatorBase.cs" />
-    <Compile Include="OperatorCreators\SingleOperatorCreatorBase.cs" />
+    <Compile Include="OperatorCreators\SingleInstanceActivityCreatorBase.cs" />
     <Compile Include="ServiceProvider.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="MainForm.cs">
@@ -88,20 +106,28 @@
     <Compile Include="OperatorsListForm.Designer.cs">
       <DependentUpon>OperatorsListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorCreators\BumperOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\CalculateOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\ConnectionOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\DataHolderOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\DriveOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\IfClauseOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\BumperServiceCreator.cs" />
+    <Compile Include="OperatorCreators\CalculateActivityCreator.cs" />
+    <Compile Include="OperatorCreators\ConnectionActivityCreator.cs" />
+    <Compile Include="OperatorCreators\DataActivityCreator.cs" />
+    <Compile Include="OperatorCreators\DriveServiceCreator.cs" />
+    <Compile Include="OperatorCreators\IfClauseActivityCreator.cs" />
     <Compile Include="OperatorCreators\LEDServiceCreator.cs" />
-    <Compile Include="OperatorCreators\MessengerOperatorCreator.cs" />
-    <Compile Include="OperatorCreators\ElementCreatorBase.cs" />
-    <Compile Include="OperatorCreators\ValueHolderOperatorCreator.cs" />
+    <Compile Include="OperatorCreators\MessengerActivityCreator.cs" />
+    <Compile Include="OperatorCreators\ActivityCreatorBase.cs" />
+    <Compile Include="OperatorCreators\VariableActivityCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\BumperControl.resx">
       <DependentUpon>BumperControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DesignFieldControl.resx">
+      <DependentUpon>DesignFieldControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DoControl.resx">
+      <DependentUpon>DoControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DriveControl.resx">
@@ -118,6 +144,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OperatorHolderControl.resx">
       <DependentUpon>OperatorHolderControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DesignerForm.resx">
+      <DependentUpon>DesignerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

@@ -8,19 +8,19 @@ namespace RVSLite{
     public partial class OperatorsListForm : Form{
         private readonly OperatorsController _operatorsController;
         private OperatorHolderControl _sourceOperatorHolderControl;
-        private BaseOperator _newInstance;
+        private BaseActivity _newInstance;
 
         public OperatorsListForm(MainController mainController){
             InitializeComponent();
             InitControls(mainController);
             _operatorsController = mainController.OperatorsController;
             Bind();
-            SelectedOperator = new BaseOperator();
+            SelectedActivity = new BaseActivity();
         }
 
-        public BaseOperator SelectedOperator { get; set; }
+        public BaseActivity SelectedActivity { get; set; }
 
-        private ElementCreatorBase SelectedElementCreator { get; set; }
+        private ActivityCreatorBase SelectedActivityCreator { get; set; }
 
         private bool InstancesListIsEmpty{
             get { return cbInstances.Items.Count == 0; }
@@ -41,55 +41,55 @@ namespace RVSLite{
         }
 
         private void RefreshSelection(){
-            SelectedElementCreator = (ElementCreatorBase) cbElementCreators.SelectedValue;
-            RefreshSourceElementPanel(SelectedElementCreator);
-            RefreshOperationsList(SelectedElementCreator);
+            SelectedActivityCreator = (ActivityCreatorBase) cbElementCreators.SelectedValue;
+            RefreshSourceElementPanel(SelectedActivityCreator);
+            RefreshOperationsList(SelectedActivityCreator);
             RefreshValuePanel();
-            RefreshNamePanel(SelectedElementCreator);
-            RefreshInstancesList(SelectedElementCreator);
+            RefreshNamePanel(SelectedActivityCreator);
+            RefreshInstancesList(SelectedActivityCreator);
             if(cbInstances.Items.Count == 0)
                 return;
             SelectFirstOperatorInList();
             RefreshSelectedInstanceProperties();
         }
 
-        private void RefreshSourceElementPanel(ElementCreatorBase elementCreator){
-            pnlSourceElement.Visible = elementCreator.RequireSourceElement;
-            if (!elementCreator.RequireSourceElement && _sourceOperatorHolderControl == null)
+        private void RefreshSourceElementPanel(ActivityCreatorBase activityCreator){
+            pnlSourceElement.Visible = activityCreator.RequireSourceElement;
+            if (!activityCreator.RequireSourceElement && _sourceOperatorHolderControl == null)
                 return;
-            txtSourceElementName.Text = _sourceOperatorHolderControl.Operator.Name;
+            txtSourceElementName.Text = _sourceOperatorHolderControl.Activity.Name;
         }
 
-        private void RefreshOperationsList(ElementCreatorBase elementCreator){
-            pnlOperations.Visible = elementCreator.IsOperatorWithOperation;
-            if (!elementCreator.IsOperatorWithOperation)
+        private void RefreshOperationsList(ActivityCreatorBase activityCreator){
+            pnlOperations.Visible = activityCreator.IsOperatorWithOperation;
+            if (!activityCreator.IsOperatorWithOperation)
                 return;
-            cbOperationsCommands.DataSource = new List<OperationsCommandBase>(((OperatorWithOperationCreatorBase) elementCreator).OperationCommands);
+            cbOperationsCommands.DataSource = new List<OperationsCommandBase>(((ActivityWithOperationCreatorBase) activityCreator).OperationCommands);
         }
 
-        private void RefreshNamePanel(ElementCreatorBase elementCreator){
-            pnlInstanceName.Visible = elementCreator.IsCollectable && !SelectedElementCreator.IsAnonymous;
+        private void RefreshNamePanel(ActivityCreatorBase activityCreator){
+            pnlInstanceName.Visible = activityCreator.IsCollectable && !SelectedActivityCreator.IsAnonymous;
         }
 
         private void RefreshValuePanel(){
-            pnlValue.Visible = OperatorIsValueHolderRequiredInitValue(SelectedOperator);
+            pnlValue.Visible = OperatorIsValueHolderRequiredInitValue(SelectedActivity);
         }
 
-        private void RefreshInstancesList(ElementCreatorBase elementCreator){
-            pnlInstances.Visible = elementCreator.IsOperatorWithOperation 
-                || elementCreator.IsCollectable
-                || elementCreator.IsPredefinedList;
-            var instances = new List<BaseOperator>(elementCreator.IsOperatorWithOperation
-                                                       ? elementCreator.ServiceProvider.ValueHolders
-                                                       : elementCreator.Instances);
-            if (elementCreator.IsCollectable)
-                AddNewInstance(instances, elementCreator.Create());
-            else if (elementCreator.IsOperatorWithOperation)
-                AddNewInstance(instances, new DataHolder());
+        private void RefreshInstancesList(ActivityCreatorBase activityCreator){
+            pnlInstances.Visible = activityCreator.IsOperatorWithOperation 
+                || activityCreator.IsCollectable
+                || activityCreator.IsPredefinedList;
+            var instances = new List<BaseActivity>(activityCreator.IsOperatorWithOperation
+                                                       ? activityCreator.ServiceProvider.ValueHolders
+                                                       : activityCreator.Instances);
+            if (activityCreator.IsCollectable)
+                AddNewInstance(instances, activityCreator.Create());
+            else if (activityCreator.IsOperatorWithOperation)
+                AddNewInstance(instances, new Data());
             cbInstances.DataSource = instances;
         }
 
-        private void AddNewInstance(IList<BaseOperator> instances, BaseOperator newInstance){
+        private void AddNewInstance(IList<BaseActivity> instances, BaseActivity newInstance){
             _newInstance = newInstance;
             instances.Insert(0, _newInstance);
         }
@@ -99,7 +99,7 @@ namespace RVSLite{
             ClearTextFields();
             if (InstancesListIsEmpty)
                 return;
-            SelectedOperator = (BaseOperator)cbInstances.SelectedValue;
+            SelectedActivity = (BaseActivity)cbInstances.SelectedValue;
             SetInstanceNameField();
             SetValueField();
         }
@@ -112,13 +112,13 @@ namespace RVSLite{
 
         private void SetValueField(){
             RefreshValuePanel();
-            if (SelectedOperator.IsValueHolder && ((ValueHolder)SelectedOperator).Value != null)
-                txtValue.Text = ((ValueHolder) SelectedOperator).Value.ToString();
+            if (SelectedActivity.IsValueHolder && ((Variable)SelectedActivity).Value != null)
+                txtValue.Text = ((Variable) SelectedActivity).Value.ToString();
         }
 
         private void SetInstanceNameField(){
-            txtInstanceName.Text = SelectedOperator.Name;
-            var instanceIsNew = SelectedOperator == _newInstance;
+            txtInstanceName.Text = SelectedActivity.Name;
+            var instanceIsNew = SelectedActivity == _newInstance;
             txtInstanceName.ReadOnly = !instanceIsNew;
             lblNewInstance.Visible = instanceIsNew;
         }
@@ -143,16 +143,16 @@ namespace RVSLite{
             if (!CheckSelectedOperatorIsValid())
                 return;
             ClearErrorMessage();
-            if (SelectedElementCreator.IsOperatorWithOperation){
-                var operatorWithOperation = (OperatorWithOperation) SelectedElementCreator.Create();
-                SelectedOperator = operatorWithOperation.InitBy((OperationsCommandBase)cbOperationsCommands.SelectedItem,
-                                             (ValueHolder) cbInstances.SelectedItem);
+            if (SelectedActivityCreator.IsOperatorWithOperation){
+                var operatorWithOperation = (ActivityWithOperation) SelectedActivityCreator.Create();
+                SelectedActivity = operatorWithOperation.InitBy((OperationsCommandBase)cbOperationsCommands.SelectedItem,
+                                             (Variable) cbInstances.SelectedItem);
             }
             else{
-                SelectedOperator.Name = txtInstanceName.Text;
+                SelectedActivity.Name = txtInstanceName.Text;
             }
-            if (SelectedElementCreator.IsCollectable)
-                SelectedElementCreator.Instances.Add(SelectedOperator);
+            if (SelectedActivityCreator.IsCollectable)
+                SelectedActivityCreator.Instances.Add(SelectedActivity);
             CloseFormWithResultOk();
         }
 
@@ -166,21 +166,21 @@ namespace RVSLite{
         }
 
         private bool CheckSelectedOperatorIsValid(){
-            if (!SelectedOperator.IsValueHolder
-                || SelectedElementCreator.IsAnonymous)
+            if (!SelectedActivity.IsValueHolder
+                || SelectedActivityCreator.IsAnonymous)
                 return true;
-            if (SelectedElementCreator.IsCollectable
+            if (SelectedActivityCreator.IsCollectable
                 && (!InstanceNameIsSetCorrectAndInstanceNameIsNotInUse()))
                 return false;
-            if (OperatorIsValueHolderRequiredInitValue(SelectedOperator) 
+            if (OperatorIsValueHolderRequiredInitValue(SelectedActivity) 
                 && !InitValueIsSetCorrect())
                 return false;
             return true;
         }
 
-        private static bool OperatorIsValueHolderRequiredInitValue(BaseOperator selectedOperator){
-            return selectedOperator.IsValueHolder 
-                   && ((ValueHolder)selectedOperator).RequireInitValue;
+        private static bool OperatorIsValueHolderRequiredInitValue(BaseActivity selectedActivity){
+            return selectedActivity.IsValueHolder 
+                   && ((Variable)selectedActivity).RequireInitValue;
         }
 
         private bool InstanceNameIsSetCorrectAndInstanceNameIsNotInUse(){
@@ -189,11 +189,11 @@ namespace RVSLite{
                 initValueErrorProvider.SetError(txtInstanceName, Lang.Res.Require_init_value);
                 return false;
             }
-            if (SelectedElementCreator.ExistAnotherInstanceWith(name, SelectedOperator)) {
+            if (SelectedActivityCreator.ExistAnotherInstanceWith(name, SelectedActivity)) {
                 initValueErrorProvider.SetError(txtInstanceName, Lang.Res.Name_is_already_in_use);
                 return false;
             }
-            SelectedOperator.Name = name;
+            SelectedActivity.Name = name;
             return true;
         }
 
@@ -203,7 +203,7 @@ namespace RVSLite{
                 initValueErrorProvider.SetError(txtValue, Lang.Res.Require_init_value);
                 return false;
             }
-            ((ValueHolder)SelectedOperator).Value = value;
+            ((Variable)SelectedActivity).Value = value;
             return true;
         }
 
@@ -214,7 +214,7 @@ namespace RVSLite{
 
         private void InitControls(MainController mainController){
             cbElementCreators.DisplayMember = "Name";
-            cbElementCreators.DataSource = mainController.OperatorCreatorsList;
+            cbElementCreators.DataSource = mainController.BasicActivities;
         }
 
         public DialogResult ActivateFor(OperatorHolderControl operatorHolderControl){

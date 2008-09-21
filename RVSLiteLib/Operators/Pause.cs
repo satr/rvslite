@@ -2,7 +2,7 @@
 using System.Threading;
 
 namespace RVSLite{
-    public class Pause : BaseOperator{
+    public class Pause : BaseActivity{
         public static readonly string OperatorName = Lang.Res.Pause;
         public override string Name{
             get { return OperatorName; }

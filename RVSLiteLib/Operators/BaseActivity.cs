@@ -3,8 +3,8 @@ using System;
 namespace RVSLite {
     public delegate void ValueEventHandler(object value);
 
-    public class BaseOperator {
-        private BaseOperator _sourceOperator;
+    public class BaseActivity {
+        private BaseActivity _sourceActivity;
         private string _name;
         
         public virtual string Name{
@@ -14,10 +14,10 @@ namespace RVSLite {
 
         public event ValueEventHandler OnPost;
 
-        public BaseOperator(){
+        public BaseActivity(){
         }
 
-        public BaseOperator(string name){
+        public BaseActivity(string name){
             _name = name;
         }
 
@@ -35,24 +35,24 @@ namespace RVSLite {
                 OnPost(value);
         }
 
-        public BaseOperator SourceOperator{
+        public BaseActivity SourceActivity{
             set{
-                _sourceOperator = value;
-                _sourceOperator.OnPost += Post;
+                _sourceActivity = value;
+                _sourceActivity.OnPost += Post;
             }
-            get { return _sourceOperator; }
+            get { return _sourceActivity; }
         }
 
         public void Disconnect(){
-            if (_sourceOperator == null)
+            if (_sourceActivity == null)
                 return;
-            _sourceOperator.OnPost -= Post;
-            _sourceOperator = null;
+            _sourceActivity.OnPost -= Post;
+            _sourceActivity = null;
             Console.Out.WriteLine("{0} {1}", this, Lang.Res.Is_disconnected);
         }
 
-        public virtual void ListenTo(BaseOperator sourceOperator) {
-            SourceOperator = sourceOperator;
+        public virtual void ListenTo(BaseActivity sourceActivity) {
+            SourceActivity = sourceActivity;
         }
 
         public virtual string ToString(object value){

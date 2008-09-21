@@ -1,8 +1,8 @@
 using System.Collections;
 
 namespace RVSLite{
-    public class BumperOperatorCreator : ServiceCreatorBase{
-        public BumperOperatorCreator(IServiceProvider services) : base(services){
+    public class BumperServiceCreator : ServiceCreatorBase{
+        public BumperServiceCreator(IServiceProvider services) : base(services){
         }
 
         protected override IList GetServices(){
@@ -13,11 +13,11 @@ namespace RVSLite{
             get { return Bumper.OperatorName; }
         }
 
-        public override BaseOperator Create(){
+        public override BaseActivity Create(){
             return new Bumper();
         }
 
-        protected override void Subscribe(IService service, BaseOperator oper){
+        protected override void Subscribe(IService service, BaseActivity oper){
             service.OnStateChanged += oper.Post;
         }
 

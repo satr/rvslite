@@ -1,6 +1,6 @@
 ﻿namespace RVSLite{
-    public class DataHolder : ValueHolder{
-        public DataHolder()
+    public class Data : Variable{
+        public Data()
             : base(Lang.Res.Constant) {
         }
 

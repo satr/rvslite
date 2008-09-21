@@ -6,12 +6,12 @@ namespace RVSLite.Controls{
             InitializeComponent();
         }
 
-        public BaseOperator Value{
+        public BaseActivity Value{
             set{
                 lblName.Text = value.Name;
                 lblValue.Visible = value.IsValueHolder;
                 if (value.IsValueHolder){
-                    object val = ((ValueHolder) value).Value;
+                    object val = ((Variable) value).Value;
                     lblValue.Text = val == null ? "" : val.ToString();
                 }
             }

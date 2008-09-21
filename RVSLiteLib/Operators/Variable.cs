@@ -1,11 +1,11 @@
 namespace RVSLite{
-    public class ValueHolder : BaseOperator{
+    public class Variable : BaseActivity{
         private string _name;
         private static int _instanceCounter;
-        public ValueHolder(): this(Lang.Res.Variable){
+        public Variable(): this(Lang.Res.Variable){
         }
 
-        public ValueHolder(string name){
+        public Variable(string name){
             _name = name;
             InstanceName = _instanceCounter++.ToString();
         }
