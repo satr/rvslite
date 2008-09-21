@@ -1,5 +1,5 @@
-﻿namespace RVSLite.Controls {
-    partial class DoControl {
+﻿namespace RVSLite.Controls.ActivityControls {
+    partial class ConnectionActivityControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -32,15 +32,15 @@
             this.groupBox.Location = new System.Drawing.Point(0, 0);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(150, 150);
-            this.groupBox.TabIndex = 0;
+            this.groupBox.TabIndex = 3;
             this.groupBox.TabStop = false;
             // 
-            // DoControl
+            // ConnectionActivityControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox);
-            this.Name = "DoControl";
+            this.Name = "ConnectionActivityControl";
             this.ResumeLayout(false);
 
         }

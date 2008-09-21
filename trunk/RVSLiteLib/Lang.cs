@@ -16,7 +16,7 @@ namespace RVSLite{
         public string Released = "Released";
         public string Bumper = "Bumper";
         public string Undefined = "Undefined";
-        public string Undefined_operator_is_called = "Undefined operator is called";
+        public string Undefined_operation = "Undefined operation";
         public string Undefined_calculation_operation = "Undefined calculation operation";
         public string Undefined_condition_operation = "Undefined condition operation";
         public string Value = "Value";
@@ -54,6 +54,14 @@ namespace RVSLite{
         public string Require_correct_name = "Require correct name";
         public string Name_is_already_in_use = "Name is already in use";
         public string Variable = "Variable";
+        public string Do = "Do";
+        public string If = "If";
+        public string Port= "Port";
+        public string Error = "Error";
+        public string New_variable = "New variable";
+        public string Name = "Name";
+        public string Cancel = "Cancel";
+
 
         public static Lang Res{
             get { return _instance ?? (_instance = new Lang()); }
@@ -64,26 +72,6 @@ namespace RVSLite{
             Res = new LangRu();
         }
 
-        public virtual string InteractionHelp{
-            get{
-                var sb = new StringBuilder();
-                sb.AppendLine("");
-                sb.AppendLine("-------------------------");
-                sb.AppendLine("q - Exit");
-                sb.AppendLine("c - Clear");
-                sb.AppendLine("1 - Bumper (press/release)");
-                sb.AppendLine("2 - Set the value");
-                sb.AppendLine("3 - Display the value");
-                sb.AppendLine("4 - Remove the LED#2");
-                sb.AppendLine("5 - Run the drive#1");
-                sb.AppendLine("6 - Start sound 3 times");
-                sb.AppendLine("7 - Condition operation with integer values");
-                sb.AppendLine("8 - Condition operation with a boolean value");
-                sb.AppendLine("9 - Start sound with a cyclic growing tone");
-                sb.AppendLine("-------------------------");
-                return sb.ToString();
-            }
-        }
     }
 
     public class LangRu : Lang{
@@ -101,7 +89,7 @@ namespace RVSLite{
             Released = "Свободен";
             Bumper = "Бампер";
             Undefined = "Не определен";
-            Undefined_operator_is_called = "Вызван неопределенный оператор";
+            Undefined_operation = "Вызван неопределенный оператор";
             Value = "Значение";
             Empty = "Пусто";
             Value_receiver = "Приемник значений";
@@ -117,6 +105,7 @@ namespace RVSLite{
             Pause = "Пауза";
             Continue = "Продолжение";
             Calculate = "Вычислить";
+            Undefined_operation = "Неопределенная операция";
             Undefined_calculation_operation = "Неопределенная вычислительная операция";
             Undefined_condition_operation = "Неопределенная условная операция"; 
             Constant = "Константа";
@@ -139,27 +128,13 @@ namespace RVSLite{
             Require_correct_name = "Требуется корректное имя";
             Name_is_already_in_use = "Имя уже используется";
             Variable = "Переменная";
-        }
-
-        public override string InteractionHelp{
-            get{
-                var sb = new StringBuilder();
-                sb.AppendLine("");
-                sb.AppendLine("-------------------------");
-                sb.AppendLine("q - Выход");
-                sb.AppendLine("c - Очистить");
-                sb.AppendLine("1 - Бампер (нажать/отпустить)");
-                sb.AppendLine("2 - Установить значение");
-                sb.AppendLine("3 - Показать значение");
-                sb.AppendLine("4 - Удалить Индикатор#2");
-                sb.AppendLine("5 - Включить Мотор#1");
-                sb.AppendLine("6 - Подать тройной сигнал");
-                sb.AppendLine("7 - Условный оператор с целыми значениями");
-                sb.AppendLine("8 - Условный оператор с логическим значением");
-                sb.AppendLine("9 - Подать сигнал с циклически нарастающим тоном");
-                sb.AppendLine("-------------------------");
-                return sb.ToString();
-            }
+            Do = "Делать";
+            If = "Если";
+            Port = "Порт";
+            Error = "Ошибка";
+            New_variable = "Новая переменная";
+            Name = "Имя";
+            Cancel = "Отменить";
         }
     }
 }

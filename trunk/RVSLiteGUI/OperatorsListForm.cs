@@ -6,14 +6,14 @@ using RVSLite.Controls;
 
 namespace RVSLite{
     public partial class OperatorsListForm : Form{
-        private readonly OperatorsController _operatorsController;
+        private readonly ActivitiesController _activitiesController;
         private OperatorHolderControl _sourceOperatorHolderControl;
         private BaseActivity _newInstance;
 
         public OperatorsListForm(MainController mainController){
             InitializeComponent();
             InitControls(mainController);
-            _operatorsController = mainController.OperatorsController;
+            _activitiesController = mainController.ActivitiesController;
             Bind();
             SelectedActivity = new BaseActivity();
         }
@@ -80,12 +80,12 @@ namespace RVSLite{
                 || activityCreator.IsCollectable
                 || activityCreator.IsPredefinedList;
             var instances = new List<BaseActivity>(activityCreator.IsOperatorWithOperation
-                                                       ? activityCreator.ServiceProvider.ValueHolders
+                                                       ? activityCreator.ServiceProvider.Variables
                                                        : activityCreator.Instances);
             if (activityCreator.IsCollectable)
                 AddNewInstance(instances, activityCreator.Create());
             else if (activityCreator.IsOperatorWithOperation)
-                AddNewInstance(instances, new Data());
+                AddNewInstance(instances, new DataActivity());
             cbInstances.DataSource = instances;
         }
 
@@ -112,8 +112,8 @@ namespace RVSLite{
 
         private void SetValueField(){
             RefreshValuePanel();
-            if (SelectedActivity.IsValueHolder && ((Variable)SelectedActivity).Value != null)
-                txtValue.Text = ((Variable) SelectedActivity).Value.ToString();
+            if (SelectedActivity.IsVariable && ((VariableActivity)SelectedActivity).Value != null)
+                txtValue.Text = ((VariableActivity) SelectedActivity).Value.ToString();
         }
 
         private void SetInstanceNameField(){
@@ -146,7 +146,7 @@ namespace RVSLite{
             if (SelectedActivityCreator.IsOperatorWithOperation){
                 var operatorWithOperation = (ActivityWithOperation) SelectedActivityCreator.Create();
                 SelectedActivity = operatorWithOperation.InitBy((OperationsCommandBase)cbOperationsCommands.SelectedItem,
-                                             (Variable) cbInstances.SelectedItem);
+                                             (VariableActivity) cbInstances.SelectedItem);
             }
             else{
                 SelectedActivity.Name = txtInstanceName.Text;
@@ -166,7 +166,7 @@ namespace RVSLite{
         }
 
         private bool CheckSelectedOperatorIsValid(){
-            if (!SelectedActivity.IsValueHolder
+            if (!SelectedActivity.IsVariable
                 || SelectedActivityCreator.IsAnonymous)
                 return true;
             if (SelectedActivityCreator.IsCollectable
@@ -179,8 +179,8 @@ namespace RVSLite{
         }
 
         private static bool OperatorIsValueHolderRequiredInitValue(BaseActivity selectedActivity){
-            return selectedActivity.IsValueHolder 
-                   && ((Variable)selectedActivity).RequireInitValue;
+            return selectedActivity.IsVariable 
+                   && ((VariableActivity)selectedActivity).RequireInitValue;
         }
 
         private bool InstanceNameIsSetCorrectAndInstanceNameIsNotInUse(){
@@ -203,7 +203,7 @@ namespace RVSLite{
                 initValueErrorProvider.SetError(txtValue, Lang.Res.Require_init_value);
                 return false;
             }
-            ((Variable)SelectedActivity).Value = value;
+            ((VariableActivity)SelectedActivity).Value = value;
             return true;
         }
 

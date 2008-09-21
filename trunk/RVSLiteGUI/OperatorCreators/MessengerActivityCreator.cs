@@ -7,7 +7,7 @@ namespace RVSLite{
         }
 
         public override BaseActivity Create(){
-            return new Messenger();
+            return new MessengerActivity();
         }
     }
 }

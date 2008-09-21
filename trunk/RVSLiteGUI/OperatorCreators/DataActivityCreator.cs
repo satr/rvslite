@@ -1,3 +1,7 @@
+using System.Windows.Forms;
+using RVSLite.Controls;
+using RVSLite.Controls.ActivityControls;
+
 namespace RVSLite{
     public class DataActivityCreator : SingleInstanceActivityCreatorBase {
         public DataActivityCreator(IServiceProvider services) : base(services) {}
@@ -7,7 +11,7 @@ namespace RVSLite{
         }
 
         public override BaseActivity Create(){
-            return new Data();
+            return new DataActivity();
         }
 
         public override bool RequireInitValue {
@@ -16,6 +20,10 @@ namespace RVSLite{
 
         public override bool RequireSourceElement {
             get { return false; }
+        }
+
+        protected override IActivityControl CreateActivityControl(){
+            return new DataActivityControl();
         }
     }
 }

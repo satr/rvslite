@@ -3,12 +3,12 @@ using System.Collections.Generic;
 namespace RVSLite {
     public class MainController {
         private readonly ServiceProvider _serviceProvider;
-        private readonly OperatorsController _operatorsController;
+        private readonly ActivitiesController _activitiesController;
         public const int CellWH = 100;
 
         public MainController(ServiceProvider serviceProvider) {
             _serviceProvider = serviceProvider;
-            _operatorsController = new OperatorsController(_serviceProvider);
+            _activitiesController = new ActivitiesController(_serviceProvider);
             InitActivitiesList();
 
         }
@@ -16,35 +16,36 @@ namespace RVSLite {
         public List<ActivityCreatorBase> BasicActivities { get; private set; }
         public IEnumerable<ActivityCreatorBase> Services { get; private set; }
 
-        public OperatorsController OperatorsController {
-            get { return _operatorsController; }
+        public ActivitiesController ActivitiesController {
+            get { return _activitiesController; }
         }
 
 
         private void InitActivitiesList() {
             BasicActivities = new List<ActivityCreatorBase>
                        {
-                           new DataActivityCreator(_operatorsController.ServiceProvider),
-                           new VariableActivityCreator(_operatorsController.ServiceProvider),
-                           new ConnectionActivityCreator(_operatorsController.ServiceProvider),
-                           new IfClauseActivityCreator(_operatorsController.ServiceProvider),
-                           new CalculateActivityCreator(_operatorsController.ServiceProvider),
-                           new PauseActivityCreator(_operatorsController.ServiceProvider),
+                           new DataActivityCreator(_activitiesController.ServiceProvider),
+                           new VariableActivityCreator(_activitiesController.ServiceProvider),
+                           new ConnectionActivityCreator(_activitiesController.ServiceProvider),
+                           new JoinActivityCreator(_activitiesController.ServiceProvider),
+                           new IfClauseActivityCreator(_activitiesController.ServiceProvider),
+                           new CalculateActivityCreator(_activitiesController.ServiceProvider),
+                           new PauseActivityCreator(_activitiesController.ServiceProvider),
                        };
             Services = new List<ActivityCreatorBase>
                        {
-                           new BumperServiceCreator(_operatorsController.ServiceProvider),
-                           new DriveServiceCreator(_operatorsController.ServiceProvider),
-                           new LEDServiceCreator(_operatorsController.ServiceProvider)
+                           new BumperServiceCreator(_activitiesController.ServiceProvider),
+                           new DriveServiceCreator(_activitiesController.ServiceProvider),
+                           new LEDServiceCreator(_activitiesController.ServiceProvider)
                        };
         }
 
         public void InitOperatorsListBy(int columnCount, int rowCount) {
-            OperatorsController.InitOperatorsListBy(columnCount, rowCount);
+            ActivitiesController.InitOperatorsListBy(columnCount, rowCount);
         }
 
         public void RegisterActivityAt(BaseActivity oper, int column, int row) {
-            OperatorsController.PlaceOperatorAt(oper, column, row);
+            ActivitiesController.PlaceOperatorAt(oper, column, row);
         }
     }
 }

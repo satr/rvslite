@@ -1,4 +1,5 @@
 using System.Collections;
+using RVSLite.Controls.ActivityControls;
 
 namespace RVSLite{
     public class BumperServiceCreator : ServiceCreatorBase{
@@ -10,11 +11,11 @@ namespace RVSLite{
         }
 
         public override string Name{
-            get { return Bumper.OperatorName; }
+            get { return BumperService.OperatorName; }
         }
 
         public override BaseActivity Create(){
-            return new Bumper();
+            return new BumperService();
         }
 
         protected override void Subscribe(IService service, BaseActivity oper){
@@ -23,6 +24,10 @@ namespace RVSLite{
 
         public override bool RequireSourceElement {
             get { return false; }
+        }
+
+        protected override IActivityControl CreateActivityControl(){
+            return new BumperServiceControl(){Ports = _serviceProvider.BumperPorts};
         }
     }
 }

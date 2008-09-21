@@ -57,9 +57,13 @@ namespace RVSLite{
         public abstract BaseActivity Create();
 
         public Control GetControl(BaseActivity activity){
-            var control = new DoControl();
+            var control = CreateActivityControl();
             control.Activity = activity;
-            return control;
+            return (Control) control;
+        }
+
+        protected virtual IActivityControl CreateActivityControl(){
+            return new JoinActivityControl();
         }
     }
 }

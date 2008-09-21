@@ -6,14 +6,14 @@ namespace RVSLite{
             DrivePorts = new List<IService>();
             BumperPorts = new List<IService>();
             LEDPorts = new List<IService>();
-            ValueHolders = new List<BaseActivity>();
+            Variables = new List<BaseActivity>();
         }
 
         #region IServiceProvider Members
 
         public List<IService> BumperPorts { get; set; }
         public List<IService> DrivePorts { get; set; }
-        public List<BaseActivity> ValueHolders{get;set;}
+        public List<BaseActivity> Variables{get;set;}
         public List<IService> LEDPorts { get; set; }
 
         #endregion
