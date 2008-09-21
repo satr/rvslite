@@ -9,9 +9,9 @@ namespace RVSLite.Controls{
         public BaseActivity Value{
             set{
                 lblName.Text = value.Name;
-                lblValue.Visible = value.IsValueHolder;
-                if (value.IsValueHolder){
-                    object val = ((Variable) value).Value;
+                lblValue.Visible = value.IsVariable;
+                if (value.IsVariable){
+                    object val = ((VariableActivity) value).Value;
                     lblValue.Text = val == null ? "" : val.ToString();
                 }
             }

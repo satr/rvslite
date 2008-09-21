@@ -8,7 +8,7 @@ namespace RVSLite{
         }
 
         public override BaseActivity Create(){
-            return new Pause();
+            return new PauseActivity();
         }
     }
 }

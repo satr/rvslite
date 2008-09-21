@@ -19,7 +19,7 @@ namespace RVSLite.Controls{
                     var oper = ((ActivityWithOperation) _activity);
                     lblOperation.Visible = elementPropertiesControl2.Visible = true;
                     lblOperation.Text = oper.OperationCommand.ToString();
-                    elementPropertiesControl2.Value = oper.Variable;
+                    elementPropertiesControl2.Value = oper.VariableOrDataActivity;
                 }
             }
         }

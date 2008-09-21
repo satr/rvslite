@@ -5,7 +5,7 @@ namespace RVSLite{
         public DriveServiceCreator(IServiceProvider services) : base(services) {}
 
         public override string Name {
-            get { return Drive.OperatorName; }
+            get { return DriveService.OperatorName; }
         }
 
         protected override IList GetServices(){
@@ -17,7 +17,7 @@ namespace RVSLite{
         }
 
         public override BaseActivity Create(){
-            return new Drive();
+            return new DriveService();
         }
     }
 }

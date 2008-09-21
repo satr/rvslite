@@ -1,19 +1,17 @@
 using System.Collections.Generic;
+using RVSLite.Controls.ActivityControls;
 
 namespace RVSLite{
     public class IfClauseActivityCreator : ActivityWithOperationCreatorBase{
-        public IfClauseActivityCreator(IServiceProvider services) : base(services) {}
+        public IfClauseActivityCreator(IServiceProvider services) : base(services){
+        }
 
-        public override string Name {
+        public override string Name{
             get { return Lang.Res.Condition; }
         }
 
-        public override BaseActivity Create(){
-            return new IfClause(Name);
-        }
-
-        public override IEnumerable<OperationsCommandBase> OperationCommands {
-            get {
+        public override IEnumerable<OperationsCommandBase> OperationCommands{
+            get{
                 yield return new EqualConditionCommand();
                 yield return new GreaterThanConditionCommand();
                 yield return new GreaterThanOrEqualConditionCommand();
@@ -23,5 +21,15 @@ namespace RVSLite{
             }
         }
 
+        public override BaseActivity Create(){
+            return new IfClauseActivity(Name);
+        }
+
+        protected override IActivityControl CreateActivityControl(){
+            return new ActivityWithOperationControl{
+                                                       ControlName = Lang.Res.If,
+                                                       Variables = ServiceProvider.Variables
+                                                   };
+        }
     }
 }

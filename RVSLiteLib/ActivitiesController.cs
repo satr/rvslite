@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 
 namespace RVSLite{
-    public class OperatorsController{
+    public class ActivitiesController{
         private readonly IServiceProvider _serviceProvider;
         private int _columnCount;
         private int _rowCount;
 
-        public OperatorsController(IServiceProvider serviceProvider){
+        public ActivitiesController(IServiceProvider serviceProvider){
             Activities = new BaseActivity[20,20];
             if (serviceProvider == null)
                 return;

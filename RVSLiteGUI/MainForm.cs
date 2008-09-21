@@ -12,7 +12,7 @@ namespace RVSLite{
             InitializeComponent();
             _mainController = new MainController(GetServices());
             _operatorsListForm = new OperatorsListForm(_mainController);
-            InitGroundControls();
+//            InitGroundControls();
             new DesignerForm(_mainController).ShowDialog();
         }
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using RVSLite.Controls.ActivityControls;
 
 namespace RVSLite{
     public class LEDServiceCreator : ServiceCreatorBase{
@@ -6,7 +7,7 @@ namespace RVSLite{
         }
 
         public override string Name {
-            get { return LED.OperatorName; }
+            get { return LEDService.OperatorName; }
         }
 
         protected override IList GetServices(){
@@ -14,11 +15,15 @@ namespace RVSLite{
         }
 
         public override BaseActivity Create(){
-            return new LED();
+            return new LEDService();
         }
 
         protected override void Subscribe(IService service, BaseActivity oper) {
             oper.OnPost += service.SetValue;
+        }
+
+        protected override IActivityControl CreateActivityControl(){
+            return new LEDServiceControl{Ports = _serviceProvider.LEDPorts};
         }
     }
 }
