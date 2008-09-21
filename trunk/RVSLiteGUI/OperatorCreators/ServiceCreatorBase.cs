@@ -1,7 +1,7 @@
 using System.Collections;
 
 namespace RVSLite{
-    public abstract class ServiceCreatorBase : ElementCreatorBase{
+    public abstract class ServiceCreatorBase : ActivityCreatorBase{
         protected object _selectedPort;
 
         protected ServiceCreatorBase(IServiceProvider services) : base(services){
@@ -16,13 +16,13 @@ namespace RVSLite{
 
         protected abstract IList GetServices();
 
-        protected BaseOperator Create(IService service) {
+        protected BaseActivity Create(IService service) {
             var oper = Create();
             Subscribe(service, oper);
             return oper;
         }
 
-        protected abstract void Subscribe(IService service, BaseOperator oper);
+        protected abstract void Subscribe(IService service, BaseActivity oper);
 
         public override bool IsPredefinedList{
             get { return true; }

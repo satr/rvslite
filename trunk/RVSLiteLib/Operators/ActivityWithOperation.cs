@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 
 namespace RVSLite{
-    public abstract class OperatorWithOperation : BaseOperator{
+    public abstract class ActivityWithOperation : BaseActivity{
         protected OperationsCommandBase _operationCommand;
-        protected ValueHolder _valueHolder;
+        protected Variable _variable;
 
-        protected OperatorWithOperation(string name) : base(name){
+        protected ActivityWithOperation(string name) : base(name){
         }
 
-        public BaseOperator InitBy(OperationsCommandBase operationCommand, ValueHolder valueHolder) {
+        public BaseActivity InitBy(OperationsCommandBase operationCommand, Variable variable) {
             _operationCommand = operationCommand;
-            _valueHolder = valueHolder;
+            _variable = variable;
             return this;
         }
 
@@ -23,15 +23,15 @@ namespace RVSLite{
                                  Name,
                                  value,
                                  _operationCommand,
-                                 _valueHolder);
+                                 _variable);
         }
 
         public OperationsCommandBase OperationCommand{
             get { return _operationCommand; }
         }
 
-        public ValueHolder ValueHolder{
-            get { return _valueHolder; }
+        public Variable Variable{
+            get { return _variable; }
         }
     }
 }

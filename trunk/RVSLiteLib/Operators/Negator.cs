@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 
 namespace RVSLite{
-    public class Negator : BaseOperator{
+    public class Negator : BaseActivity{
         public static readonly string OperatorName = Lang.Res.Negate_entry_value;
 
         public override string Name{

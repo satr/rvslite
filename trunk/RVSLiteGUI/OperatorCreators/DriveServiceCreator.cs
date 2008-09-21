@@ -1,8 +1,8 @@
 using System.Collections;
 
 namespace RVSLite{
-    public class DriveOperatorCreator :ServiceCreatorBase {
-        public DriveOperatorCreator(IServiceProvider services) : base(services) {}
+    public class DriveServiceCreator :ServiceCreatorBase {
+        public DriveServiceCreator(IServiceProvider services) : base(services) {}
 
         public override string Name {
             get { return Drive.OperatorName; }
@@ -12,11 +12,11 @@ namespace RVSLite{
             return _serviceProvider.DrivePorts;
         }
 
-        protected override void Subscribe(IService service, BaseOperator oper) {
+        protected override void Subscribe(IService service, BaseActivity oper) {
             oper.OnPost += service.SetValue;
         }
 
-        public override BaseOperator Create(){
+        public override BaseActivity Create(){
             return new Drive();
         }
     }

@@ -1,5 +1,5 @@
 ﻿namespace RVSLite{
-    public class Drive : BaseOperator{
+    public class Drive : BaseActivity{
         private static int _instanceCounter;
         public static readonly string OperatorName = Lang.Res.Drive;
         private string _name;

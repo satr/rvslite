@@ -8,7 +8,7 @@ namespace RVSLite{
         private int _rowCount;
 
         public OperatorsController(IServiceProvider serviceProvider){
-            Operators = new BaseOperator[0,0];
+            Activities = new BaseActivity[20,20];
             if (serviceProvider == null)
                 return;
            _serviceProvider = serviceProvider;
@@ -18,40 +18,40 @@ namespace RVSLite{
             get { return _serviceProvider; }
         }
 
-        public BaseOperator[,] Operators { get; set; }
+        public BaseActivity[,] Activities { get; set; }
 
-        public void PlaceOperatorAt(BaseOperator oper, int column, int row){
-            Operators[column, row] = oper;
+        public void PlaceOperatorAt(BaseActivity oper, int column, int row){
+            Activities[column, row] = oper;
             ConnectToNeighbours(oper, column, row);
         }
 
-        private void ConnectToNeighbours(BaseOperator oper, int column, int row){
+        private void ConnectToNeighbours(BaseActivity oper, int column, int row){
             foreach (NeighbourDirections direction in new[]{NeighbourDirections.Left, NeighbourDirections.Top, NeighbourDirections.Bottom, NeighbourDirections.Right}){
                 if (ConnectToNeighboursBy(column, row, oper, direction))
                     return;
             }
         }
 
-        private bool ConnectToNeighboursBy(int column, int row, BaseOperator oper, NeighbourDirections direction){
-            BaseOperator neighbourOperator = GetNeighbourOperatorBy(column, row, direction);
-            if (neighbourOperator == null)
+        private bool ConnectToNeighboursBy(int column, int row, BaseActivity oper, NeighbourDirections direction){
+            BaseActivity neighbourActivity = GetNeighbourOperatorBy(column, row, direction);
+            if (neighbourActivity == null)
                 return false;
-            oper.ListenTo(neighbourOperator);
+            oper.ListenTo(neighbourActivity);
             return true;
         }
 
-        private BaseOperator GetNeighbourOperatorBy(int column, int row, NeighbourDirections direction){
+        private BaseActivity GetNeighbourOperatorBy(int column, int row, NeighbourDirections direction){
             if (direction == NeighbourDirections.Left)
-                return column == 0 ? null : Operators[column - 1, row];
+                return column == 0 ? null : Activities[column - 1, row];
             if (direction == NeighbourDirections.Right)
-                return column == _columnCount ? null : Operators[column + 1, row];
+                return column == _columnCount ? null : Activities[column + 1, row];
             if (direction == NeighbourDirections.Top)
-                return row == 0 ? null : Operators[column, row - 1];
-            return row == _rowCount ? null : Operators[column, row + 1];
+                return row == 0 ? null : Activities[column, row - 1];
+            return row == _rowCount ? null : Activities[column, row + 1];
         }
 
         public void InitOperatorsListBy(int columnCount, int rowCount){
-            Operators = new BaseOperator[columnCount,rowCount];
+            Activities = new BaseActivity[columnCount,rowCount];
             _columnCount = columnCount;
             _rowCount = rowCount;
         }

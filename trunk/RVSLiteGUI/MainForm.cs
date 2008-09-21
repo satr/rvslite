@@ -13,7 +13,7 @@ namespace RVSLite{
             _mainController = new MainController(GetServices());
             _operatorsListForm = new OperatorsListForm(_mainController);
             InitGroundControls();
-            
+            new DesignerForm(_mainController).ShowDialog();
         }
 
         private ServiceProvider GetServices() {
@@ -59,13 +59,13 @@ namespace RVSLite{
         private void operatorHolderControl_Click(object sender, EventArgs e){
             var operatorHolderControl = (OperatorHolderControl)sender;
             var position = tableLayoutPanel.GetCellPosition(operatorHolderControl);
-            if (operatorHolderControl.Operator != null)
+            if (operatorHolderControl.Activity != null)
                 return;
             if (_operatorsListForm.ActivateFor(operatorHolderControl) == DialogResult.Cancel)
                 return;
-            var selectedOperator = _operatorsListForm.SelectedOperator;
-            _mainController.PlaceOperatorAt(selectedOperator, position.Column, position.Row);
-            operatorHolderControl.Operator = selectedOperator;
+            var selectedOperator = _operatorsListForm.SelectedActivity;
+            _mainController.RegisterActivityAt(selectedOperator, position.Column, position.Row);
+            operatorHolderControl.Activity = selectedOperator;
         }
 
     }

@@ -15,15 +15,15 @@ namespace RVSLite{
 //        private const string SET_VALUE_DEMO_ACTION_ID = "2";
 //        private const string SOUND_DEMO_ACTION_ID = "6";
 //        private readonly IServiceProvider _serviceProvider;
-//        private readonly Dictionary<string, BaseOperator> _demoActions = new Dictionary<string, BaseOperator>();
+//        private readonly Dictionary<string, BaseActivity> _demoActions = new Dictionary<string, BaseActivity>();
 //        private int _columnCount;
-//        private BaseOperator _ledNo2Operator;
+//        private BaseActivity _ledNo2Operator;
 //        private int _rowCount;
 //        private ValueReceiver _valueReceiver = new ValueReceiver();
-//        private readonly DataHolder _bumperState = new DataHolder(false);
+//        private readonly Data _bumperState = new Data(false);
 //
 //        public ServiceCoordinator(IServiceProvider serviceProvider){
-//            Operators = new BaseOperator[0,0];
+//            Activities = new BaseActivity[0,0];
 //            if (serviceProvider == null)
 //                return;
 //           _serviceProvider = serviceProvider;
@@ -33,7 +33,7 @@ namespace RVSLite{
 //            get { return _serviceProvider; }
 //        }
 //
-//        public BaseOperator[,] Operators { get; set; }
+//        public BaseActivity[,] Activities { get; set; }
 //
 //        public void Start(){
 //            for (;;){
@@ -58,13 +58,13 @@ namespace RVSLite{
 //            return Console.In.ReadLine().ToLower();
 //        }
 //
-//        private BaseOperator GetServiceBy(string sensorId){
+//        private BaseActivity GetServiceBy(string sensorId){
 //            if (!_demoActions.ContainsKey(sensorId))
 //                return new NullOperator();
 //            return _demoActions[sensorId];
 //        }
 //
-//        private void RegisterInteractiveServiceTo(string serviceId, BaseOperator op){
+//        private void RegisterInteractiveServiceTo(string serviceId, BaseActivity op){
 //            _demoActions[serviceId] = op;
 //        }
 //
@@ -80,38 +80,38 @@ namespace RVSLite{
 //            StartCyclicSound();
 //        }
 //
-//        public void PlaceOperatorAt(BaseOperator oper, int column, int row){
-//            Operators[column, row] = oper;
+//        public void PlaceOperatorAt(BaseActivity oper, int column, int row){
+//            Activities[column, row] = oper;
 //            ConnectToNeighbours(oper, column, row);
 //        }
 //
-//        private void ConnectToNeighbours(BaseOperator oper, int column, int row){
+//        private void ConnectToNeighbours(BaseActivity oper, int column, int row){
 //            foreach (NeighbourDirections direction in new[]{NeighbourDirections.Left, NeighbourDirections.Top, NeighbourDirections.Bottom, NeighbourDirections.Right}){
 //                if (ConnectToNeighboursBy(column, row, oper, direction))
 //                    return;
 //            }
 //        }
 //
-//        private bool ConnectToNeighboursBy(int column, int row, BaseOperator oper, NeighbourDirections direction){
-//            BaseOperator neighbourOperator = GetNeighbourOperatorBy(column, row, direction);
+//        private bool ConnectToNeighboursBy(int column, int row, BaseActivity oper, NeighbourDirections direction){
+//            BaseActivity neighbourOperator = GetNeighbourOperatorBy(column, row, direction);
 //            if (neighbourOperator == null)
 //                return false;
 //            oper.ListenTo(neighbourOperator);
 //            return true;
 //        }
 //
-//        private BaseOperator GetNeighbourOperatorBy(int column, int row, NeighbourDirections direction){
+//        private BaseActivity GetNeighbourOperatorBy(int column, int row, NeighbourDirections direction){
 //            if (direction == NeighbourDirections.Left)
-//                return column == 0 ? null : Operators[column - 1, row];
+//                return column == 0 ? null : Activities[column - 1, row];
 //            if (direction == NeighbourDirections.Right)
-//                return column == _columnCount ? null : Operators[column + 1, row];
+//                return column == _columnCount ? null : Activities[column + 1, row];
 //            if (direction == NeighbourDirections.Top)
-//                return row == 0 ? null : Operators[column, row - 1];
-//            return row == _rowCount ? null : Operators[column, row + 1];
+//                return row == 0 ? null : Activities[column, row - 1];
+//            return row == _rowCount ? null : Activities[column, row + 1];
 //        }
 //
 //        public void InitOperatorsListBy(int columnCount, int rowCount){
-//            Operators = new BaseOperator[columnCount,rowCount];
+//            Activities = new BaseActivity[columnCount,rowCount];
 //            _columnCount = columnCount;
 //            _rowCount = rowCount;
 //        }
@@ -134,10 +134,10 @@ namespace RVSLite{
 //            RegisterInteractiveServiceTo(BOOL_CONDITION_OPERATION_DEMO_ACTION_ID, bumper);
 //            var ifClause = new IfClause(bumper);
 //            ifClause.ListenTo(bumper);
-//            var value = new ValueHolder();
-//            var valueSetter1 = new ValueSetter(value, new DataHolder(100));
+//            var value = new Variable();
+//            var valueSetter1 = new ValueSetter(value, new Data(100));
 //            valueSetter1.ListenTo(ifClause.Positive);
-//            var valueSetter2 = new ValueSetter(value, new DataHolder(200));
+//            var valueSetter2 = new ValueSetter(value, new Data(200));
 //            valueSetter2.ListenTo(ifClause.Negative);
 //            var join = new Join();
 //            join.ListenTo(valueSetter1);
@@ -146,33 +146,33 @@ namespace RVSLite{
 //        }
 //
 //        private void StartCyclicSound(){
-//            var soundTone = new ValueHolder(Lang.Res.SoundTone, 100);
-//            var soundToneInitializer = new ValueSetter(soundTone, new DataHolder(100));
+//            var soundTone = new Variable(Lang.Res.SoundTone, 100);
+//            var soundToneInitializer = new ValueSetter(soundTone, new Data(100));
 //            RegisterInteractiveServiceTo(CYCLIC_SOUND_DEMO_ACTION_ID, soundToneInitializer);
 //            soundTone.ListenTo(soundToneInitializer);
-//            var ifClause = new IfClause(soundTone, ConditionOperations.LessThan, new DataHolder(200));
+//            var ifClause = new IfClause(soundTone, ConditionOperations.LessThan, new Data(200));
 //            ifClause.ListenTo(soundTone);
 //            var sound = new Sound(soundTone);
 //            sound.ListenTo(ifClause.Positive);
 //            var pause = new Pause(100);
 //            pause.ListenTo(sound);
-//            var calculate = new Calculate(soundTone, CalculationOperations.Sum, new DataHolder(20), soundTone);
+//            var calculate = new Calculate(soundTone, CalculationOperations.Sum, new Data(20), soundTone);
 //            calculate.ListenTo(pause);
 //            ifClause.ListenTo(calculate);
-//            new Messenger(new DataHolder(Lang.Res.Finished)).ListenTo(ifClause.Negative);
+//            new Messenger(new Data(Lang.Res.Finished)).ListenTo(ifClause.Negative);
 //        }
 //
 //        private void DemoStartSound3Times(){
 //            var sound1 = new Sound(100);
 //            RegisterInteractiveServiceTo(SOUND_DEMO_ACTION_ID, sound1);
-//            var pause1 = new Pause(new ValueHolder(500));
+//            var pause1 = new Pause(new Variable(500));
 //            pause1.ListenTo(sound1);
-//            var tone = new ValueHolder(Lang.Res.SoundTone, 200);
+//            var tone = new Variable(Lang.Res.SoundTone, 200);
 //            var sound2 = new Sound(tone);
 //            sound2.ListenTo(pause1);
 //            var pause2 = new Pause(2300);
 //            pause2.ListenTo(sound2);
-//            var calculate = new Calculate(tone, CalculationOperations.Sum, new ValueHolder(Lang.Res.Constant, 25), tone);
+//            var calculate = new Calculate(tone, CalculationOperations.Sum, new Variable(Lang.Res.Constant, 25), tone);
 //            calculate.ListenTo(pause2);
 //            var sound3 = new Sound(tone);
 //            sound3.ListenTo(calculate);

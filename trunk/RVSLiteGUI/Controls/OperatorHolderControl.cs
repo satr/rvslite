@@ -10,16 +10,16 @@ namespace RVSLite.Controls{
             RefireEvent(Controls);
         }
 
-        private BaseOperator _operator;
-        public BaseOperator Operator{
-            get { return _operator; }
+        private BaseActivity _activity;
+        public BaseActivity Activity{
+            get { return _activity; }
             set{
-                elementPropertiesControl.Value = _operator = value;
-                if(_operator.IsOperatorWithOperation){
-                    var oper = ((OperatorWithOperation) _operator);
+                elementPropertiesControl.Value = _activity = value;
+                if(_activity.IsOperatorWithOperation){
+                    var oper = ((ActivityWithOperation) _activity);
                     lblOperation.Visible = elementPropertiesControl2.Visible = true;
                     lblOperation.Text = oper.OperationCommand.ToString();
-                    elementPropertiesControl2.Value = oper.ValueHolder;
+                    elementPropertiesControl2.Value = oper.Variable;
                 }
             }
         }
@@ -47,7 +47,7 @@ namespace RVSLite.Controls{
                 foreach (var direction in GetNeighbourDirections()){
                     var neihgbour = Neihgbours[direction];
                     if (neihgbour != null
-                        && neihgbour.Operator != null)
+                        && neihgbour.Activity != null)
                         return neihgbour;
                 }
                 return null;

@@ -1,5 +1,5 @@
 ﻿namespace RVSLite{
-    public class Sound : BaseOperator{
+    public class Sound : BaseActivity{
         public static readonly string OperatorName = Lang.Res.Sound;
 
         public override string Name{

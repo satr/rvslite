@@ -3,34 +3,38 @@ using System.Collections.Generic;
 namespace RVSLite {
     public class MainController {
         private readonly ServiceProvider _serviceProvider;
-        private readonly List<ElementCreatorBase> _operatorsList;
         private readonly OperatorsController _operatorsController;
+        public const int CellWH = 100;
 
         public MainController(ServiceProvider serviceProvider) {
             _serviceProvider = serviceProvider;
             _operatorsController = new OperatorsController(_serviceProvider);
-            _operatorsList = InitOperatorsList();
+            InitActivitiesList();
+
         }
 
-        public IEnumerable<ElementCreatorBase> OperatorCreatorsList {
-            get { return _operatorsList; }
-        }
+        public List<ActivityCreatorBase> BasicActivities { get; private set; }
+        public IEnumerable<ActivityCreatorBase> Services { get; private set; }
 
         public OperatorsController OperatorsController {
             get { return _operatorsController; }
         }
 
-        private List<ElementCreatorBase> InitOperatorsList() {
-            return new List<ElementCreatorBase>
+
+        private void InitActivitiesList() {
+            BasicActivities = new List<ActivityCreatorBase>
                        {
-                           new DataHolderOperatorCreator(_operatorsController.ServiceProvider),
-                           new ValueHolderOperatorCreator(_operatorsController.ServiceProvider),
-                           new ConnectionOperatorCreator(_operatorsController.ServiceProvider),
-                           new IfClauseOperatorCreator(_operatorsController.ServiceProvider),
-                           new CalculateOperatorCreator(_operatorsController.ServiceProvider),
-                           new PauseOperatorCreator(_operatorsController.ServiceProvider),
-                           new BumperOperatorCreator(_operatorsController.ServiceProvider),
-                           new DriveOperatorCreator(_operatorsController.ServiceProvider),
+                           new DataActivityCreator(_operatorsController.ServiceProvider),
+                           new VariableActivityCreator(_operatorsController.ServiceProvider),
+                           new ConnectionActivityCreator(_operatorsController.ServiceProvider),
+                           new IfClauseActivityCreator(_operatorsController.ServiceProvider),
+                           new CalculateActivityCreator(_operatorsController.ServiceProvider),
+                           new PauseActivityCreator(_operatorsController.ServiceProvider),
+                       };
+            Services = new List<ActivityCreatorBase>
+                       {
+                           new BumperServiceCreator(_operatorsController.ServiceProvider),
+                           new DriveServiceCreator(_operatorsController.ServiceProvider),
                            new LEDServiceCreator(_operatorsController.ServiceProvider)
                        };
         }
@@ -39,7 +43,7 @@ namespace RVSLite {
             OperatorsController.InitOperatorsListBy(columnCount, rowCount);
         }
 
-        public void PlaceOperatorAt(BaseOperator oper, int column, int row) {
+        public void RegisterActivityAt(BaseActivity oper, int column, int row) {
             OperatorsController.PlaceOperatorAt(oper, column, row);
         }
     }

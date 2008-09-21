@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace RVSLite{
-    public class ValueReceiver : ValueHolder{
+    public class ValueReceiver : Variable{
         new public static readonly string OperatorName = Lang.Res.Value_receiver;
         protected string _title;
 

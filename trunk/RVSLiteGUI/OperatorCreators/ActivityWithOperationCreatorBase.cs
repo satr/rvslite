@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
 namespace RVSLite{
-    public abstract class OperatorWithOperationCreatorBase : SingleOperatorCreatorBase{
-        protected OperatorWithOperationCreatorBase(IServiceProvider services) : base(services) {
+    public abstract class ActivityWithOperationCreatorBase : SingleInstanceActivityCreatorBase{
+        protected ActivityWithOperationCreatorBase(IServiceProvider services) : base(services) {
         }
 
         public override bool IsOperatorWithOperation{

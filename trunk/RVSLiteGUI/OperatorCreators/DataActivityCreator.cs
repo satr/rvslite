@@ -1,13 +1,13 @@
 namespace RVSLite{
-    public class DataHolderOperatorCreator : SingleOperatorCreatorBase {
-        public DataHolderOperatorCreator(IServiceProvider services) : base(services) {}
+    public class DataActivityCreator : SingleInstanceActivityCreatorBase {
+        public DataActivityCreator(IServiceProvider services) : base(services) {}
 
         public override string Name {
             get { return Lang.Res.Data; }
         }
 
-        public override BaseOperator Create(){
-            return new DataHolder();
+        public override BaseActivity Create(){
+            return new Data();
         }
 
         public override bool RequireInitValue {

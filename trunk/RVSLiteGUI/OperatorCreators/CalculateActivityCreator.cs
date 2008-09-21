@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 
 namespace RVSLite{
-    public class CalculateOperatorCreator : OperatorWithOperationCreatorBase {
-        public CalculateOperatorCreator(IServiceProvider services) : base(services) {}
+    public class CalculateActivityCreator : ActivityWithOperationCreatorBase {
+        public CalculateActivityCreator(IServiceProvider services) : base(services) {}
 
         public override string Name {
             get { return Lang.Res.Calculate; }
         }
 
-        public override BaseOperator Create(){
+        public override BaseActivity Create(){
             return new Calculate(Name);
         }
 

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 
 namespace RVSLite{
-    public class IfClauseOperatorCreator : OperatorWithOperationCreatorBase{
-        public IfClauseOperatorCreator(IServiceProvider services) : base(services) {}
+    public class IfClauseActivityCreator : ActivityWithOperationCreatorBase{
+        public IfClauseActivityCreator(IServiceProvider services) : base(services) {}
 
         public override string Name {
             get { return Lang.Res.Condition; }
         }
 
-        public override BaseOperator Create(){
+        public override BaseActivity Create(){
             return new IfClause(Name);
         }
 
