@@ -33,6 +33,13 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMainField = new System.Windows.Forms.TabPage();
             this.designFieldControl = new RVSLite.Controls.DesignFieldControl();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.driveControl2 = new RVSLite.Controls.DriveEmulatorControl();
+            this.driveControl1 = new RVSLite.Controls.DriveEmulatorControl();
+            this.bumperControl2 = new RVSLite.Controls.BumperEmulatorControl();
+            this.bumperControl1 = new RVSLite.Controls.BumperEmulatorControl();
+            this.ledControl2 = new RVSLite.Controls.LEDEmulatorControl();
+            this.ledControl1 = new RVSLite.Controls.LEDEmulatorControl();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -42,9 +49,12 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabMainField.SuspendLayout();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer2
@@ -62,7 +72,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.gbServices);
-            this.splitContainer2.Size = new System.Drawing.Size(163, 558);
+            this.splitContainer2.Size = new System.Drawing.Size(148, 558);
             this.splitContainer2.SplitterDistance = 313;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 0;
@@ -73,7 +83,7 @@
             this.gbBasicActivities.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbBasicActivities.Location = new System.Drawing.Point(0, 0);
             this.gbBasicActivities.Name = "gbBasicActivities";
-            this.gbBasicActivities.Size = new System.Drawing.Size(161, 311);
+            this.gbBasicActivities.Size = new System.Drawing.Size(146, 311);
             this.gbBasicActivities.TabIndex = 1;
             this.gbBasicActivities.TabStop = false;
             this.gbBasicActivities.Text = "Basic activities";
@@ -86,7 +96,7 @@
             this.lvBasicActivities.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvBasicActivities.Location = new System.Drawing.Point(3, 16);
             this.lvBasicActivities.Name = "lvBasicActivities";
-            this.lvBasicActivities.Size = new System.Drawing.Size(155, 292);
+            this.lvBasicActivities.Size = new System.Drawing.Size(140, 292);
             this.lvBasicActivities.TabIndex = 2;
             this.lvBasicActivities.UseCompatibleStateImageBehavior = false;
             this.lvBasicActivities.View = System.Windows.Forms.View.List;
@@ -97,7 +107,7 @@
             this.gbServices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbServices.Location = new System.Drawing.Point(0, 0);
             this.gbServices.Name = "gbServices";
-            this.gbServices.Size = new System.Drawing.Size(161, 235);
+            this.gbServices.Size = new System.Drawing.Size(146, 235);
             this.gbServices.TabIndex = 2;
             this.gbServices.TabStop = false;
             this.gbServices.Text = "Services";
@@ -110,7 +120,7 @@
             this.lvServices.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvServices.Location = new System.Drawing.Point(3, 16);
             this.lvServices.Name = "lvServices";
-            this.lvServices.Size = new System.Drawing.Size(155, 216);
+            this.lvServices.Size = new System.Drawing.Size(140, 216);
             this.lvServices.TabIndex = 2;
             this.lvServices.UseCompatibleStateImageBehavior = false;
             this.lvServices.View = System.Windows.Forms.View.List;
@@ -128,8 +138,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(1007, 558);
-            this.splitContainer1.SplitterDistance = 163;
+            this.splitContainer1.Size = new System.Drawing.Size(919, 558);
+            this.splitContainer1.SplitterDistance = 148;
             this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer3
@@ -141,8 +151,12 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.tabControl);
-            this.splitContainer3.Size = new System.Drawing.Size(840, 558);
-            this.splitContainer3.SplitterDistance = 673;
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
+            this.splitContainer3.Size = new System.Drawing.Size(767, 558);
+            this.splitContainer3.SplitterDistance = 592;
             this.splitContainer3.TabIndex = 0;
             // 
             // tabControl
@@ -152,7 +166,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(673, 558);
+            this.tabControl.Size = new System.Drawing.Size(592, 558);
             this.tabControl.TabIndex = 1;
             // 
             // tabMainField
@@ -161,7 +175,7 @@
             this.tabMainField.Location = new System.Drawing.Point(4, 22);
             this.tabMainField.Name = "tabMainField";
             this.tabMainField.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMainField.Size = new System.Drawing.Size(665, 532);
+            this.tabMainField.Size = new System.Drawing.Size(584, 532);
             this.tabMainField.TabIndex = 1;
             this.tabMainField.Text = "Main";
             this.tabMainField.UseVisualStyleBackColor = true;
@@ -172,14 +186,87 @@
             this.designFieldControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.designFieldControl.Location = new System.Drawing.Point(3, 3);
             this.designFieldControl.Name = "designFieldControl";
-            this.designFieldControl.Size = new System.Drawing.Size(659, 526);
+            this.designFieldControl.Size = new System.Drawing.Size(578, 526);
             this.designFieldControl.TabIndex = 0;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.driveControl2);
+            this.splitContainer4.Panel1.Controls.Add(this.driveControl1);
+            this.splitContainer4.Panel1.Controls.Add(this.bumperControl2);
+            this.splitContainer4.Panel1.Controls.Add(this.bumperControl1);
+            this.splitContainer4.Panel1.Controls.Add(this.ledControl2);
+            this.splitContainer4.Panel1.Controls.Add(this.ledControl1);
+            this.splitContainer4.Size = new System.Drawing.Size(171, 558);
+            this.splitContainer4.SplitterDistance = 195;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // driveControl2
+            // 
+            this.driveControl2.Location = new System.Drawing.Point(119, 45);
+            this.driveControl2.Name = "driveControl2";
+            this.driveControl2.ServiceName = "Drive";
+            this.driveControl2.Size = new System.Drawing.Size(52, 104);
+            this.driveControl2.TabIndex = 10;
+            this.driveControl2.Value = 0;
+            // 
+            // driveControl1
+            // 
+            this.driveControl1.Location = new System.Drawing.Point(0, 45);
+            this.driveControl1.Name = "driveControl1";
+            this.driveControl1.ServiceName = "Drive";
+            this.driveControl1.Size = new System.Drawing.Size(52, 104);
+            this.driveControl1.TabIndex = 9;
+            this.driveControl1.Value = 0;
+            // 
+            // bumperControl2
+            // 
+            this.bumperControl2.Location = new System.Drawing.Point(17, 157);
+            this.bumperControl2.Name = "bumperControl2";
+            this.bumperControl2.ServiceName = "Rear bumper";
+            this.bumperControl2.Size = new System.Drawing.Size(143, 28);
+            this.bumperControl2.TabIndex = 8;
+            this.bumperControl2.Value = false;
+            // 
+            // bumperControl1
+            // 
+            this.bumperControl1.Location = new System.Drawing.Point(17, 10);
+            this.bumperControl1.Name = "bumperControl1";
+            this.bumperControl1.ServiceName = "Front bumper";
+            this.bumperControl1.Size = new System.Drawing.Size(143, 29);
+            this.bumperControl1.TabIndex = 7;
+            this.bumperControl1.Value = false;
+            // 
+            // ledControl2
+            // 
+            this.ledControl2.Location = new System.Drawing.Point(51, 122);
+            this.ledControl2.Name = "ledControl2";
+            this.ledControl2.ServiceName = "LED#2";
+            this.ledControl2.Size = new System.Drawing.Size(89, 27);
+            this.ledControl2.TabIndex = 5;
+            this.ledControl2.Value = false;
+            // 
+            // ledControl1
+            // 
+            this.ledControl1.Location = new System.Drawing.Point(51, 45);
+            this.ledControl1.Name = "ledControl1";
+            this.ledControl1.ServiceName = "LED#1";
+            this.ledControl1.Size = new System.Drawing.Size(89, 27);
+            this.ledControl1.TabIndex = 6;
+            this.ledControl1.Value = false;
             // 
             // DesignerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 558);
+            this.ClientSize = new System.Drawing.Size(919, 558);
             this.Controls.Add(this.splitContainer1);
             this.Name = "DesignerForm";
             this.Text = "DesignerForm";
@@ -192,9 +279,12 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.tabMainField.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -211,5 +301,12 @@
         private System.Windows.Forms.ListView lvBasicActivities;
         private System.Windows.Forms.GroupBox gbServices;
         private System.Windows.Forms.ListView lvServices;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private RVSLite.Controls.DriveEmulatorControl driveControl2;
+        private RVSLite.Controls.DriveEmulatorControl driveControl1;
+        private RVSLite.Controls.BumperEmulatorControl bumperControl2;
+        private RVSLite.Controls.BumperEmulatorControl bumperControl1;
+        private RVSLite.Controls.LEDEmulatorControl ledControl2;
+        private RVSLite.Controls.LEDEmulatorControl ledControl1;
     }
 }

@@ -1,5 +1,5 @@
 ﻿namespace RVSLite.Controls {
-    partial class BumperControl : IService{
+    partial class BumperEmulatorControl : IService{
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -47,13 +47,13 @@
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             // 
-            // BumperControl
+            // BumperEmulatorControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.lblName);
-            this.Name = "BumperControl";
+            this.Name = "BumperEmulatorControl";
             this.Size = new System.Drawing.Size(109, 49);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);

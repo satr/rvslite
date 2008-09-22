@@ -2,10 +2,10 @@
 using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public partial class LEDControl : UserControl, IService {
+    public partial class LEDEmulatorControl : UserControl, IService {
         private bool _value;
 
-        public LEDControl(){
+        public LEDEmulatorControl(){
             InitializeComponent();
         }
 

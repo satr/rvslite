@@ -24,18 +24,16 @@
         /// </summary>
         private void InitializeComponent() {
             this.groupBox = new System.Windows.Forms.GroupBox();
-            this.txtValue = new System.Windows.Forms.TextBox();
-            this.cbInstances = new System.Windows.Forms.ComboBox();
-            this.lblOperator = new System.Windows.Forms.Label();
             this.lblSource = new System.Windows.Forms.Label();
+            this.cbOperationCommands = new System.Windows.Forms.ComboBox();
+            this.variableOrDataControl = new RVSLite.Controls.VariableOrDataControl();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox
             // 
-            this.groupBox.Controls.Add(this.txtValue);
-            this.groupBox.Controls.Add(this.cbInstances);
-            this.groupBox.Controls.Add(this.lblOperator);
+            this.groupBox.Controls.Add(this.variableOrDataControl);
+            this.groupBox.Controls.Add(this.cbOperationCommands);
             this.groupBox.Controls.Add(this.lblSource);
             this.groupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox.Location = new System.Drawing.Point(0, 0);
@@ -43,35 +41,6 @@
             this.groupBox.Size = new System.Drawing.Size(150, 150);
             this.groupBox.TabIndex = 2;
             this.groupBox.TabStop = false;
-            // 
-            // txtValue
-            // 
-            this.txtValue.Location = new System.Drawing.Point(3, 65);
-            this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(144, 20);
-            this.txtValue.TabIndex = 6;
-            // 
-            // cbInstances
-            // 
-            this.cbInstances.DisplayMember = "Name";
-            this.cbInstances.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cbInstances.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbInstances.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbInstances.FormattingEnabled = true;
-            this.cbInstances.Location = new System.Drawing.Point(3, 42);
-            this.cbInstances.Name = "cbInstances";
-            this.cbInstances.Size = new System.Drawing.Size(144, 21);
-            this.cbInstances.TabIndex = 4;
-            // 
-            // lblOperator
-            // 
-            this.lblOperator.AutoSize = true;
-            this.lblOperator.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblOperator.Location = new System.Drawing.Point(3, 29);
-            this.lblOperator.Name = "lblOperator";
-            this.lblOperator.Size = new System.Drawing.Size(48, 13);
-            this.lblOperator.TabIndex = 1;
-            this.lblOperator.Text = "Operator";
             // 
             // lblSource
             // 
@@ -82,6 +51,26 @@
             this.lblSource.Size = new System.Drawing.Size(41, 13);
             this.lblSource.TabIndex = 0;
             this.lblSource.Text = "Source";
+            // 
+            // cbOperationCommands
+            // 
+            this.cbOperationCommands.DisplayMember = "Name";
+            this.cbOperationCommands.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbOperationCommands.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOperationCommands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbOperationCommands.FormattingEnabled = true;
+            this.cbOperationCommands.Location = new System.Drawing.Point(3, 29);
+            this.cbOperationCommands.Name = "cbOperationCommands";
+            this.cbOperationCommands.Size = new System.Drawing.Size(144, 21);
+            this.cbOperationCommands.TabIndex = 8;
+            // 
+            // variableOrDataControl
+            // 
+            this.variableOrDataControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.variableOrDataControl.Location = new System.Drawing.Point(3, 50);
+            this.variableOrDataControl.Name = "variableOrDataControl";
+            this.variableOrDataControl.Size = new System.Drawing.Size(144, 29);
+            this.variableOrDataControl.TabIndex = 9;
             // 
             // ActivityWithOperationControl
             // 
@@ -99,8 +88,7 @@
 
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Label lblSource;
-        private System.Windows.Forms.Label lblOperator;
-        private System.Windows.Forms.ComboBox cbInstances;
-        private System.Windows.Forms.TextBox txtValue;
+        private VariableOrDataControl variableOrDataControl;
+        private System.Windows.Forms.ComboBox cbOperationCommands;
     }
 }

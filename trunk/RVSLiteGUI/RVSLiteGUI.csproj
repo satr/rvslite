@@ -45,12 +45,6 @@
     <Compile Include="AddVariableForm.Designer.cs">
       <DependentUpon>AddVariableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ActivityControls\BumperServiceControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ActivityControls\BumperServiceControl.Designer.cs">
-      <DependentUpon>BumperServiceControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ActivityControls\ConnectionActivityControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,11 +63,11 @@
     <Compile Include="Controls\ActivityControls\ActivityWithOperationControl.Designer.cs">
       <DependentUpon>ActivityWithOperationControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ActivityControls\LEDServiceControl.cs">
+    <Compile Include="Controls\ActivityControls\ServiceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ActivityControls\LEDServiceControl.Designer.cs">
-      <DependentUpon>LEDServiceControl.cs</DependentUpon>
+    <Compile Include="Controls\ActivityControls\ServiceControl.Designer.cs">
+      <DependentUpon>ServiceControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\IActivityControl.cs" />
     <Compile Include="Controls\ActivityControls\VariableActivityControl.cs">
@@ -82,11 +76,11 @@
     <Compile Include="Controls\ActivityControls\VariableActivityControl.Designer.cs">
       <DependentUpon>VariableActivityControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BumperControl.cs">
+    <Compile Include="Controls\EmulatorControls\BumperEmulatorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\BumperControl.Designer.cs">
-      <DependentUpon>BumperControl.cs</DependentUpon>
+    <Compile Include="Controls\EmulatorControls\BumperEmulatorControl.Designer.cs">
+      <DependentUpon>BumperEmulatorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DesignFieldControl.cs">
       <SubType>UserControl</SubType>
@@ -100,29 +94,23 @@
     <Compile Include="Controls\ActivityControls\JoinActivityControl.Designer.cs">
       <DependentUpon>JoinActivityControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DriveControl.cs">
+    <Compile Include="Controls\EmulatorControls\DriveEmulatorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DriveControl.Designer.cs">
-      <DependentUpon>DriveControl.cs</DependentUpon>
+    <Compile Include="Controls\EmulatorControls\DriveEmulatorControl.Designer.cs">
+      <DependentUpon>DriveEmulatorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ElementPropertiesControl.cs">
+    <Compile Include="Controls\EmulatorControls\LEDEmulatorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ElementPropertiesControl.Designer.cs">
-      <DependentUpon>ElementPropertiesControl.cs</DependentUpon>
+    <Compile Include="Controls\EmulatorControls\LEDEmulatorControl.Designer.cs">
+      <DependentUpon>LEDEmulatorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LEDControl.cs">
+    <Compile Include="Controls\VariableOrDataControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\LEDControl.Designer.cs">
-      <DependentUpon>LEDControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperatorHolderControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\OperatorHolderControl.Designer.cs">
-      <DependentUpon>OperatorHolderControl.cs</DependentUpon>
+    <Compile Include="Controls\VariableOrDataControl.Designer.cs">
+      <DependentUpon>VariableOrDataControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DesignerForm.cs">
       <SubType>Form</SubType>
@@ -144,12 +132,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorsListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OperatorsListForm.Designer.cs">
-      <DependentUpon>OperatorsListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="OperatorCreators\BumperServiceCreator.cs" />
     <Compile Include="OperatorCreators\CalculateActivityCreator.cs" />
     <Compile Include="OperatorCreators\ConnectionActivityCreator.cs" />
@@ -166,10 +148,6 @@
       <DependentUpon>AddVariableForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ActivityControls\BumperServiceControl.resx">
-      <DependentUpon>BumperServiceControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ActivityControls\ConnectionActivityControl.resx">
       <DependentUpon>ConnectionActivityControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -182,16 +160,16 @@
       <DependentUpon>ActivityWithOperationControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ActivityControls\LEDServiceControl.resx">
-      <DependentUpon>LEDServiceControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ActivityControls\ServiceControl.resx">
+      <DependentUpon>ServiceControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ActivityControls\VariableActivityControl.resx">
       <DependentUpon>VariableActivityControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\BumperControl.resx">
-      <DependentUpon>BumperControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\EmulatorControls\BumperEmulatorControl.resx">
+      <DependentUpon>BumperEmulatorControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DesignFieldControl.resx">
@@ -202,20 +180,16 @@
       <DependentUpon>JoinActivityControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DriveControl.resx">
-      <DependentUpon>DriveControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\EmulatorControls\DriveEmulatorControl.resx">
+      <DependentUpon>DriveEmulatorControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ElementPropertiesControl.resx">
-      <DependentUpon>ElementPropertiesControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\EmulatorControls\LEDEmulatorControl.resx">
+      <DependentUpon>LEDEmulatorControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LEDControl.resx">
-      <DependentUpon>LEDControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OperatorHolderControl.resx">
-      <DependentUpon>OperatorHolderControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\VariableOrDataControl.resx">
+      <DependentUpon>VariableOrDataControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DesignerForm.resx">
@@ -224,10 +198,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OperatorsListForm.resx">
-      <DependentUpon>OperatorsListForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

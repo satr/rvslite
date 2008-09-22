@@ -33,7 +33,7 @@ namespace RVSLite{
         }
 
         private bool ConnectToNeighboursBy(int column, int row, BaseActivity oper, NeighbourDirections direction){
-            BaseActivity neighbourActivity = GetNeighbourOperatorBy(column, row, direction);
+            var neighbourActivity = GetNeighbourOperatorBy(column, row, direction);
             if (neighbourActivity == null)
                 return false;
             oper.ListenTo(neighbourActivity);

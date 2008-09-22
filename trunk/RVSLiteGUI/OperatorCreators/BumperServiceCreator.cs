@@ -27,7 +27,7 @@ namespace RVSLite{
         }
 
         protected override IActivityControl CreateActivityControl(){
-            return new BumperServiceControl(){Ports = _serviceProvider.BumperPorts};
+            return new ServiceControl() { ControlName = Lang.Res.Bumper, Ports = _serviceProvider.BumperPorts };
         }
     }
 }

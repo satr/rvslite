@@ -1,10 +1,10 @@
 ﻿using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public partial class DriveControl : UserControl, IService{
+    public partial class DriveEmulatorControl : UserControl, IService{
         private int _value;
 
-        public DriveControl(){
+        public DriveEmulatorControl(){
             InitializeComponent();
         }
 

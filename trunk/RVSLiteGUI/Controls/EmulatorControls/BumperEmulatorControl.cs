@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public partial class BumperControl : UserControl, IService{
+    public partial class BumperEmulatorControl : UserControl, IService{
         private bool _value;
 
-        public BumperControl(){
+        public BumperEmulatorControl(){
             InitializeComponent();
             Value = false;
             pictureBox.Click += pictureBox_Click;

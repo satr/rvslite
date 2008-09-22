@@ -26,7 +26,8 @@ namespace RVSLite{
         protected override IActivityControl CreateActivityControl(){
             return new ActivityWithOperationControl{
                                                        ControlName = Lang.Res.Calculate,
-                                                       Variables = ServiceProvider.Variables
+                                                       ServiceProvider = ServiceProvider,
+                                                       OperationCommands = OperationCommands
                                                    };
         }
     }
