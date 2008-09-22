@@ -1,4 +1,5 @@
 using System.Collections;
+using RVSLite.Controls.ActivityControls;
 
 namespace RVSLite{
     public class DriveServiceCreator :ServiceCreatorBase {
@@ -18,6 +19,9 @@ namespace RVSLite{
 
         public override BaseActivity Create(){
             return new DriveService();
+        }
+        protected override IActivityControl CreateActivityControl() {
+            return new ServiceControl() { ControlName = Lang.Res.Drive, Ports = _serviceProvider.DrivePorts };
         }
     }
 }

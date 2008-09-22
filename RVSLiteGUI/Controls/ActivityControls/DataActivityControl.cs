@@ -18,7 +18,6 @@ namespace RVSLite.Controls.ActivityControls{
             }
             set{
                 _activity = (DataActivity) value;
-                lblInstanceName.Text = _activity.Name;
                 txtValue.Text = _activity.Value == null ? "" : _activity.Value.ToString();
             }
         }

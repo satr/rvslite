@@ -28,7 +28,8 @@ namespace RVSLite{
         protected override IActivityControl CreateActivityControl(){
             return new ActivityWithOperationControl{
                                                        ControlName = Lang.Res.If,
-                                                       Variables = ServiceProvider.Variables
+                                                       ServiceProvider = ServiceProvider,
+                                                       OperationCommands = OperationCommands
                                                    };
         }
     }

@@ -23,7 +23,7 @@ namespace RVSLite{
         }
 
         protected override IActivityControl CreateActivityControl(){
-            return new LEDServiceControl{Ports = _serviceProvider.LEDPorts};
+            return new ServiceControl{ControlName = Lang.Res.LED,Ports = _serviceProvider.LEDPorts};
         }
     }
 }

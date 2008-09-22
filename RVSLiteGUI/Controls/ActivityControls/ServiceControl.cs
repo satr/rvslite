@@ -2,12 +2,11 @@
 using System.Windows.Forms;
 
 namespace RVSLite.Controls.ActivityControls{
-    public partial class BumperServiceControl : UserControl, IActivityControl{
-        private BumperService _activity;
+    public partial class ServiceControl : UserControl, IActivityControl{
+        private BaseActivity _activity;
 
-        public BumperServiceControl(){
+        public ServiceControl(){
             InitializeComponent();
-            groupBox.Text = Lang.Res.Bumper;
             lblPort.Text = Lang.Res.Port;
         }
 
@@ -16,16 +15,21 @@ namespace RVSLite.Controls.ActivityControls{
         public BaseActivity Activity{
             get { return _activity; }
             set{
-                _activity = (BumperService) value;
+                _activity = (BaseActivity) value;
             }
         }
 
         #endregion
 
-        public List<IService> Ports{
-            set{
+        public List<IService> Ports {
+            set {
                 cbInstances.DataSource = value;
             }
         }
+
+        public string ControlName {
+            set { groupBox.Text = value; }
+        }
+
     }
 }

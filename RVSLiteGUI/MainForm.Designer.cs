@@ -24,14 +24,14 @@
         /// </summary>
         private void InitializeComponent() {
             this.pnlMainControl = new System.Windows.Forms.Panel();
-            this.bumperControl2 = new RVSLite.Controls.BumperControl();
-            this.bumperControl1 = new RVSLite.Controls.BumperControl();
-            this.ledControl2 = new RVSLite.Controls.LEDControl();
-            this.ledControl1 = new RVSLite.Controls.LEDControl();
+            this.bumperControl2 = new RVSLite.Controls.BumperEmulatorControl();
+            this.bumperControl1 = new RVSLite.Controls.BumperEmulatorControl();
+            this.ledControl2 = new RVSLite.Controls.LEDEmulatorControl();
+            this.ledControl1 = new RVSLite.Controls.LEDEmulatorControl();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.driveControl1 = new RVSLite.Controls.DriveControl();
-            this.driveControl2 = new RVSLite.Controls.DriveControl();
+            this.driveControl1 = new RVSLite.Controls.DriveEmulatorControl();
+            this.driveControl2 = new RVSLite.Controls.DriveEmulatorControl();
             this.pnlMainControl.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -171,12 +171,12 @@
         private System.Windows.Forms.Panel pnlMainControl;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private RVSLite.Controls.LEDControl ledControl1;
-        private RVSLite.Controls.BumperControl bumperControl1;
-        private RVSLite.Controls.LEDControl ledControl2;
-        private RVSLite.Controls.BumperControl bumperControl2;
-        private RVSLite.Controls.DriveControl driveControl2;
-        private RVSLite.Controls.DriveControl driveControl1;
+        private RVSLite.Controls.LEDEmulatorControl ledControl1;
+        private RVSLite.Controls.BumperEmulatorControl bumperControl1;
+        private RVSLite.Controls.LEDEmulatorControl ledControl2;
+        private RVSLite.Controls.BumperEmulatorControl bumperControl2;
+        private RVSLite.Controls.DriveEmulatorControl driveControl2;
+        private RVSLite.Controls.DriveEmulatorControl driveControl1;
     }
 }
 

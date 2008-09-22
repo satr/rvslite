@@ -1,5 +1,5 @@
 ﻿namespace RVSLite.Controls {
-    partial class LEDControl{
+    partial class LEDEmulatorControl{
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -46,13 +46,13 @@
             this.lblName.TabIndex = 1;
             this.lblName.Text = "LED";
             // 
-            // LEDControl
+            // LEDEmulatorControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pictureBox);
-            this.Name = "LEDControl";
+            this.Name = "LEDEmulatorControl";
             this.Size = new System.Drawing.Size(67, 27);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
