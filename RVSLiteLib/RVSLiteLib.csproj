@@ -36,6 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\ServiceActivity.cs" />
     <Compile Include="OperationsCommands\OperationsCommandBase.cs" />
     <Compile Include="OperationsCommands\CalculationCommands\DivisionCalculationCommand.cs" />
     <Compile Include="OperationsCommands\CalculationCommands\MultiplyCalculationCommand.cs" />
@@ -52,24 +53,20 @@
     <Compile Include="Interfaces\IServiceProvider.cs" />
     <Compile Include="Lang.cs" />
     <Compile Include="NeighbourDirections.cs" />
-    <Compile Include="Activities\BasicActivities\BooleanValueBase.cs" />
-    <Compile Include="Activities\Services\BumperService.cs" />
-    <Compile Include="Activities\BasicActivities\CalculateActivity.cs" />
-    <Compile Include="Activities\BasicActivities\ConnectionActivity.cs" />
-    <Compile Include="Activities\BasicActivities\DataActivity.cs" />
-    <Compile Include="Activities\Services\DriveService.cs" />
-    <Compile Include="Activities\BasicActivities\IfClauseActivity.cs" />
+    <Compile Include="Activities\CalculateActivity.cs" />
+    <Compile Include="Activities\ConnectionActivity.cs" />
+    <Compile Include="Activities\DataActivity.cs" />
+    <Compile Include="Activities\IfClauseActivity.cs" />
     <Compile Include="Interfaces\IService.cs" />
-    <Compile Include="Activities\BasicActivities\JoinActivity.cs" />
-    <Compile Include="Activities\Services\LEDService.cs" />
-    <Compile Include="Activities\BasicActivities\MessengerActivity.cs" />
-    <Compile Include="Activities\BasicActivities\NegatorActivity.cs" />
+    <Compile Include="Activities\JoinActivity.cs" />
+    <Compile Include="Activities\NegatorActivity.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
-    <Compile Include="Activities\BasicActivities\ActivityWithOperation.cs" />
-    <Compile Include="Activities\BasicActivities\PauseActivity.cs" />
-    <Compile Include="Activities\BasicActivities\VariableActivity.cs" />
-    <Compile Include="Activities\BasicActivities\ValueReceiverActivity.cs" />
+    <Compile Include="Activities\ActivityWithOperation.cs" />
+    <Compile Include="Activities\PauseActivity.cs" />
+    <Compile Include="Activities\VariableActivity.cs" />
+    <Compile Include="Activities\ValueReceiverActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

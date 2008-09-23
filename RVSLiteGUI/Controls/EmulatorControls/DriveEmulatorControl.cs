@@ -3,6 +3,7 @@
 namespace RVSLite.Controls{
     public partial class DriveEmulatorControl : UserControl, IService{
         private int _value;
+        private string _name = Lang.Res.Drive;
 
         public DriveEmulatorControl(){
             InitializeComponent();
@@ -19,8 +20,9 @@ namespace RVSLite.Controls{
         public object Value{
             get { return _value; }
             set{
-                bool valueChanged = _value != (int) value;
-                _value = (int) value;
+                var checkedValue = value is int ? (int) value : 0;
+                bool valueChanged = _value != checkedValue;
+                _value = checkedValue;
                 if (_value > 0)
                     pictureBox.Image = imageList.Images[0];
                 else if (_value == 0)
@@ -33,8 +35,8 @@ namespace RVSLite.Controls{
         }
 
         public string ServiceName{
-            get { return "Drive"; }
-            set { }
+            get { return _name; }
+            set { _name = value; }
         }
 
         #endregion

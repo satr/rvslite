@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityCreators\StartActivityCreator.cs" />
     <Compile Include="AddVariableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,11 +64,29 @@
     <Compile Include="Controls\ActivityControls\ActivityWithOperationControl.Designer.cs">
       <DependentUpon>ActivityWithOperationControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ActivityControls\ServiceControl.cs">
+    <Compile Include="Controls\ActivityControls\PauseActivityControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ActivityControls\ServiceControl.Designer.cs">
-      <DependentUpon>ServiceControl.cs</DependentUpon>
+    <Compile Include="Controls\ActivityControls\PauseActivityControl.Designer.cs">
+      <DependentUpon>PauseActivityControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ActivityControls\ServiceActivityControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ActivityControls\ServiceActivityControl.Designer.cs">
+      <DependentUpon>ServiceActivityControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ActivityControls\StartActivityControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ActivityControls\StartActivityControl.Designer.cs">
+      <DependentUpon>StartActivityControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EmulatorControls\MessengerEmulatorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EmulatorControls\MessengerEmulatorControl.Designer.cs">
+      <DependentUpon>MessengerEmulatorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\IActivityControl.cs" />
     <Compile Include="Controls\ActivityControls\VariableActivityControl.cs">
@@ -112,36 +131,30 @@
     <Compile Include="Controls\VariableOrDataControl.Designer.cs">
       <DependentUpon>VariableOrDataControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DesignerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DesignerForm.Designer.cs">
-      <DependentUpon>DesignerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OperatorCreators\BaseActivityCreatorBase.cs" />
-    <Compile Include="OperatorCreators\ActivityWithOperationCreatorBase.cs" />
-    <Compile Include="OperatorCreators\JoinActivityCreator.cs" />
-    <Compile Include="OperatorCreators\PauseActivityCreator.cs" />
-    <Compile Include="OperatorCreators\ServiceCreatorBase.cs" />
-    <Compile Include="OperatorCreators\SingleInstanceActivityCreatorBase.cs" />
-    <Compile Include="ServiceProvider.cs" />
-    <Compile Include="MainController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorCreators\BumperServiceCreator.cs" />
-    <Compile Include="OperatorCreators\CalculateActivityCreator.cs" />
-    <Compile Include="OperatorCreators\ConnectionActivityCreator.cs" />
-    <Compile Include="OperatorCreators\DataActivityCreator.cs" />
-    <Compile Include="OperatorCreators\DriveServiceCreator.cs" />
-    <Compile Include="OperatorCreators\IfClauseActivityCreator.cs" />
-    <Compile Include="OperatorCreators\LEDServiceCreator.cs" />
-    <Compile Include="OperatorCreators\MessengerActivityCreator.cs" />
-    <Compile Include="OperatorCreators\ActivityCreatorBase.cs" />
-    <Compile Include="OperatorCreators\VariableActivityCreator.cs" />
+    <Compile Include="ActivityCreators\BaseActivityCreatorBase.cs" />
+    <Compile Include="ActivityCreators\ActivityWithOperationCreatorBase.cs" />
+    <Compile Include="ActivityCreators\JoinActivityCreator.cs" />
+    <Compile Include="ActivityCreators\PauseActivityCreator.cs" />
+    <Compile Include="ActivityCreators\ServiceActivityCreatorBase.cs" />
+    <Compile Include="ActivityCreators\SingleInstanceActivityCreatorBase.cs" />
+    <Compile Include="ServiceProvider.cs" />
+    <Compile Include="MainController.cs" />
+    <Compile Include="ActivityCreators\BumperServiceCreator.cs" />
+    <Compile Include="ActivityCreators\CalculateActivityCreator.cs" />
+    <Compile Include="ActivityCreators\ConnectionActivityCreator.cs" />
+    <Compile Include="ActivityCreators\DataActivityCreator.cs" />
+    <Compile Include="ActivityCreators\DriveServiceCreator.cs" />
+    <Compile Include="ActivityCreators\IfClauseActivityCreator.cs" />
+    <Compile Include="ActivityCreators\LEDServiceCreator.cs" />
+    <Compile Include="ActivityCreators\MessengerServiceCreator.cs" />
+    <Compile Include="ActivityCreators\ActivityCreatorBase.cs" />
+    <Compile Include="ActivityCreators\VariableActivityCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddVariableForm.resx">
@@ -160,8 +173,16 @@
       <DependentUpon>ActivityWithOperationControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ActivityControls\ServiceControl.resx">
-      <DependentUpon>ServiceControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ActivityControls\PauseActivityControl.resx">
+      <DependentUpon>PauseActivityControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ActivityControls\ServiceActivityControl.resx">
+      <DependentUpon>ServiceActivityControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ActivityControls\StartActivityControl.resx">
+      <DependentUpon>StartActivityControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ActivityControls\VariableActivityControl.resx">
@@ -188,12 +209,12 @@
       <DependentUpon>LEDEmulatorControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\VariableOrDataControl.resx">
-      <DependentUpon>VariableOrDataControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\EmulatorControls\MessengerEmulatorControl.resx">
+      <DependentUpon>MessengerEmulatorControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="DesignerForm.resx">
-      <DependentUpon>DesignerForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\VariableOrDataControl.resx">
+      <DependentUpon>VariableOrDataControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

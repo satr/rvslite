@@ -10,7 +10,7 @@ namespace RVSLite {
             _serviceProvider = serviceProvider;
             _activitiesController = new ActivitiesController(_serviceProvider);
             InitActivitiesList();
-
+            ActivityControls = new IActivityControl[20, 20];
         }
 
         public List<ActivityCreatorBase> BasicActivities { get; private set; }
@@ -20,10 +20,13 @@ namespace RVSLite {
             get { return _activitiesController; }
         }
 
+        public IActivityControl[,] ActivityControls { get; private set; }
+
 
         private void InitActivitiesList() {
             BasicActivities = new List<ActivityCreatorBase>
                        {
+                           new StartActivityCreator(_activitiesController.ServiceProvider),
                            new DataActivityCreator(_activitiesController.ServiceProvider),
                            new VariableActivityCreator(_activitiesController.ServiceProvider),
                            new ConnectionActivityCreator(_activitiesController.ServiceProvider),
@@ -36,16 +39,13 @@ namespace RVSLite {
                        {
                            new BumperServiceCreator(_activitiesController.ServiceProvider),
                            new DriveServiceCreator(_activitiesController.ServiceProvider),
-                           new LEDServiceCreator(_activitiesController.ServiceProvider)
+                           new LEDServiceCreator(_activitiesController.ServiceProvider),
+                           new MessengerServiceCreator(_activitiesController.ServiceProvider)
                        };
         }
 
         public void InitOperatorsListBy(int columnCount, int rowCount) {
             ActivitiesController.InitOperatorsListBy(columnCount, rowCount);
-        }
-
-        public void RegisterActivityAt(BaseActivity oper, int column, int row) {
-            ActivitiesController.PlaceOperatorAt(oper, column, row);
         }
     }
 }

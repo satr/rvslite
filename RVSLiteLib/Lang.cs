@@ -61,6 +61,11 @@ namespace RVSLite{
         public string New_variable = "New variable";
         public string Name = "Name";
         public string Cancel = "Cancel";
+        public string Yes = "Yes";
+        public string No = "No";
+        public string Correct = "Correct";
+        public string Incorrect = "Incorrect";
+        public string Start= "Start";
 
 
         public static Lang Res{
@@ -95,7 +100,7 @@ namespace RVSLite{
             Value_receiver = "Приемник значений";
             Wait_for = "Ожидание";
             Negate_value = "Инвертировать значение";
-            Negate_entry_value = "Инвертировать входящие данные"; 
+            Negate_entry_value = "Инвертировать входящие данные";
             Integer = "Целое";
             Max = "Макс.";
             Min = "Мин.";
@@ -107,7 +112,7 @@ namespace RVSLite{
             Calculate = "Вычислить";
             Undefined_operation = "Неопределенная операция";
             Undefined_calculation_operation = "Неопределенная вычислительная операция";
-            Undefined_condition_operation = "Неопределенная условная операция"; 
+            Undefined_condition_operation = "Неопределенная условная операция";
             Constant = "Константа";
             Condition = "Условие";
             Lesser = "Меньший";
@@ -121,8 +126,8 @@ namespace RVSLite{
             Check_condition = "Проверить условие";
             Data = "Данные";
             Connection = "Соединение";
-            True = "Да";
-            False= "Нет";
+            True = "Правда";
+            False = "Ложь";
             Entry_value = "Входящее значение";
             Require_init_value = "Требуется начальное значение";
             Require_correct_name = "Требуется корректное имя";
@@ -135,6 +140,11 @@ namespace RVSLite{
             New_variable = "Новая переменная";
             Name = "Имя";
             Cancel = "Отменить";
+            Yes = "Да";
+            No = "Нет";
+            Correct = "Верно";
+            Incorrect = "Неверно";
+            Start = "Старт";
         }
     }
 }

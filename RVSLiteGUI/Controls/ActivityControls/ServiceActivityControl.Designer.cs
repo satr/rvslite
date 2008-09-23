@@ -1,5 +1,5 @@
 ﻿namespace RVSLite.Controls.ActivityControls {
-    partial class ServiceControl {
+    partial class ServiceActivityControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -63,12 +63,12 @@
             this.lblPort.TabIndex = 3;
             this.lblPort.Text = "Port";
             // 
-            // ServiceControl
+            // ServiceActivityControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox);
-            this.Name = "ServiceControl";
+            this.Name = "ServiceActivityControl";
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             this.ResumeLayout(false);
