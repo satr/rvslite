@@ -16,15 +16,18 @@ namespace RVSLite.Controls.ActivityControls{
         public VariableActivityCreator VariableActivityCreator{
             set{
                 _variableActivityCreator = value;
-                InitInstancesListBy(_variableActivityCreator.ServiceProvider.Variables);
+                var variables = _variableActivityCreator.ServiceProvider.Variables;
+                if(variables.Count == 0)
+                    variables.Add(_variableActivityCreator.Create());
+                InitInstancesListBy(variables);
             }
         }
 
         #region IActivityControl Members
 
         public BaseActivity Activity{
-            get { return _activity; }
-            set { _activity = (VariableActivity) value; }
+            get { return (BaseActivity) cbInstances.SelectedValue; }
+            set { }
         }
 
         #endregion

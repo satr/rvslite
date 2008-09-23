@@ -1,13 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls.ActivityControls{
     public partial class ActivityWithOperationControl : UserControl, IActivityControl{
         private ActivityWithOperation _activity;
-        private IServiceProvider _serviceProvider;
 
         public ActivityWithOperationControl(){
             InitializeComponent();
+            cbOperationCommands.SelectedValueChanged += cbOperationCommands_SelectedValueChanged;
+            variableOrDataControl.OnChanged += variableOrDataControl_OnChanged;
+        }
+
+        void variableOrDataControl_OnChanged(object sender, EventArgs e) {
+            RefreshActivity();
         }
 
         public string ControlName{
@@ -15,10 +21,7 @@ namespace RVSLite.Controls.ActivityControls{
         }
 
         public IServiceProvider ServiceProvider{
-            set{
-                _serviceProvider = value;
-                variableOrDataControl.Variables = _serviceProvider.Variables;
-            }
+            set { variableOrDataControl.ServiceProvider = value; }
         }
 
         public IEnumerable<OperationsCommandBase> OperationCommands{
@@ -28,11 +31,7 @@ namespace RVSLite.Controls.ActivityControls{
         #region IActivityControl Members
 
         public BaseActivity Activity{
-            get{
-                _activity.InitBy((OperationsCommandBase) cbOperationCommands.SelectedValue,
-                                 variableOrDataControl.SelectedActivity);
-                return _activity;
-            }
+            get { return _activity; }
             set{
                 _activity = (ActivityWithOperation) value;
                 lblSource.Text = _activity.SourceActivity.Name;
@@ -40,5 +39,23 @@ namespace RVSLite.Controls.ActivityControls{
         }
 
         #endregion
+
+        private void cbOperationCommands_SelectedValueChanged(object sender, EventArgs e){
+            RefreshActivity();
+        }
+
+        private void RefreshActivity(){
+            if (_activity == null)
+                return;
+            _activity.InitBy(SelectedOperationCommand, SelectedActivity);
+        }
+
+        private VariableActivity SelectedActivity{
+            get { return variableOrDataControl.SelectedActivity; }
+        }
+
+        private OperationsCommandBase SelectedOperationCommand{
+            get { return (OperationsCommandBase) cbOperationCommands.SelectedValue; }
+        }
     }
 }

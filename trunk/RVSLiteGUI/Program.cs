@@ -11,7 +11,7 @@ namespace RVSLite {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DesignerForm());
+            Application.Run(new MainForm());
         }
     }
 }

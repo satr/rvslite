@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace RVSLite{
     public class ActivitiesController{
         private readonly IServiceProvider _serviceProvider;
@@ -11,7 +8,7 @@ namespace RVSLite{
             Activities = new BaseActivity[20,20];
             if (serviceProvider == null)
                 return;
-           _serviceProvider = serviceProvider;
+            _serviceProvider = serviceProvider;
         }
 
         public IServiceProvider ServiceProvider{
@@ -20,27 +17,15 @@ namespace RVSLite{
 
         public BaseActivity[,] Activities { get; set; }
 
-        public void PlaceOperatorAt(BaseActivity oper, int column, int row){
-            Activities[column, row] = oper;
-            ConnectToNeighbours(oper, column, row);
-        }
+//        private bool ConnectToNeighboursBy(int column, int row, BaseActivity oper, NeighbourDirections direction){
+//            var neighbourActivity = GetNeighbourActivityBy(column, row, direction);
+//            if (neighbourActivity == null)
+//                return false;
+//            oper.ListenTo(neighbourActivity);
+//            return true;
+//        }
 
-        private void ConnectToNeighbours(BaseActivity oper, int column, int row){
-            foreach (NeighbourDirections direction in new[]{NeighbourDirections.Left, NeighbourDirections.Top, NeighbourDirections.Bottom, NeighbourDirections.Right}){
-                if (ConnectToNeighboursBy(column, row, oper, direction))
-                    return;
-            }
-        }
-
-        private bool ConnectToNeighboursBy(int column, int row, BaseActivity oper, NeighbourDirections direction){
-            var neighbourActivity = GetNeighbourOperatorBy(column, row, direction);
-            if (neighbourActivity == null)
-                return false;
-            oper.ListenTo(neighbourActivity);
-            return true;
-        }
-
-        private BaseActivity GetNeighbourOperatorBy(int column, int row, NeighbourDirections direction){
+        private BaseActivity GetNeighbourActivityBy(int column, int row, NeighbourDirections direction){
             if (direction == NeighbourDirections.Left)
                 return column == 0 ? null : Activities[column - 1, row];
             if (direction == NeighbourDirections.Right)
@@ -54,6 +39,22 @@ namespace RVSLite{
             Activities = new BaseActivity[columnCount,rowCount];
             _columnCount = columnCount;
             _rowCount = rowCount;
+        }
+
+        public BaseActivity GetSourceNeighbourActivityBy(int column, int row){
+            foreach (NeighbourDirections direction in GetNeighbourDirections()){
+                BaseActivity activity = GetNeighbourActivityBy(column, row, direction);
+                if (activity != null)
+                    return activity;
+            }
+            return null;
+        }
+
+        private static NeighbourDirections[] GetNeighbourDirections(){
+            return new[]{
+                            NeighbourDirections.Left, NeighbourDirections.Top, NeighbourDirections.Bottom,
+                            NeighbourDirections.Right
+                        };
         }
     }
 }
