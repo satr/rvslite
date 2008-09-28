@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RVSLite{
     public class DriveServiceCreator : ServiceActivityCreatorBase{
-        public DriveServiceCreator(IServiceProvider services) : base(services){
+        public DriveServiceCreator(IServiceProvider services) : base(services, false){
         }
 
         public override string Name{

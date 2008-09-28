@@ -2,7 +2,8 @@
     public class ServiceActivity : BaseActivity{
         private IService _port;
 
-        public ServiceActivity(string name) : base(name){
+        public ServiceActivity(string name, bool canFirePost)
+            : base(name, canFirePost) {
         }
 
         public IService Port{
@@ -17,7 +18,7 @@
         }
 
         public override void Post(object value){
-            if (Port != null)
+            if (Port != null && value != null)
                 Port.SetValue(value);
             FireOnPost(value);
         }

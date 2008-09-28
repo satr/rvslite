@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls{
-    public delegate void PosEventHandler(DesignFieldControl designFieldControl ,int column, int row);
+    public delegate void PosEventHandler(int column, int row);
 
     public partial class DesignFieldControl : UserControl{
         public event PosEventHandler OnClickInPos;
@@ -20,7 +20,7 @@ namespace RVSLite.Controls{
         void pictureBox_MouseUp(object sender, MouseEventArgs e) {
             if (OnClickInPos == null)
                 return;
-            OnClickInPos(this, GetPosBy(e.X), GetPosBy(e.Y));
+            OnClickInPos(GetPosBy(e.X), GetPosBy(e.Y));
         }
 
         private static int GetPosBy(int value){
@@ -39,10 +39,13 @@ namespace RVSLite.Controls{
                 g.DrawLine(new Pen(Color.DarkGray, 1), 0, y, width, y);
         }
 
-        public void PlaceActivityControlAt(Control control, int column, int row){
+        public void PlaceActivityControlAt(IActivityControl activityControl, int column, int row){
+            var control = (Control)activityControl;
             Controls.Add(control);
-            control.Location = new Point(column * MainController.CellWH, row * MainController.CellWH);
-            control.Size = new Size(MainController.CellWH, MainController.CellWH);
+            control.Location = new Point(column * MainController.CellWH,
+                row * MainController.CellWH);
+            control.Size = new Size(MainController.CellWH,
+                MainController.CellWH);
             control.BringToFront();
         }
     }

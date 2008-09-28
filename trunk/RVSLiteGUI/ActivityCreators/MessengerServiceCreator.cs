@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RVSLite{
     public class MessengerServiceCreator : ServiceActivityCreatorBase{
-        public MessengerServiceCreator(IServiceProvider services) : base(services){
+        public MessengerServiceCreator(IServiceProvider services) : base(services, true){
         }
 
         public override string Name{

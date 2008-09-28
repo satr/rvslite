@@ -28,7 +28,6 @@
             // 
             // groupBox
             // 
-            this.groupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox.Location = new System.Drawing.Point(0, 0);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(150, 150);

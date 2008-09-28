@@ -2,6 +2,7 @@
     public class DataActivity : VariableActivity{
         public DataActivity()
             : base(Lang.Res.Data) {
+            Value = string.Empty;
         }
 
         public override void Post(object value){

@@ -26,23 +26,41 @@ namespace RVSLite.Controls.ActivityControls {
         /// </summary>
         private void InitializeComponent() {
             this.groupBox = new System.Windows.Forms.GroupBox();
-            this.cbInstances = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlNew = new System.Windows.Forms.Panel();
             this.btnNew = new System.Windows.Forms.Button();
+            this.cbInstances = new System.Windows.Forms.ComboBox();
             this.groupBox.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlNew.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox
             // 
-            this.groupBox.Controls.Add(this.panel1);
+            this.groupBox.Controls.Add(this.pnlNew);
             this.groupBox.Controls.Add(this.cbInstances);
-            this.groupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox.Location = new System.Drawing.Point(0, 0);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(150, 150);
             this.groupBox.TabIndex = 1;
             this.groupBox.TabStop = false;
+            // 
+            // pnlNew
+            // 
+            this.pnlNew.Controls.Add(this.btnNew);
+            this.pnlNew.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlNew.Location = new System.Drawing.Point(101, 37);
+            this.pnlNew.Name = "pnlNew";
+            this.pnlNew.Size = new System.Drawing.Size(46, 110);
+            this.pnlNew.TabIndex = 8;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnNew.Location = new System.Drawing.Point(0, 0);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(46, 19);
+            this.btnNew.TabIndex = 4;
+            this.btnNew.Text = "New";
+            this.btnNew.UseVisualStyleBackColor = true;
             // 
             // cbInstances
             // 
@@ -55,25 +73,6 @@ namespace RVSLite.Controls.ActivityControls {
             this.cbInstances.Size = new System.Drawing.Size(144, 21);
             this.cbInstances.TabIndex = 7;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnNew);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(101, 37);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(46, 110);
-            this.panel1.TabIndex = 8;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNew.Location = new System.Drawing.Point(0, 0);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(46, 23);
-            this.btnNew.TabIndex = 4;
-            this.btnNew.Text = "New";
-            this.btnNew.UseVisualStyleBackColor = true;
-            // 
             // VariableActivityControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -81,7 +80,7 @@ namespace RVSLite.Controls.ActivityControls {
             this.Controls.Add(this.groupBox);
             this.Name = "VariableActivityControl";
             this.groupBox.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.pnlNew.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -90,7 +89,7 @@ namespace RVSLite.Controls.ActivityControls {
 
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.ComboBox cbInstances;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlNew;
         private System.Windows.Forms.Button btnNew;
     }
 }

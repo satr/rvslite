@@ -24,33 +24,44 @@
         /// </summary>
         private void InitializeComponent() {
             this.groupBox = new System.Windows.Forms.GroupBox();
-            this.lblSource = new System.Windows.Forms.Label();
-            this.cbOperationCommands = new System.Windows.Forms.ComboBox();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.variableOrDataControl = new RVSLite.Controls.VariableOrDataControl();
+            this.cbOperationCommands = new System.Windows.Forms.ComboBox();
+            this.lblSource = new System.Windows.Forms.Label();
             this.groupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox
             // 
+            this.groupBox.Controls.Add(this.pictureBox);
             this.groupBox.Controls.Add(this.variableOrDataControl);
             this.groupBox.Controls.Add(this.cbOperationCommands);
             this.groupBox.Controls.Add(this.lblSource);
-            this.groupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox.Location = new System.Drawing.Point(0, 0);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(150, 150);
             this.groupBox.TabIndex = 2;
             this.groupBox.TabStop = false;
             // 
-            // lblSource
+            // pictureBox
             // 
-            this.lblSource.AutoSize = true;
-            this.lblSource.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSource.Location = new System.Drawing.Point(3, 16);
-            this.lblSource.Name = "lblSource";
-            this.lblSource.Size = new System.Drawing.Size(41, 13);
-            this.lblSource.TabIndex = 0;
-            this.lblSource.Text = "Source";
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Location = new System.Drawing.Point(3, 79);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(144, 68);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox.TabIndex = 10;
+            this.pictureBox.TabStop = false;
+            // 
+            // variableOrDataControl
+            // 
+            this.variableOrDataControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.variableOrDataControl.Location = new System.Drawing.Point(3, 50);
+            this.variableOrDataControl.Name = "variableOrDataControl";
+            this.variableOrDataControl.ServiceProvider = null;
+            this.variableOrDataControl.Size = new System.Drawing.Size(144, 29);
+            this.variableOrDataControl.TabIndex = 9;
             // 
             // cbOperationCommands
             // 
@@ -64,13 +75,15 @@
             this.cbOperationCommands.Size = new System.Drawing.Size(144, 21);
             this.cbOperationCommands.TabIndex = 8;
             // 
-            // variableOrDataControl
+            // lblSource
             // 
-            this.variableOrDataControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.variableOrDataControl.Location = new System.Drawing.Point(3, 50);
-            this.variableOrDataControl.Name = "variableOrDataControl";
-            this.variableOrDataControl.Size = new System.Drawing.Size(144, 29);
-            this.variableOrDataControl.TabIndex = 9;
+            this.lblSource.AutoSize = true;
+            this.lblSource.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSource.Location = new System.Drawing.Point(3, 16);
+            this.lblSource.Name = "lblSource";
+            this.lblSource.Size = new System.Drawing.Size(41, 13);
+            this.lblSource.TabIndex = 0;
+            this.lblSource.Text = "Source";
             // 
             // ActivityWithOperationControl
             // 
@@ -80,6 +93,7 @@
             this.Name = "ActivityWithOperationControl";
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -90,5 +104,6 @@
         private System.Windows.Forms.Label lblSource;
         private VariableOrDataControl variableOrDataControl;
         private System.Windows.Forms.ComboBox cbOperationCommands;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }

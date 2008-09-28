@@ -1,13 +1,11 @@
+using System.Collections.Generic;
+
 namespace RVSLite{
     public class ActivitiesController{
         private readonly IServiceProvider _serviceProvider;
-        private int _columnCount;
-        private int _rowCount;
-
+        readonly List<ActivitiesLink> _activitiesLinks = new List<ActivitiesLink>();
+            
         public ActivitiesController(IServiceProvider serviceProvider){
-            Activities = new BaseActivity[20,20];
-            if (serviceProvider == null)
-                return;
             _serviceProvider = serviceProvider;
         }
 
@@ -15,46 +13,18 @@ namespace RVSLite{
             get { return _serviceProvider; }
         }
 
-        public BaseActivity[,] Activities { get; set; }
 
-//        private bool ConnectToNeighboursBy(int column, int row, BaseActivity oper, NeighbourDirections direction){
-//            var neighbourActivity = GetNeighbourActivityBy(column, row, direction);
-//            if (neighbourActivity == null)
-//                return false;
-//            oper.ListenTo(neighbourActivity);
-//            return true;
-//        }
-
-        private BaseActivity GetNeighbourActivityBy(int column, int row, NeighbourDirections direction){
-            if (direction == NeighbourDirections.Left)
-                return column == 0 ? null : Activities[column - 1, row];
-            if (direction == NeighbourDirections.Right)
-                return column == _columnCount ? null : Activities[column + 1, row];
-            if (direction == NeighbourDirections.Top)
-                return row == 0 ? null : Activities[column, row - 1];
-            return row == _rowCount ? null : Activities[column, row + 1];
+        public void RegisterActivity(BaseActivity sourceActivity, BaseActivity targetActivity){
+            _activitiesLinks.Add(new ActivitiesLink(sourceActivity, targetActivity));
         }
 
-        public void InitOperatorsListBy(int columnCount, int rowCount){
-            Activities = new BaseActivity[columnCount,rowCount];
-            _columnCount = columnCount;
-            _rowCount = rowCount;
-        }
-
-        public BaseActivity GetSourceNeighbourActivityBy(int column, int row){
-            foreach (NeighbourDirections direction in GetNeighbourDirections()){
-                BaseActivity activity = GetNeighbourActivityBy(column, row, direction);
-                if (activity != null)
-                    return activity;
+        public void UnregisterActivity(BaseActivity activity){
+            foreach (ActivitiesLink activitiesLink in new List<ActivitiesLink>(_activitiesLinks)){
+                if(activitiesLink.TargetActivity == activity)
+                    _activitiesLinks.Remove(activitiesLink);
+                if (activitiesLink.SourceActivity == activity)
+                    activitiesLink.SourceActivity = null;
             }
-            return null;
-        }
-
-        private static NeighbourDirections[] GetNeighbourDirections(){
-            return new[]{
-                            NeighbourDirections.Left, NeighbourDirections.Top, NeighbourDirections.Bottom,
-                            NeighbourDirections.Right
-                        };
         }
     }
 }

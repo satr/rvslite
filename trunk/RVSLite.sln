@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVSLiteLib", "RVSLiteLib\RV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVSLiteGUI", "RVSLiteGUI\RVSLiteGUI.csproj", "{C22D01D8-E232-45C4-9CED-785489D84958}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBeeLib", "ZigBeeLib\ZigBeeLib.csproj", "{27CB5FBB-8F2E-4124-81C4-6201F30F630A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{C22D01D8-E232-45C4-9CED-785489D84958}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C22D01D8-E232-45C4-9CED-785489D84958}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C22D01D8-E232-45C4-9CED-785489D84958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27CB5FBB-8F2E-4124-81C4-6201F30F630A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27CB5FBB-8F2E-4124-81C4-6201F30F630A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27CB5FBB-8F2E-4124-81C4-6201F30F630A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27CB5FBB-8F2E-4124-81C4-6201F30F630A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

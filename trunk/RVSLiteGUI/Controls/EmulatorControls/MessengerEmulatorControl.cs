@@ -14,10 +14,11 @@ namespace RVSLite.Controls.EmulatorControls{
             get { return _value; }
             set{
                 var checkedValue = (value == null? string.Empty: value.ToString());
-                bool valueChanged = (_value != checkedValue);
+                if (_value == checkedValue)
+                    return;
                 _value = checkedValue;
-                textBox1.Text = _value;
-                if (valueChanged && OnStateChanged != null)
+                SetText(_value.ToString());
+                if (OnStateChanged != null)
                     OnStateChanged(value);
             }
         }
@@ -34,5 +35,17 @@ namespace RVSLite.Controls.EmulatorControls{
         public event ValueEventHandler OnStateChanged;
 
         #endregion
+
+        private void SetText(string text) {
+            if (textBox1.InvokeRequired) {
+                var d = new SetTextCallback(SetText);
+                Invoke(d, new object[] { text });
+            }
+            else {
+                textBox1.AppendText(text);
+            }
+        }
+
+        private delegate void SetTextCallback(string text);
     }
 }

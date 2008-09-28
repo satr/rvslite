@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RVSLite{
     public class BumperServiceCreator : ServiceActivityCreatorBase{
-        public BumperServiceCreator(IServiceProvider services) : base(services){
+        public BumperServiceCreator(IServiceProvider services) : base(services, true){
         }
 
         public override string Name{

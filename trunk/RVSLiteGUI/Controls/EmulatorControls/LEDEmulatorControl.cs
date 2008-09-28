@@ -14,10 +14,12 @@ namespace RVSLite.Controls{
         public object Value{
             get { return _value; }
             set{
-                var valueChanged = _value = (bool)value;
-                _value = (bool)value;
+                bool inValue = Settings.GetBoolValueBy(value);
+                if(_value == inValue)
+                    return;
+                _value = inValue;
                 pictureBox.BackColor = _value ? Color.Yellow : Color.Gray;
-                if (valueChanged && OnStateChanged != null)
+                if (OnStateChanged != null)
                     OnStateChanged(value);
             }
         }

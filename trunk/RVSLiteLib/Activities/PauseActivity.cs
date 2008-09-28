@@ -10,7 +10,7 @@ namespace RVSLite{
         }
 
         public override void Post(object value){
-            Thread.Sleep(GetDurationInMillisecondsBy(value));
+            Thread.Sleep(GetDurationInMillisecondsBy(value?? 0));
             FireOnPost(value);
         }
 

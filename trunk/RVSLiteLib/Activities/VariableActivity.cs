@@ -1,5 +1,7 @@
 namespace RVSLite{
+    public delegate void VariableActivityEventHandler(VariableActivity variableActivity);
     public class VariableActivity : BaseActivity{
+        public event VariableActivityEventHandler OnChanged;
         private string _name;
         private static int _instanceCounter;
         public VariableActivity(): this(Lang.Res.Variable){
@@ -22,11 +24,22 @@ namespace RVSLite{
         }
 
         public override void Post(object value){
-            Value = value;
+            if(value != null)
+                Value = value;
             base.Post(Value);
         }
 
-        public virtual object Value { set; get; }
+        private object _value;
+        public object Value{
+            set{
+                if (_value == value)
+                    return;
+                _value = value;
+                if (OnChanged != null)
+                    OnChanged(this);
+            }
+            get { return _value; }
+        }
 
         public override bool IsVariable {
             get { return true; }

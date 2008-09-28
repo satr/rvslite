@@ -1,43 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls.ActivityControls{
     public partial class VariableActivityControl : UserControl, IActivityControl{
-        private VariableActivity _activity;
+        private readonly VariableActivityHolder _variableActivityHolder = new VariableActivityHolder();
         private VariableActivityCreator _variableActivityCreator;
 
         public VariableActivityControl(){
             InitializeComponent();
             groupBox.Text = Lang.Res.Variable;
+            btnNew.Text = Lang.Res.New_p;
             btnNew.Click += btnNew_Click;
+            Activity = new VariableActivity(Lang.Res.Undefined);
+            cbInstances.Enabled = false;
+            cbInstances.SelectedIndexChanged += cbInstances_SelectedIndexChanged;
+        }
+
+        void cbInstances_SelectedIndexChanged(object sender, EventArgs e){
+            var selectedActivity = (BaseActivity) cbInstances.SelectedValue;
+            if(Activity == selectedActivity)
+                return;
+            if (SourceActivity != null && Activity != null)
+                SourceActivity.OnPost -= Activity.Post;
+            Activity = selectedActivity;
+            if (SourceActivity != null && Activity != null)
+                SourceActivity.OnPost += Activity.Post;
         }
 
         public VariableActivityCreator VariableActivityCreator{
             set{
                 _variableActivityCreator = value;
-                var variables = _variableActivityCreator.ServiceProvider.Variables;
-                if(variables.Count == 0)
-                    variables.Add(_variableActivityCreator.Create());
-                InitInstancesListBy(variables);
+                InitInstancesListBy(_variableActivityCreator.ServiceProvider.Variables);
             }
         }
 
         #region IActivityControl Members
 
         public BaseActivity Activity{
-            get { return (BaseActivity) cbInstances.SelectedValue; }
-            set { }
+            get { return _variableActivityHolder; }
+            set { _variableActivityHolder.InnerVariableActivity = value; }
         }
 
         #endregion
 
         private void btnNew_Click(object sender, EventArgs e){
+            AddVariable();
+        }
+
+        private bool AddVariable(){
             var addVariableForm = new AddVariableForm(_variableActivityCreator);
             if (addVariableForm.ShowDialog() == DialogResult.Cancel)
-                return;
+                return false;
             InitInstancesListBy(_variableActivityCreator.ServiceProvider.Variables);
             SelectInstance(addVariableForm.NewActivity);
+            return true;
         }
 
         private void SelectInstance(BaseActivity activity){
@@ -50,8 +68,34 @@ namespace RVSLite.Controls.ActivityControls{
             }
         }
 
-        private void InitInstancesListBy(IEnumerable<BaseActivity> variables){
+        private void InitInstancesListBy(ICollection<BaseActivity> variables){
+            cbInstances.Enabled = variables.Count > 0;
             cbInstances.DataSource = new List<BaseActivity>(variables);
+        }
+        private BaseActivity _sourceActivity = new NullActivity();
+        public BaseActivity SourceActivity {
+            get { return _sourceActivity; }
+            set { _sourceActivity = value; }
+        }
+
+        public event ActivityControlEventHandler OnClickActivityControl;
+
+        public Color DefaultBGColor { get; set; }
+
+        public bool Selected { get; set; }
+
+        public void Init() {
+            MainController.InitControlBy(this, groupBox, pnlNew);
+            FireOnClickActivityControl();
+            if (cbInstances.Items.Count > 0)
+                return;
+            if (AddVariable())
+                return;
+        }
+
+        public void FireOnClickActivityControl() {
+            if (OnClickActivityControl != null)
+                OnClickActivityControl(this);
         }
     }
 }

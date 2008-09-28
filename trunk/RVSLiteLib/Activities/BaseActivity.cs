@@ -1,80 +1,65 @@
-using System;
-
-namespace RVSLite {
+namespace RVSLite{
     public delegate void ValueEventHandler(object value);
+    public delegate void ActionEventHandler();
 
-    public class BaseActivity {
-        private BaseActivity _sourceActivity;
+    public class BaseActivity{
+        protected readonly bool _canFirePost = true;
         private string _name;
-        
+
+        public BaseActivity() 
+            : this(string.Empty, true){
+        }
+
+        public BaseActivity(bool canFirePost)
+            : this(string.Empty, canFirePost){
+        }
+
+        public BaseActivity(string name, bool canFirePost){
+            _name = name;
+            _canFirePost = canFirePost;
+        }
+
+        public BaseActivity(string name) : this(name, true){
+        }
+
         public virtual string Name{
             get { return _name; }
             set { _name = value; }
         }
 
+        public virtual bool IsVariable{
+            get { return false; }
+        }
+
+        public virtual bool IsOperatorWithOperation{
+            get { return false; }
+        }
+
+        public virtual bool CanFirePost{
+            get { return _canFirePost; }
+        }
+
         public event ValueEventHandler OnPost;
-
-        public BaseActivity(){
-        }
-
-        public BaseActivity(string name){
-            _name = name;
-        }
+        public event ActionEventHandler OnActivated;
+        public event ActionEventHandler OnDeactivated;
 
         public virtual void Post(object value){
             FireOnPost(value);
         }
 
         protected void FireOnPost(object value){
+            if (!CanFirePost)
+                return;
+            if (OnActivated != null)
+                OnActivated();
             if (OnPost != null)
                 OnPost(value);
-        }
-
-        public BaseActivity SourceActivity{
-            set{
-                if (_sourceActivity != null)
-                    _sourceActivity.OnPost -= Post;
-                _sourceActivity = value;
-                if (_sourceActivity != null)
-                    _sourceActivity.OnPost += Post;
-            }
-            get{
-                return _sourceActivity ?? (_sourceActivity = new NullActivity());
-            }
-        }
-
-        public void Disconnect(){
-            if (_sourceActivity == null)
-                return;
-            _sourceActivity.OnPost -= Post;
-            _sourceActivity = null;
-            Console.Out.WriteLine("{0} {1}", this, Lang.Res.Is_disconnected);
-        }
-
-        public virtual void ListenTo(BaseActivity sourceActivity) {
-            SourceActivity = sourceActivity;
+            if (OnDeactivated != null)
+                OnDeactivated();
         }
 
         public virtual string ToString(object value){
             return string.Format("{0} {1}", Name ?? string.Empty, value ?? string.Empty);
-        }
-
-        public virtual bool IsVariable {
-            get { return false; }
-        }
-
-        public virtual bool IsOperatorWithOperation {
-            get { return false; }
-        }
-    }
-
-    public class NullActivity : BaseActivity{
-        public NullActivity()
-            : base(Lang.Res.Undefined) {
-        }
-
-        public override void Post(object value){
-            //do nothing
         }
     }
 }

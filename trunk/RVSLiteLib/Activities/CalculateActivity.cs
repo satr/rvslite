@@ -5,6 +5,8 @@ namespace RVSLite{
         }
 
         public override void Post(object value){
+            if (_variableOrData.Value == null)
+                throw new VariableIsNotDefinedException(_variableOrData);
             base.Post(_operationCommand.Perform(value, _variableOrData.Value));
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using RVSLite.Controls;
 using RVSLite.Controls.ActivityControls;
 
@@ -11,10 +12,12 @@ namespace RVSLite{
         }
 
         public override BaseActivity Create(){
-            return new PauseActivity();
+            throw new NotImplementedException();
         }
         protected override IActivityControl CreateActivityControl() {
-            return new PauseActivityControl() { Activity = Create() };
+            return new PauseActivityControl(){
+                                                 Activity = new CompositeActivityDecorator(new PauseActivity())
+                                             };
         }
     }
 }
