@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RVSLite{
     public class LEDServiceCreator : ServiceActivityCreatorBase{
-        public LEDServiceCreator(IServiceProvider services) : base(services){
+        public LEDServiceCreator(IServiceProvider services) : base(services, false){
         }
 
         public override string Name{

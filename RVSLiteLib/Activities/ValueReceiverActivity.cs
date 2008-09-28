@@ -26,7 +26,8 @@ namespace RVSLite{
         }
 
         public override void Post(object value) {
-            Value = value;
+            if (value != null)
+                Value = value;
             ReceiveValue();
             base.Post(Value);
         }

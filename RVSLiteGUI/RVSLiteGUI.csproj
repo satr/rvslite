@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ActivityCreators\StartActivityCreator.cs" />
     <Compile Include="AddVariableForm.cs">
       <SubType>Form</SubType>
@@ -143,6 +149,7 @@
     <Compile Include="ActivityCreators\PauseActivityCreator.cs" />
     <Compile Include="ActivityCreators\ServiceActivityCreatorBase.cs" />
     <Compile Include="ActivityCreators\SingleInstanceActivityCreatorBase.cs" />
+    <Compile Include="Messenger.cs" />
     <Compile Include="ServiceProvider.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="ActivityCreators\BumperServiceCreator.cs" />
@@ -157,6 +164,10 @@
     <Compile Include="ActivityCreators\VariableActivityCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddVariableForm.resx">
       <DependentUpon>AddVariableForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -240,11 +251,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TerminalController.cs" />
+    <Compile Include="ZegBeeBumperService.cs" />
+    <Compile Include="ZegBeeDriveService.cs" />
+    <Compile Include="ZegBeeLEDService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RVSLiteLib\RVSLiteLib.csproj">
       <Project>{8155BFB2-3B24-49EC-BB6F-1B72678B3B8A}</Project>
       <Name>RVSLiteLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZigBeeLib\ZigBeeLib.csproj">
+      <Project>{27CB5FBB-8F2E-4124-81C4-6201F30F630A}</Project>
+      <Name>ZigBeeLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

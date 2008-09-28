@@ -1,25 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using RVSLite.Controls;
 
 namespace RVSLite{
     public partial class MainForm : Form{
         private readonly MainController _mainController;
-        private ActivityCreatorBase _activityCreator;
+        private readonly TerminalController _terminalController;
 
         public MainForm(){
             InitializeComponent();
             Lang.SwitchToRu();
-            _mainController = new MainController(GetServices());
+            _terminalController = new TerminalController(this, btnConnect, btnSendATCommand, txtATCommand, txtTerminal);
+            _mainController = new MainController(GetServices(), designFieldControl, txtPrompting);
             InitBasicActivities();
+            terminalToolStripMenuItem.Checked = TerminalPanel.Visible;
+            Bind();
+            InterfaceLocalization();
+        }
+
+        private SplitterPanel TerminalPanel{
+            get { return splitContainer5.Panel1; }
+        }
+
+        private void InterfaceLocalization(){
+            fileToolStripMenuItem.Text = Lang.Res.File;
+            exitToolStripMenuItem.Text = Lang.Res.Exit;
+            communicationToolStripMenuItem.Text = Lang.Res.Communication;
+            clearTerminalToolStripMenuItem.Text = Lang.Res.Clear_terminal;
+            editToolStripMenuItem.Text = Lang.Res.Edit;
+            terminalToolStripMenuItem.Text = Lang.Res.Terminal;
+            helpToolStripMenuItem.Text = Lang.Res.Help;
+            aboutToolStripMenuItem.Text = Lang.Res.About;
+            btnClearTerminal.Text = Lang.Res.Clear;
+            btnSendATCommand.Text = Lang.Res.Send_command;
+            btnConnect.Text = Lang.Res.Connect;
+            btnShowHideTerminalControls.Text = Lang.Res.Terminal_control;
+            gbBasicActivities.Text = Lang.Res.Basic_activities;
+            gbServices.Text = Lang.Res.Services;
+            clearAllToolStripMenuItem.Text = Lang.Res.Clear_all;
+            btnShowHidePrompting.Text = Lang.Res.Prompting;
         }
 
         private ServiceProvider GetServices(){
             var serviceProvider = new ServiceProvider();
-            serviceProvider.BumperPorts = new List<IService>{bumperControl1, bumperControl2};
-            serviceProvider.LEDPorts = new List<IService>{ledControl1, ledControl2};
-            serviceProvider.DrivePorts = new List<IService>{driveControl1, driveControl2};
+            serviceProvider.BumperPorts = new List<IService>{
+                                                                bumperControl1,
+                                                                bumperControl2,
+                                                                new ZegBeeBumperService("ZB " + Lang.Res.Bumper, 1, _terminalController.Communicator),
+                                                                new ZegBeeBumperService("ZB " + Lang.Res.Bumper, 2, _terminalController.Communicator)
+                                                            };
+            serviceProvider.LEDPorts = new List<IService>{
+                                                             ledControl1,
+                                                             ledControl2,
+                                                             new ZegBeeLEDService("ZB " + Lang.Res.LED,
+                                                                                  _terminalController.Communicator)
+                                                         };
+            serviceProvider.DrivePorts = new List<IService>{
+                                                               driveControl1, 
+                                                               driveControl2,
+                                                               new ZegBeeDriveService("ZB " + Lang.Res.Drive, 1, _terminalController.Communicator),
+                                                               new ZegBeeDriveService("ZB " + Lang.Res.Drive, 2, _terminalController.Communicator)
+                                                           };
             serviceProvider.MessengerPorts = new List<IService>{messengerEmulatorControl1};
             return serviceProvider;
         }
@@ -27,45 +68,51 @@ namespace RVSLite{
         private void InitBasicActivities(){
             InitActivitiesFor(lvBasicActivities, _mainController.BasicActivities);
             InitActivitiesFor(lvServices, _mainController.Services);
-            Bind();
         }
 
         private void Bind(){
+            _mainController.OnActivityControlPlaced += ClearActivityCreatorSelection;
             lvBasicActivities.SelectedIndexChanged += lvBasicActivities_SelectedIndexChanged;
             lvServices.SelectedIndexChanged += lvBasicActivities_SelectedIndexChanged;
-            designFieldControl.OnClickInPos += designFieldControl_OnClickInPos;
-            KeyUp += DesignerForm_KeyUp;
+            clearAllToolStripMenuItem.Click += clearAllToolStripMenuItem_Click;
+            terminalToolStripMenuItem.Click += terminalToolStripMenuItem_Click;
+            btnShowHideTerminalControls.Click += btnShowHideTerminalControls_Click;
+            clearTerminalToolStripMenuItem.Click += clearTerminalToolStripMenuItem_Click;
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            btnShowHidePrompting.Click += btnShowHidePrompting_Click;
         }
 
-        private void designFieldControl_OnClickInPos(DesignFieldControl fieldControl, int column, int row){
-            if (ActivityCreatorIsNotSelected)
-                return;
-            var activityControl = _activityCreator.GetControl();
-            var activity = ((IActivityControl) activityControl).Activity;
-            activity.SourceActivity = _mainController.ActivitiesController.GetSourceNeighbourActivityBy(column, row);
-            _mainController.ActivitiesController.Activities[column, row] = activity;
-            _mainController.ActivityControls[column, row] = (IActivityControl) activityControl;
-            fieldControl.PlaceActivityControlAt(activityControl, column, row);
-            ClearSelection();
+        void btnShowHidePrompting_Click(object sender, EventArgs e){
+            bool visible = !txtPrompting.Visible;
+            txtPrompting.Visible = visible;
+            splitContainer5.SplitterDistance = splitContainer5.Height - btnShowHidePrompting.Height - (visible ? 80 : 10);
         }
 
-        private bool ActivityCreatorIsNotSelected{
-            get { return _activityCreator == null; }
+        private SplitterPanel PromptingPanel{
+            get { return splitContainer5.Panel2; }
         }
 
-        private void DesignerForm_KeyUp(object sender, KeyEventArgs e){
-            if (e.KeyCode != Keys.Escape)
-                return;
-            ClearSelection();
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e){
+            Close();
         }
 
-
-        private void designFieldControl_Click(object sender, EventArgs e){
-            ClearSelection();
+        private void clearTerminalToolStripMenuItem_Click(object sender, EventArgs e){
+            txtTerminal.Clear();
         }
 
-        private void ClearSelection(){
-            _activityCreator = null;
+        private void btnShowHideTerminalControls_Click(object sender, EventArgs e){
+            pnlTerminalControls.Visible = !pnlTerminalControls.Visible;
+        }
+
+        private void terminalToolStripMenuItem_Click(object sender, EventArgs e){
+            clearTerminalToolStripMenuItem.Enabled = TerminalPanel.Visible = terminalToolStripMenuItem.Checked;
+        }
+
+        private void clearAllToolStripMenuItem_Click(object sender, EventArgs e){
+            _mainController.ClearAll();
+        }
+
+        private void ClearActivityCreatorSelection(){
             lvBasicActivities.SelectedItems.Clear();
             lvServices.SelectedItems.Clear();
         }
@@ -87,8 +134,7 @@ namespace RVSLite{
             ListView.SelectedListViewItemCollection selectedItems = ((ListView) sender).SelectedItems;
             if (selectedItems.Count == 0)
                 return;
-            _activityCreator = (ActivityCreatorBase) selectedItems[0].Tag;
+            _mainController.SelectedActivityCreator = (ActivityCreatorBase) selectedItems[0].Tag;
         }
-
     }
 }

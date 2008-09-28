@@ -36,7 +36,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivitiesLink.cs" />
+    <Compile Include="Activities\CompositeActivityDecorator.cs" />
+    <Compile Include="Activities\VariableActivityHolder.cs" />
+    <Compile Include="Activities\NullActivity.cs" />
     <Compile Include="Activities\ServiceActivity.cs" />
+    <Compile Include="VariableIsNotDefinedException.cs" />
     <Compile Include="OperationsCommands\OperationsCommandBase.cs" />
     <Compile Include="OperationsCommands\CalculationCommands\DivisionCalculationCommand.cs" />
     <Compile Include="OperationsCommands\CalculationCommands\MultiplyCalculationCommand.cs" />

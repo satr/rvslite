@@ -4,9 +4,11 @@ using RVSLite.Controls.ActivityControls;
 
 namespace RVSLite{
     public abstract class ServiceActivityCreatorBase : ActivityCreatorBase{
+        private readonly bool _canFirePost;
         protected object _selectedPort;
 
-        protected ServiceActivityCreatorBase(IServiceProvider services) : base(services){
+        protected ServiceActivityCreatorBase(IServiceProvider services, bool canFirePost) : base(services){
+            _canFirePost = canFirePost;
         }
 
         protected abstract List<IService> GetServices();
@@ -18,7 +20,7 @@ namespace RVSLite{
         }
 
         public override BaseActivity Create(){
-            return new ServiceActivity(Name);
+            return new ServiceActivity(Name, _canFirePost);
         }
 
         protected override IActivityControl CreateActivityControl(){

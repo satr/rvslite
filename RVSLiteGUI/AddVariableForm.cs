@@ -10,8 +10,10 @@ namespace RVSLite{
             InitializeComponent();
             Text = Lang.Res.New_variable;
             lblName.Text = Lang.Res.Name;
-            btnCancel.Text = Lang.Res.Cancel;
             lblError.Text = string.Format("{0}: {1}", Lang.Res.Error, Lang.Res.Name_is_already_in_use);
+            lblValue.Text = Lang.Res.Value;
+            lblValueError.Text = string.Format("{0}: {1}", Lang.Res.Error, Lang.Res.Name_is_already_in_use);
+            btnCancel.Text = Lang.Res.Cancel;
             Closing += AddVariableForm_Closing;
         }
 
@@ -24,21 +26,37 @@ namespace RVSLite{
                 e.Cancel = true;
                 return;
             }
-            NewActivity = _variableActivityCreator.Create();
+            txtValue.Text = txtValue.Text.Trim();
+            string value = txtValue.Text;
+            if (!CheckValueIsValid(value)){
+                e.Cancel = true;
+                return;
+            }
+            NewActivity = (VariableActivity)_variableActivityCreator.Create();
             NewActivity.Name = name;
+            NewActivity.Value = Settings.GetValueBy(value);
             _variableActivityCreator.ServiceProvider.Variables.Add(NewActivity);
         }
 
-        public BaseActivity NewActivity { get; set; }
+        private bool CheckValueIsValid(string value) {
+            if (value.Length == 0) {
+                SetError(Lang.Res.Value_is_not_defined, lblValueError);
+                return false;
+            }
+            lblError.Visible = false;
+            return true;
+        }
+
+        public VariableActivity NewActivity { get; set; }
 
         private bool CheckNameIsValid(string name){
             if (name.Length == 0){
-                SetError(Lang.Res.Require_correct_name);
+                SetError(Lang.Res.Require_correct_name, lblError);
                 return false;
             }
             foreach (VariableActivity variable in _variableActivityCreator.ServiceProvider.Variables) {
                 if (variable.Name == name){
-                    SetError(Lang.Res.Name_is_already_in_use);
+                    SetError(Lang.Res.Name_is_already_in_use, lblError);
                     return false;
                 }
             }
@@ -46,9 +64,9 @@ namespace RVSLite{
             return true;
         }
 
-        private void SetError(string errorMessage){
-            lblError.Text = errorMessage;
-            lblError.Visible = true;
+        private static void SetError(string errorMessage, Label errorLabel){
+            errorLabel.Text = errorMessage;
+            errorLabel.Visible = true;
         }
     }
 }

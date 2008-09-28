@@ -15,6 +15,7 @@ namespace RVSLite.Controls{
             cbInstances.SelectedIndexChanged += cbInstances_SelectedIndexChanged;
             cbInstances.DropDown += cbInstances_DropDown;
             SelectedActivity = _dataActivity;
+            txtValue.TextChanged += txtValue_TextChanged;
         }
 
         void cbInstances_DropDown(object sender, EventArgs e){
@@ -61,5 +62,11 @@ namespace RVSLite.Controls{
         public VariableActivity SelectedActivity { get; private set; }
 
         public IServiceProvider ServiceProvider { get; set; }
+
+        private void txtValue_TextChanged(object sender, EventArgs e) {
+            if (SelectedActivity == null)
+                return;
+            SelectedActivity.Value = Settings.GetValueBy(txtValue.Text);
+        }
     }
 }

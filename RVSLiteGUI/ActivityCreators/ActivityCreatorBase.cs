@@ -59,8 +59,8 @@ namespace RVSLite{
 
         public abstract BaseActivity Create();
 
-        public Control GetControl(){
-            return (Control) CreateActivityControl();
+        public IActivityControl GetControl(){
+            return CreateActivityControl();
         }
 
         protected virtual IActivityControl CreateActivityControl(){
