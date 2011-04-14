@@ -61,7 +61,7 @@ namespace RVSLite.Controls.ActivityControls{
         public void Init() {
             txtValue.Focus();
             txtValue.SelectAll();
-            MainController.InitControlBy(this, groupBox, pictureBox);
+            ActivityControlsController.InitControlBy(this, groupBox, pictureBox);
             FireOnClickActivityControl();
         }
 

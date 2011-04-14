@@ -27,7 +27,6 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.variableOrDataControl = new RVSLite.Controls.VariableOrDataControl();
             this.cbOperationCommands = new System.Windows.Forms.ComboBox();
-            this.lblSource = new System.Windows.Forms.Label();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -37,7 +36,6 @@
             this.groupBox.Controls.Add(this.pictureBox);
             this.groupBox.Controls.Add(this.variableOrDataControl);
             this.groupBox.Controls.Add(this.cbOperationCommands);
-            this.groupBox.Controls.Add(this.lblSource);
             this.groupBox.Location = new System.Drawing.Point(0, 0);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(150, 150);
@@ -47,9 +45,9 @@
             // pictureBox
             // 
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(3, 79);
+            this.pictureBox.Location = new System.Drawing.Point(3, 66);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(144, 68);
+            this.pictureBox.Size = new System.Drawing.Size(144, 81);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 10;
             this.pictureBox.TabStop = false;
@@ -57,7 +55,7 @@
             // variableOrDataControl
             // 
             this.variableOrDataControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.variableOrDataControl.Location = new System.Drawing.Point(3, 50);
+            this.variableOrDataControl.Location = new System.Drawing.Point(3, 37);
             this.variableOrDataControl.Name = "variableOrDataControl";
             this.variableOrDataControl.ServiceProvider = null;
             this.variableOrDataControl.Size = new System.Drawing.Size(144, 29);
@@ -70,20 +68,10 @@
             this.cbOperationCommands.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOperationCommands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbOperationCommands.FormattingEnabled = true;
-            this.cbOperationCommands.Location = new System.Drawing.Point(3, 29);
+            this.cbOperationCommands.Location = new System.Drawing.Point(3, 16);
             this.cbOperationCommands.Name = "cbOperationCommands";
             this.cbOperationCommands.Size = new System.Drawing.Size(144, 21);
             this.cbOperationCommands.TabIndex = 8;
-            // 
-            // lblSource
-            // 
-            this.lblSource.AutoSize = true;
-            this.lblSource.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSource.Location = new System.Drawing.Point(3, 16);
-            this.lblSource.Name = "lblSource";
-            this.lblSource.Size = new System.Drawing.Size(41, 13);
-            this.lblSource.TabIndex = 0;
-            this.lblSource.Text = "Source";
             // 
             // ActivityWithOperationControl
             // 
@@ -92,7 +80,6 @@
             this.Controls.Add(this.groupBox);
             this.Name = "ActivityWithOperationControl";
             this.groupBox.ResumeLayout(false);
-            this.groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -101,7 +88,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox;
-        private System.Windows.Forms.Label lblSource;
         private VariableOrDataControl variableOrDataControl;
         private System.Windows.Forms.ComboBox cbOperationCommands;
         private System.Windows.Forms.PictureBox pictureBox;

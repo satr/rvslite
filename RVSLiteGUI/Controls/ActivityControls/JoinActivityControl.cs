@@ -24,7 +24,7 @@ namespace RVSLite.Controls{
         public bool Selected { get; set; }
 
         public void Init() {
-            MainController.InitControlBy(this, groupBox);
+            ActivityControlsController.InitControlBy(this, groupBox);
             FireOnClickActivityControl();
         }
 

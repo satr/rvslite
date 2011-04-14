@@ -8,5 +8,6 @@ namespace RVSLite{
         List<IService> LEDPorts { get; set; }
         List<IService> DrivePorts { get; set; }
         List<BaseActivity> Variables { get; }
+        List<CompositeActivity> CompositeActivities { get; }
     }
 }

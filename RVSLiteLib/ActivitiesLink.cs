@@ -1,24 +1,24 @@
 namespace RVSLite{
     public class ActivitiesLink{
         private BaseActivity _sourceActivity;
-        private readonly BaseActivity _targetActivity;
 
         public ActivitiesLink(BaseActivity sourceActivity, BaseActivity targetActivity){
-            _targetActivity = targetActivity;
+            TargetActivity = targetActivity;
             SourceActivity = sourceActivity;
         }
 
-        public BaseActivity TargetActivity{
-            get { return _targetActivity; }
+        public ActivitiesLink(): this(new NullActivity(), new NullActivity()){
         }
+
+        public BaseActivity TargetActivity { get; set; }
 
         public BaseActivity SourceActivity {
             set {
                 if (_sourceActivity != null)
-                    _sourceActivity.OnPost -= _targetActivity.Post;
+                    _sourceActivity.OnPost -= TargetActivity.Post;
                 _sourceActivity = value;
                 if (_sourceActivity != null)
-                    _sourceActivity.OnPost += _targetActivity.Post;
+                    _sourceActivity.OnPost += TargetActivity.Post;
             }
             get {
                 return _sourceActivity ?? (_sourceActivity = new NullActivity());

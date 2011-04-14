@@ -39,18 +39,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
+    <Compile Include="ActivityControlsLink.cs" />
+    <Compile Include="ChartsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutForm.Designer.cs">
+    <Compile Include="ChartsForm.Designer.cs">
+      <DependentUpon>ChartsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ControlCallback.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\LEDServiceStateChangedCommand.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\SerialConnectionLEDOffServiceCommand.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\SerialConnectionLEDOnServiceCommand.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\SerialConnectionLEDOnServiceCommandBase.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\SerialConnectionSensorServiceAcceptDataCommand.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\SerialConnectionServiceCommandBase.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\SerialConnectionServiceCommandFactory.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\SerialConnectionWrongServiceCommand.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\Commands\ServiceStateChangedCommand.cs" />
+    <Compile Include="DeviceServicesController.cs" />
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ActivityCreators\StartActivityCreator.cs" />
-    <Compile Include="AddVariableForm.cs">
+    <Compile Include="ActivityFactory\CompositeActivityFactory.cs" />
+    <Compile Include="ActivityFactory\StartActivityFactory.cs" />
+    <Compile Include="Forms\AddEditCompositeActivityForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddVariableForm.Designer.cs">
+    <Compile Include="Forms\AddEditCompositeActivityForm.Designer.cs">
+      <DependentUpon>AddEditCompositeActivityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddVariableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddVariableForm.Designer.cs">
       <DependentUpon>AddVariableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ActivitiesLinkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ActivitiesLinkControl.Designer.cs">
+      <DependentUpon>ActivitiesLinkControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ActivityControls\CompositeActivityControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ActivityControls\CompositeActivityControl.Designer.cs">
+      <DependentUpon>CompositeActivityControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ActivityControls\ConnectionActivityControl.cs">
       <SubType>UserControl</SubType>
@@ -137,39 +174,57 @@
     <Compile Include="Controls\VariableOrDataControl.Designer.cs">
       <DependentUpon>VariableOrDataControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\Delegates.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ActivityCreators\BaseActivityCreatorBase.cs" />
-    <Compile Include="ActivityCreators\ActivityWithOperationCreatorBase.cs" />
-    <Compile Include="ActivityCreators\JoinActivityCreator.cs" />
-    <Compile Include="ActivityCreators\PauseActivityCreator.cs" />
-    <Compile Include="ActivityCreators\ServiceActivityCreatorBase.cs" />
-    <Compile Include="ActivityCreators\SingleInstanceActivityCreatorBase.cs" />
-    <Compile Include="Messenger.cs" />
-    <Compile Include="ServiceProvider.cs" />
-    <Compile Include="MainController.cs" />
-    <Compile Include="ActivityCreators\BumperServiceCreator.cs" />
-    <Compile Include="ActivityCreators\CalculateActivityCreator.cs" />
-    <Compile Include="ActivityCreators\ConnectionActivityCreator.cs" />
-    <Compile Include="ActivityCreators\DataActivityCreator.cs" />
-    <Compile Include="ActivityCreators\DriveServiceCreator.cs" />
-    <Compile Include="ActivityCreators\IfClauseActivityCreator.cs" />
-    <Compile Include="ActivityCreators\LEDServiceCreator.cs" />
-    <Compile Include="ActivityCreators\MessengerServiceCreator.cs" />
-    <Compile Include="ActivityCreators\ActivityCreatorBase.cs" />
-    <Compile Include="ActivityCreators\VariableActivityCreator.cs" />
+    <Compile Include="ActivityFactory\BaseActivityFactoryBase.cs" />
+    <Compile Include="ActivityFactory\ActivityWithOperationFactoryBase.cs" />
+    <Compile Include="ActivityFactory\JoinActivityFactory.cs" />
+    <Compile Include="ActivityFactory\PauseActivityFactory.cs" />
+    <Compile Include="ActivityFactory\ServiceActivityFactoryBase.cs" />
+    <Compile Include="ActivityFactory\SingleInstanceActivityFactoryBase.cs" />
+    <Compile Include="Controllers\Messenger.cs" />
+    <Compile Include="Controllers\ActivityControlsController.cs" />
+    <Compile Include="Position.cs" />
+    <Compile Include="Controllers\ServiceProvider.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="ActivityFactory\BumperServiceFactory.cs" />
+    <Compile Include="ActivityFactory\CalculateActivityFactory.cs" />
+    <Compile Include="ActivityFactory\ConnectActivityFactory.cs" />
+    <Compile Include="ActivityFactory\DataActivityFactory.cs" />
+    <Compile Include="ActivityFactory\DriveServiceFactory.cs" />
+    <Compile Include="ActivityFactory\IfClauseActivityFactory.cs" />
+    <Compile Include="ActivityFactory\LEDServiceFactory.cs" />
+    <Compile Include="ActivityFactory\DisplayServiceFactory.cs" />
+    <Compile Include="ActivityFactory\ActivityFactoryBase.cs" />
+    <Compile Include="ActivityFactory\VariableActivityFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AboutForm.resx">
+    <EmbeddedResource Include="ChartsForm.resx">
+      <DependentUpon>ChartsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddVariableForm.resx">
+    <EmbeddedResource Include="Forms\AddEditCompositeActivityForm.resx">
+      <DependentUpon>AddEditCompositeActivityForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddVariableForm.resx">
       <DependentUpon>AddVariableForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ActivitiesLinkControl.resx">
+      <DependentUpon>ActivitiesLinkControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ActivityControls\CompositeActivityControl.resx">
+      <DependentUpon>CompositeActivityControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ActivityControls\ConnectionActivityControl.resx">
@@ -251,19 +306,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TerminalController.cs" />
-    <Compile Include="ZegBeeBumperService.cs" />
-    <Compile Include="ZegBeeDriveService.cs" />
-    <Compile Include="ZegBeeLEDService.cs" />
+    <Compile Include="Controllers\TerminalController.cs" />
+    <Compile Include="Controllers\SerialConnectionBumperService.cs" />
+    <Compile Include="Controllers\SerialConnectionDriveService.cs" />
+    <Compile Include="Controllers\SerialConnectionLEDService.cs" />
+    <Compile Include="Controllers\SerialConnectionServices\SerialConnectionServicesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RVSLiteLib\RVSLiteLib.csproj">
       <Project>{8155BFB2-3B24-49EC-BB6F-1B72678B3B8A}</Project>
       <Name>RVSLiteLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ZigBeeLib\ZigBeeLib.csproj">
+    <ProjectReference Include="..\SerialConnectionLib\SerialConnectionLib.csproj">
       <Project>{27CB5FBB-8F2E-4124-81C4-6201F30F630A}</Project>
-      <Name>ZigBeeLib</Name>
+      <Name>SerialConnectionLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

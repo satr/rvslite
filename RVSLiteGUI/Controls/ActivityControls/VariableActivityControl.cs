@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace RVSLite.Controls.ActivityControls{
     public partial class VariableActivityControl : UserControl, IActivityControl{
         private readonly VariableActivityHolder _variableActivityHolder = new VariableActivityHolder();
-        private VariableActivityCreator _variableActivityCreator;
+        private VariableActivityFactory _variableActivityFactory;
 
         public VariableActivityControl(){
             InitializeComponent();
@@ -29,10 +29,10 @@ namespace RVSLite.Controls.ActivityControls{
                 SourceActivity.OnPost += Activity.Post;
         }
 
-        public VariableActivityCreator VariableActivityCreator{
+        public VariableActivityFactory VariableActivityFactory{
             set{
-                _variableActivityCreator = value;
-                InitInstancesListBy(_variableActivityCreator.ServiceProvider.Variables);
+                _variableActivityFactory = value;
+                InitInstancesListBy(_variableActivityFactory.ServiceProvider.Variables);
             }
         }
 
@@ -50,10 +50,10 @@ namespace RVSLite.Controls.ActivityControls{
         }
 
         private bool AddVariable(){
-            var addVariableForm = new AddVariableForm(_variableActivityCreator);
+            var addVariableForm = new AddVariableForm(_variableActivityFactory);
             if (addVariableForm.ShowDialog() == DialogResult.Cancel)
                 return false;
-            InitInstancesListBy(_variableActivityCreator.ServiceProvider.Variables);
+            InitInstancesListBy(_variableActivityFactory.ServiceProvider.Variables);
             SelectInstance(addVariableForm.NewActivity);
             return true;
         }
@@ -85,7 +85,7 @@ namespace RVSLite.Controls.ActivityControls{
         public bool Selected { get; set; }
 
         public void Init() {
-            MainController.InitControlBy(this, groupBox, pnlNew);
+            ActivityControlsController.InitControlBy(this, groupBox, pnlNew);
             FireOnClickActivityControl();
             if (cbInstances.Items.Count > 0)
                 return;

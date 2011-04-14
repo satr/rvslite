@@ -1,5 +1,4 @@
 namespace RVSLite{
-    public delegate void VariableActivityEventHandler(VariableActivity variableActivity);
     public class VariableActivity : BaseActivity{
         public event VariableActivityEventHandler OnChanged;
         private string _name;
