@@ -1,8 +1,10 @@
-namespace RVSLite{
-    public delegate void ValueEventHandler(object value);
-    public delegate void ActionEventHandler();
+using System;
 
+namespace RVSLite{
+    
     public class BaseActivity{
+        private string _id = Guid.NewGuid().ToString();
+        private string _factoryKey = string.Empty;
         protected readonly bool _canFirePost = true;
         private string _name;
 
@@ -22,6 +24,16 @@ namespace RVSLite{
         public BaseActivity(string name) : this(name, true){
         }
 
+        public string ID{
+            get { return _id; }
+            set { _id = value; }
+        }
+
+        public string FactoryKey{
+            get { return _factoryKey; }
+            set { _factoryKey = value; }
+        }
+
         public virtual string Name{
             get { return _name; }
             set { _name = value; }
@@ -37,6 +49,10 @@ namespace RVSLite{
 
         public virtual bool CanFirePost{
             get { return _canFirePost; }
+        }
+
+        public bool IdIsEmpty{
+            get { return string.IsNullOrEmpty(ID); }
         }
 
         public event ValueEventHandler OnPost;
@@ -60,6 +76,11 @@ namespace RVSLite{
 
         public virtual string ToString(object value){
             return string.Format("{0} {1}", Name ?? string.Empty, value ?? string.Empty);
+        }
+
+        public BaseActivity SetId(string id){
+            ID = id;
+            return this;
         }
     }
 }

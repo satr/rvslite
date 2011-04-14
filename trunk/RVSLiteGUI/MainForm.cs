@@ -1,21 +1,70 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Ports;
 using System.Windows.Forms;
+using SerialConnection;
 
 namespace RVSLite{
     public partial class MainForm : Form{
-        private readonly MainController _mainController;
-        private readonly TerminalController _terminalController;
+        private readonly ActivityControlsController _activityControlsController;
+        private ActivitiesController _activitiesController;
+        private TerminalController _terminalController;
 
         public MainForm(){
             InitializeComponent();
             Lang.SwitchToRu();
-            _terminalController = new TerminalController(this, btnConnect, btnSendATCommand, txtATCommand, txtTerminal);
-            _mainController = new MainController(GetServices(), designFieldControl, txtPrompting);
+            saveFileDialog.InitialDirectory = Preferences.Instance.DefaultDiagramFilesPath;
+            _activityControlsController = new ActivityControlsController(designFieldControl);
+            CreateActivitiesController();
+            _activitiesController.DiagramFileName = string.Format("{0}1.xml", Lang.Res.Diagram);//rdg
+            MainController.InitBy(_activitiesController, txtPrompting, tabControl);
             InitBasicActivities();
             terminalToolStripMenuItem.Checked = TerminalPanel.Visible;
             Bind();
             InterfaceLocalization();
+        }
+
+        private void CreateActivitiesController(){
+            InitPortsList();
+            InitBaudList();
+            var dataSource = new List<SerialConnectionBase>(){
+                                                                 new USB2UARTSerialConnection("NUL", 9600, Parity.None, 8, StopBits.One, Handshake.None, 300, 300),
+                                                                 new TelegesisETRX2Connection("NUL", 9600, Parity.None, 8, StopBits.One, Handshake.None, 100, 100),
+                                                             };
+            cbSerialConnectionProviders.DataSource = dataSource;
+            _terminalController = new TerminalController(this, btnConnect, btnSendATCommand, txtATCommand, txtTerminal, cbSerialConnectionProviders, cbPorts, cbBaud);
+            _activitiesController = new ActivitiesController(CreateServicesProvider(_terminalController));
+        }
+
+        private void InitBaudList(){
+            cbBaud.DataSource = GetBaudList();
+            cbBaud.SelectedIndex = 3;
+        }
+
+        private void InitPortsList(){
+            cbPorts.DataSource = SerialPort.GetPortNames();
+            if(cbPorts.Items.Count == 0){
+                btnConnect.Enabled = false;
+                txtTerminal.Text = "Serial ports not found";
+            }
+            else{
+                cbPorts.SelectedIndex = cbPorts.Items.Count - 1;
+            }
+        }
+
+        private static List<int> GetBaudList(){
+            return new List<int>{
+                                    1200,
+                                    2400,
+                                    4800,
+                                    9600,
+                                    14400,
+                                    19200,
+                                    28800,
+                                    115200
+                                };
         }
 
         private SplitterPanel TerminalPanel{
@@ -39,39 +88,46 @@ namespace RVSLite{
             gbServices.Text = Lang.Res.Services;
             clearAllToolStripMenuItem.Text = Lang.Res.Clear_all;
             btnShowHidePrompting.Text = Lang.Res.Prompting;
+            deleteToolStripMenuItem.Text = Lang.Res.Delete;
+            tabMainField.Text = Lang.Res.Diagram;
+            openToolStripMenuItem.Text = Lang.Res.Open;
+            saveToolStripMenuItem.Text = Lang.Res.Save;
         }
 
-        private ServiceProvider GetServices(){
+        private ServiceProvider CreateServicesProvider(TerminalController terminalController){
             var serviceProvider = new ServiceProvider();
+            var serialConnectionServicesController = new SerialConnectionServicesController(terminalController);
             serviceProvider.BumperPorts = new List<IService>{
                                                                 bumperControl1,
                                                                 bumperControl2,
-                                                                new ZegBeeBumperService("ZB " + Lang.Res.Bumper, 1, _terminalController.Communicator),
-                                                                new ZegBeeBumperService("ZB " + Lang.Res.Bumper, 2, _terminalController.Communicator)
+                                                                serialConnectionServicesController.Add(new SerialConnectionBumperService("SC " + Lang.Res.Bumper, 1), 0),
+                                                                serialConnectionServicesController.Add(new SerialConnectionBumperService("SC " + Lang.Res.Bumper, 2), 1)
                                                             };
             serviceProvider.LEDPorts = new List<IService>{
                                                              ledControl1,
                                                              ledControl2,
-                                                             new ZegBeeLEDService("ZB " + Lang.Res.LED,
-                                                                                  _terminalController.Communicator)
+                                                             serialConnectionServicesController.Add(new SerialConnectionLEDService("SC" + Lang.Res.LED), 0)
                                                          };
             serviceProvider.DrivePorts = new List<IService>{
                                                                driveControl1, 
                                                                driveControl2,
-                                                               new ZegBeeDriveService("ZB " + Lang.Res.Drive, 1, _terminalController.Communicator),
-                                                               new ZegBeeDriveService("ZB " + Lang.Res.Drive, 2, _terminalController.Communicator)
+                                                               serialConnectionServicesController.Add(new SerialConnectionDriveService("SC " + Lang.Res.Drive, 1), 0),
+                                                               serialConnectionServicesController.Add(new SerialConnectionDriveService("SC " + Lang.Res.Drive, 2), 1)
                                                            };
             serviceProvider.MessengerPorts = new List<IService>{messengerEmulatorControl1};
             return serviceProvider;
         }
 
         private void InitBasicActivities(){
-            InitActivitiesFor(lvBasicActivities, _mainController.BasicActivities);
-            InitActivitiesFor(lvServices, _mainController.Services);
+            InitActivitiesFor(lvBasicActivities, MainController.Instance.BasicActivities);
+            InitActivitiesFor(lvServices, MainController.Instance.Services);
         }
 
         private void Bind(){
-            _mainController.OnActivityControlPlaced += ClearActivityCreatorSelection;
+            _activityControlsController.OnActivityControlPlaced += ClearActivityFactorySelection;
+            _activityControlsController.OnUnregisterActivity += _activitiesController.UnregisterActivity;
+            _activityControlsController.OnRegisterActivity += _activitiesController.RegisterActivity;
+            _activityControlsController.OnExpandCompositeActivity += _activityControlsController_OnExpandCompositeActivity;
             lvBasicActivities.SelectedIndexChanged += lvBasicActivities_SelectedIndexChanged;
             lvServices.SelectedIndexChanged += lvBasicActivities_SelectedIndexChanged;
             clearAllToolStripMenuItem.Click += clearAllToolStripMenuItem_Click;
@@ -80,16 +136,67 @@ namespace RVSLite{
             clearTerminalToolStripMenuItem.Click += clearTerminalToolStripMenuItem_Click;
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             btnShowHidePrompting.Click += btnShowHidePrompting_Click;
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            saveToolStripMenuItem.Click += SaveDiagram;
+            openToolStripMenuItem.Click += OpenDiagram;
+            chartsToolStripMenuItem.Click += OpenChartsForm;
+        }
+
+        private void OpenChartsForm(object sender, EventArgs e){
+            new ChartsForm(_terminalController).Show();
+        }
+
+        private void OpenDiagram(object sender, EventArgs e){
+            if (ShowOpenFileDialog() == DialogResult.Cancel)
+                return;
+            MainController.Instance.OpenDiagramm(openFileDialog.FileName);
+            _activityControlsController.CreateDiagramControls();
+        }
+
+        private DialogResult ShowOpenFileDialog(){
+            openFileDialog.Title = Lang.Res.Open_diagramm;
+            return openFileDialog.ShowDialog();
+        }
+
+        private void SaveDiagram(object sender, EventArgs e){
+            if (OpenSaveFileDialog() == DialogResult.Cancel)
+                return;
+            if (DoNotWantToOverrideExistFile())
+                return;
+            MainController.Instance.SaveDiagramm(saveFileDialog.FileName);
+        }
+
+        private bool DoNotWantToOverrideExistFile(){
+            return new FileInfo(saveFileDialog.FileName).Exists
+                   && !Messenger.ShowConfirmation(Lang.Res.File_already_exist_overwrite);
+        }
+
+        private DialogResult OpenSaveFileDialog(){
+            saveFileDialog.OverwritePrompt = false;
+            saveFileDialog.FileName = MainController.Instance.ActivitiesController.DiagramFileName;
+            saveFileDialog.Title = Lang.Res.Save_diagramm;
+            return saveFileDialog.ShowDialog();
+        }
+
+        void _activityControlsController_OnExpandCompositeActivity(BaseActivity activity){
+            var tabPage = new TabPage(activity.Name);
+            tabControl.TabPages.Add(tabPage);
+            tabPage.Focus();
+        }
+
+        static void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            new AboutForm().ShowDialog();
+        }
+
+        void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
+            _activityControlsController.DeleteSelected();
         }
 
         void btnShowHidePrompting_Click(object sender, EventArgs e){
             bool visible = !txtPrompting.Visible;
             txtPrompting.Visible = visible;
             splitContainer5.SplitterDistance = splitContainer5.Height - btnShowHidePrompting.Height - (visible ? 80 : 10);
-        }
-
-        private SplitterPanel PromptingPanel{
-            get { return splitContainer5.Panel2; }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e){
@@ -109,10 +216,10 @@ namespace RVSLite{
         }
 
         private void clearAllToolStripMenuItem_Click(object sender, EventArgs e){
-            _mainController.ClearAll();
+            _activityControlsController.DeleteAll();
         }
 
-        private void ClearActivityCreatorSelection(){
+        private void ClearActivityFactorySelection(){
             lvBasicActivities.SelectedItems.Clear();
             lvServices.SelectedItems.Clear();
         }
@@ -121,11 +228,11 @@ namespace RVSLite{
             SelectActivityBy(sender);
         }
 
-        private static void InitActivitiesFor(ListView listView, IEnumerable<ActivityCreatorBase> activities){
+        private static void InitActivitiesFor(ListView listView, IEnumerable<ActivityFactoryBase> activities){
             var columnHeader = new ColumnHeader{Width = 100};
             listView.Columns.Add(columnHeader);
-            foreach (ActivityCreatorBase elementCreator in activities){
-                var item = new ListViewItem(new[]{elementCreator.Name}){Tag = elementCreator};
+            foreach (ActivityFactoryBase elementFactory in activities) {
+                var item = new ListViewItem(new[]{elementFactory.Name}){Tag = elementFactory};
                 listView.Items.Add(item);
             }
         }
@@ -134,7 +241,7 @@ namespace RVSLite{
             ListView.SelectedListViewItemCollection selectedItems = ((ListView) sender).SelectedItems;
             if (selectedItems.Count == 0)
                 return;
-            _mainController.SelectedActivityCreator = (ActivityCreatorBase) selectedItems[0].Tag;
+            _activityControlsController.SelectedActivityFactory = (ActivityFactoryBase) selectedItems[0].Tag;
         }
     }
 }

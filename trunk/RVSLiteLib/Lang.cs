@@ -91,6 +91,16 @@ namespace RVSLite{
         public string Comment_one_second_equal_to_1000_milliseconds = "1 sec.= 1000 ms";
         public string Prompting = "Prompting";
         public string New_p = "New";
+        public string Delete = "Delete";
+        public string Diagram = "Diagram";
+        public string Activity = "Activity";
+        public string Open = "Open";
+        public string Save = "Save";
+        public string Save_diagramm = "Save diagramm";
+        public string Open_diagramm = "Open diagramm";
+        public string File_already_exist_overwrite = "The file with this name already exist. Do you want to override it?";
+        public string Confirmation = "Confirmation";
+        public string Display = "Display";
 
 
         public static Lang Res{
@@ -195,6 +205,16 @@ namespace RVSLite{
             Comment_one_second_equal_to_1000_milliseconds = "1 сек.=1000 мс";
             Prompting = "Подсказка";
             New_p = "Нов.";
+            Delete = "Удалить";
+            Diagram = "Диаграмма";
+            Activity = "Активность";
+            Open = "Открыть";
+            Save = "Сохранить";
+            Save_diagramm = "Сохранить диаграмму";
+            Open_diagramm = "Открыть диаграмму";
+            File_already_exist_overwrite = "Файл с таким именем уже существует. Заменить его?";
+            Confirmation = "Подтверждение";
+            Display = "Дисплей";
        }
     }
 }

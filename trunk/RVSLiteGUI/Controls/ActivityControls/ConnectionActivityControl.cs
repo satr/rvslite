@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace RVSLite.Controls.ActivityControls{
     public partial class ConnectionActivityControl : UserControl, IActivityControl{
-        private ConnectionActivity _activity;
+        private ConnectActivity _activity;
 
         public ConnectionActivityControl(){
             InitializeComponent();
@@ -14,7 +14,7 @@ namespace RVSLite.Controls.ActivityControls{
 
         public BaseActivity Activity{
             get { return _activity; }
-            set { _activity = (ConnectionActivity) value; }
+            set { _activity = (ConnectActivity) value; }
         }
 
         #endregion
@@ -31,7 +31,7 @@ namespace RVSLite.Controls.ActivityControls{
         public bool Selected { get; set; }
 
         public void Init() {
-            MainController.InitControlBy(this, groupBox);
+            ActivityControlsController.InitControlBy(this, groupBox);
             FireOnClickActivityControl();
         }
 

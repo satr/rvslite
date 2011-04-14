@@ -64,11 +64,11 @@ namespace RVSLite.Controls.ActivityControls{
             RefreshActivity();
         }
 
-        private void RefreshSourceActivityProperty(BaseActivity sourceActivity){
-            lblSource.Text = (sourceActivity == null) ? Lang.Res.Undefined : sourceActivity.Name;
+        private static void RefreshSourceActivityProperty(BaseActivity sourceActivity){
+//            lblSource.Text = (sourceActivity == null) ? Lang.Res.Undefined : sourceActivity.Name;
         }
 
-        private void _sourceActivity_OnChanged(VariableActivity variableActivity){
+        private static void _sourceActivity_OnChanged(VariableActivity variableActivity){
             RefreshSourceActivityProperty(variableActivity);
         }
 
@@ -88,7 +88,7 @@ namespace RVSLite.Controls.ActivityControls{
         public bool Selected { get; set; }
 
         public void Init() {
-            MainController.InitControlBy(this, groupBox);
+            ActivityControlsController.InitControlBy(this, groupBox);
             FireOnClickActivityControl();
         }
 

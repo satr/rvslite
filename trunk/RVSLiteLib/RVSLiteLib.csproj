@@ -37,10 +37,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivitiesLink.cs" />
+    <Compile Include="Activities\CompositeActivity.cs" />
     <Compile Include="Activities\CompositeActivityDecorator.cs" />
     <Compile Include="Activities\VariableActivityHolder.cs" />
     <Compile Include="Activities\NullActivity.cs" />
     <Compile Include="Activities\ServiceActivity.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Preferences.cs" />
     <Compile Include="VariableIsNotDefinedException.cs" />
     <Compile Include="OperationsCommands\OperationsCommandBase.cs" />
     <Compile Include="OperationsCommands\CalculationCommands\DivisionCalculationCommand.cs" />
@@ -59,7 +62,7 @@
     <Compile Include="Lang.cs" />
     <Compile Include="NeighbourDirections.cs" />
     <Compile Include="Activities\CalculateActivity.cs" />
-    <Compile Include="Activities\ConnectionActivity.cs" />
+    <Compile Include="Activities\ConnectActivity.cs" />
     <Compile Include="Activities\DataActivity.cs" />
     <Compile Include="Activities\IfClauseActivity.cs" />
     <Compile Include="Interfaces\IService.cs" />
@@ -69,7 +72,6 @@
     <Compile Include="Activities\ActivityWithOperation.cs" />
     <Compile Include="Activities\PauseActivity.cs" />
     <Compile Include="Activities\VariableActivity.cs" />
-    <Compile Include="Activities\ValueReceiverActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>

@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls.ActivityControls{
-    public delegate void ActivityControlEventHandler(IActivityControl activityControl);
     public partial class DataActivityControl : UserControl, IActivityControl{
 
         private DataActivity _activity;
@@ -27,7 +26,7 @@ namespace RVSLite.Controls.ActivityControls{
         public bool Selected { get; set; }
 
         public void Init(){
-            MainController.InitControlBy(this, groupBox);
+            ActivityControlsController.InitControlBy(this, groupBox);
             FireOnClickActivityControl();
             txtValue.Focus();
         }

@@ -26,12 +26,18 @@
         private void InitializeComponent() {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.terminalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearTerminalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTopMain = new System.Windows.Forms.Panel();
@@ -55,17 +61,24 @@
             this.ledControl2 = new RVSLite.Controls.LEDEmulatorControl();
             this.ledControl1 = new RVSLite.Controls.LEDEmulatorControl();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.lblBaud = new System.Windows.Forms.Label();
+            this.cbBaud = new System.Windows.Forms.ComboBox();
+            this.pbpPort = new System.Windows.Forms.Label();
+            this.cbPorts = new System.Windows.Forms.ComboBox();
             this.txtTerminal = new System.Windows.Forms.TextBox();
             this.btnShowHideTerminalControls = new System.Windows.Forms.Button();
             this.pnlTerminalControls = new System.Windows.Forms.Panel();
+            this.cbSerialConnectionProviders = new System.Windows.Forms.ComboBox();
             this.pnlMainControls = new System.Windows.Forms.Panel();
             this.txtATCommand = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnSendATCommand = new System.Windows.Forms.Button();
             this.btnClearTerminal = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
-            this.btnShowHidePrompting = new System.Windows.Forms.Button();
             this.txtPrompting = new System.Windows.Forms.RichTextBox();
+            this.btnShowHidePrompting = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -87,6 +100,7 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            this.pnlTerminalControls.SuspendLayout();
             this.pnlMainControls.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -97,6 +111,7 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.communicationToolStripMenuItem,
+            this.toolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -107,21 +122,42 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearAllToolStripMenuItem});
+            this.clearAllToolStripMenuItem,
+            this.deleteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -129,8 +165,14 @@
             // clearAllToolStripMenuItem
             // 
             this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
-            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.clearAllToolStripMenuItem.Text = "Clear all";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // communicationToolStripMenuItem
             // 
@@ -153,6 +195,20 @@
             this.clearTerminalToolStripMenuItem.Name = "clearTerminalToolStripMenuItem";
             this.clearTerminalToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.clearTerminalToolStripMenuItem.Text = "Clear terminal";
+            // 
+            // toolStripMenuItem
+            // 
+            this.toolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chartsToolStripMenuItem});
+            this.toolStripMenuItem.Name = "toolStripMenuItem";
+            this.toolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolStripMenuItem.Text = "Tools";
+            // 
+            // chartsToolStripMenuItem
+            // 
+            this.chartsToolStripMenuItem.Name = "chartsToolStripMenuItem";
+            this.chartsToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.chartsToolStripMenuItem.Text = "Charts";
             // 
             // helpToolStripMenuItem
             // 
@@ -310,7 +366,7 @@
             this.tabMainField.Padding = new System.Windows.Forms.Padding(3);
             this.tabMainField.Size = new System.Drawing.Size(509, 531);
             this.tabMainField.TabIndex = 1;
-            this.tabMainField.Text = "Главная";
+            this.tabMainField.Text = "Диаграмма";
             this.tabMainField.UseVisualStyleBackColor = true;
             // 
             // designFieldControl
@@ -431,6 +487,42 @@
             this.splitContainer5.SplitterDistance = 197;
             this.splitContainer5.TabIndex = 0;
             // 
+            // lblBaud
+            // 
+            this.lblBaud.AutoSize = true;
+            this.lblBaud.Location = new System.Drawing.Point(136, 30);
+            this.lblBaud.Name = "lblBaud";
+            this.lblBaud.Size = new System.Drawing.Size(32, 13);
+            this.lblBaud.TabIndex = 12;
+            this.lblBaud.Text = "Baud";
+            // 
+            // cbBaud
+            // 
+            this.cbBaud.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBaud.FormattingEnabled = true;
+            this.cbBaud.Location = new System.Drawing.Point(168, 27);
+            this.cbBaud.Name = "cbBaud";
+            this.cbBaud.Size = new System.Drawing.Size(70, 21);
+            this.cbBaud.TabIndex = 11;
+            // 
+            // pbpPort
+            // 
+            this.pbpPort.AutoSize = true;
+            this.pbpPort.Location = new System.Drawing.Point(12, 30);
+            this.pbpPort.Name = "pbpPort";
+            this.pbpPort.Size = new System.Drawing.Size(26, 13);
+            this.pbpPort.TabIndex = 12;
+            this.pbpPort.Text = "Port";
+            // 
+            // cbPorts
+            // 
+            this.cbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPorts.FormattingEnabled = true;
+            this.cbPorts.Location = new System.Drawing.Point(44, 27);
+            this.cbPorts.Name = "cbPorts";
+            this.cbPorts.Size = new System.Drawing.Size(70, 21);
+            this.cbPorts.TabIndex = 11;
+            // 
             // txtTerminal
             // 
             this.txtTerminal.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -454,12 +546,28 @@
             // 
             // pnlTerminalControls
             // 
+            this.pnlTerminalControls.Controls.Add(this.lblBaud);
+            this.pnlTerminalControls.Controls.Add(this.cbSerialConnectionProviders);
+            this.pnlTerminalControls.Controls.Add(this.cbBaud);
+            this.pnlTerminalControls.Controls.Add(this.pbpPort);
+            this.pnlTerminalControls.Controls.Add(this.cbPorts);
             this.pnlTerminalControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTerminalControls.Location = new System.Drawing.Point(0, 43);
             this.pnlTerminalControls.Name = "pnlTerminalControls";
             this.pnlTerminalControls.Size = new System.Drawing.Size(299, 79);
             this.pnlTerminalControls.TabIndex = 8;
             this.pnlTerminalControls.Visible = false;
+            // 
+            // cbSerialConnectionProviders
+            // 
+            this.cbSerialConnectionProviders.DisplayMember = "Name";
+            this.cbSerialConnectionProviders.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbSerialConnectionProviders.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSerialConnectionProviders.FormattingEnabled = true;
+            this.cbSerialConnectionProviders.Location = new System.Drawing.Point(0, 0);
+            this.cbSerialConnectionProviders.Name = "cbSerialConnectionProviders";
+            this.cbSerialConnectionProviders.Size = new System.Drawing.Size(299, 21);
+            this.cbSerialConnectionProviders.TabIndex = 0;
             // 
             // pnlMainControls
             // 
@@ -521,16 +629,6 @@
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
             // 
-            // btnShowHidePrompting
-            // 
-            this.btnShowHidePrompting.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnShowHidePrompting.Location = new System.Drawing.Point(0, 0);
-            this.btnShowHidePrompting.Name = "btnShowHidePrompting";
-            this.btnShowHidePrompting.Size = new System.Drawing.Size(299, 20);
-            this.btnShowHidePrompting.TabIndex = 0;
-            this.btnShowHidePrompting.Text = "short help";
-            this.btnShowHidePrompting.UseVisualStyleBackColor = true;
-            // 
             // txtPrompting
             // 
             this.txtPrompting.BackColor = System.Drawing.SystemColors.Info;
@@ -542,6 +640,20 @@
             this.txtPrompting.Size = new System.Drawing.Size(299, 69);
             this.txtPrompting.TabIndex = 1;
             this.txtPrompting.Text = "";
+            // 
+            // btnShowHidePrompting
+            // 
+            this.btnShowHidePrompting.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnShowHidePrompting.Location = new System.Drawing.Point(0, 0);
+            this.btnShowHidePrompting.Name = "btnShowHidePrompting";
+            this.btnShowHidePrompting.Size = new System.Drawing.Size(299, 20);
+            this.btnShowHidePrompting.TabIndex = 0;
+            this.btnShowHidePrompting.Text = "short help";
+            this.btnShowHidePrompting.UseVisualStyleBackColor = true;
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Title = "Save diagramm";
             // 
             // MainForm
             // 
@@ -577,6 +689,8 @@
             this.splitContainer5.Panel1.PerformLayout();
             this.splitContainer5.Panel2.ResumeLayout(false);
             this.splitContainer5.ResumeLayout(false);
+            this.pnlTerminalControls.ResumeLayout(false);
+            this.pnlTerminalControls.PerformLayout();
             this.pnlMainControls.ResumeLayout(false);
             this.pnlMainControls.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -629,6 +743,19 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnShowHidePrompting;
         private System.Windows.Forms.RichTextBox txtPrompting;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ComboBox cbSerialConnectionProviders;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chartsToolStripMenuItem;
+        private System.Windows.Forms.Label lblBaud;
+        private System.Windows.Forms.ComboBox cbBaud;
+        private System.Windows.Forms.Label pbpPort;
+        private System.Windows.Forms.ComboBox cbPorts;
 
     }
 }

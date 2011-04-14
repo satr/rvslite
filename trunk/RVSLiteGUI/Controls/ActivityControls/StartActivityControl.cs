@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace RVSLite.Controls.ActivityControls{
-    public partial class StartActivityControl : UserControl, IActivityControl{
+    public partial class StartActivityControl : UserControl, IActivityControl2{
         public StartActivityControl(){
             InitializeComponent();
             btnStart.Text = groupBox.Text = Lang.Res.Start;
@@ -35,13 +35,17 @@ namespace RVSLite.Controls.ActivityControls{
         public bool Selected { get; set; }
 
         public void Init() {
-            MainController.InitControlBy(this, groupBox);
+            ActivityControlsController.InitControlBy(this, groupBox);
             FireOnClickActivityControl();
         }
 
         public void FireOnClickActivityControl() {
             if (OnClickActivityControl != null)
                 OnClickActivityControl(this);
+        }
+
+        public bool OutputAvailableTo(NeighbourDirections direction){
+            return true;
         }
     }
 }
